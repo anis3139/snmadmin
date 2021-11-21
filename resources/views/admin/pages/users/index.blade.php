@@ -81,90 +81,41 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Search Form -->
-                        <div class="card-body mt-2">
-                            <form class="dt_adv_search" method="POST">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-row mb-1">
-                                            <div class="col-lg-2">
-                                                <label>Name:</label>
-                                                <input type="text"  class="form-control" />
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <label>User Type:</label>
-                                                <select class="form-control" name="status">
-                                                    <option value="">Select Type</option>
-                                                    <option value="In Progress">Admin</option>
-                                                    <option value="Pending">Driver</option>
-                                                    <option value="Delivered">User</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <label>Status:</label>
-                                                <select class="form-control" name="status">
-                                                    <option value="">Select Status</option>
-                                                    <option value="Processing">Active</option>
-                                                    <option value="Picked">Inactive</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <label>From Date</label>
-                                                <input type="date"  class="form-control" name="from" />
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <label>To Date</label>
-                                                <input type="date"  class="form-control" name="to" />
-                                            </div>
-                                            <div class="col-lg-2" style="margin-top:22px;">
-                                                <input type="submit"  class="btn btn-success btn-sm" name="submit" value="Search" />
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                         <hr class="my-0" />
                         <div class="col-sm-12">
-                            <table class="table table-striped table-bordered table-responsive common-datatables" style="width:100%; padding: 10px">
+                            <table class="table table-bordered table-responsive common-datatables" style="width:100%; padding: 10px">
                                 <thead>
                                 <tr>
-                                    <th>SL</th>
-                                    <th><input name="checkbox" onclick='checkedAll();' type="checkbox" readonly="readonly" /></th>
-                                    <th>Action</th>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Present Address</th>
-                                    <th>Permanent Address</th>
-                                    <th>User Type</th>
-                                    <th>Status</th>
-                                    <th>Social Links</th>
+                                    <th style="width: 3%">SL</th>
+                                    <th style="width: 2%"><input name="checkbox" onclick='checkedAll();' type="checkbox" readonly="readonly" /></th>
+                                    <th style="width: 10%">Action</th>
+                                    <th style="width: 20%">Full Name</th>
+                                    <th style="width: 10%">Email</th>
+                                    <th style="width: 10%">Phone</th>
+                                    <th style="width: 10%">User Type</th>
+                                    <th style="width: 10%">Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @if($users!="")
-                                    @foreach($users as $response)
-                                        <tr id="tablerow{{ $response->id }}">
-                                        <td>{{ $response->id }}</td>
-                                        <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="{{ $response->id }}" /></td>
+                                    @foreach($users as $key=>$user)
+                                        <tr id="tablerow{{ $key }}">
+                                        <td>{{ $user->id }}</td>
+                                        <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="{{ $user->id }}" /></td>
                                         <td class="text-nowrap">
-                                            <a href="{{ route('user.show',$response->id) }}"><i data-feather='eye'></i></a>
-                                            <a href="{{ route('user.edit',$response->id) }}"><i data-feather='edit'></i></a>
-                                            <!--<a href="{{ route('user.destroy',$response->id) }}"><i data-feather='trash-2'></i></a>
-                                            <a href="{{ url('common/delete/') }}?id={{ $response->id }}&&api=users&&type=single"><i data-feather='trash-2'></i></a>-->
-                                            <a href="#" onclick="singleDelete({{ $response->id }},'admin');"><i data-feather='trash-2'></i></a>
+                                            <a href="{{ route('user.show',$user->id) }}"><i data-feather='eye'></i></a>
+                                            <a href="{{ route('user.edit',$user->id) }}"><i data-feather='edit'></i></a>
+                                            <!--<a href="{{ route('user.destroy',$user->id) }}"><i data-feather='trash-2'></i></a>
+                                            <a href="{{ url('common/delete/') }}?id={{ $user->id }}&&api=users&&type=single"><i data-feather='trash-2'></i></a>-->
+                                            <a href="#" onclick="singleDelete({{ $user->id }},'admin');"><i data-feather='trash-2'></i></a>
                                             <a href="#"><i data-feather='more-vertical'></i></a>
                                         </td>
-                                        <td>{{ $response->name }}</td>
-                                        <td>{{ $response->email }}</td>
-                                        <td>{{ $response->phone }}</td>
-                                        <td>{{ $response->present_address }}</td>
-                                        <td>{{ $response->permanent_address }}</td>
-                                        <td><button class="btn btn-sm btn-primary">df</button></td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->phone }}</td>
+                                        <td><button class="btn btn-sm btn-primary">{{ ucfirst($user->getRoleNames()[0]) }}</button></td>
                                         <td><button class="btn btn-sm btn-success">Active</button></td>
-                                        <td><span><i data-feather='facebook'></i></span></td>
                                     </tr>
                                     @endforeach
                                 @endif
@@ -173,6 +124,7 @@
 
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>

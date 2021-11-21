@@ -2,17 +2,17 @@
 @section('vendor-style')
     <!-- vendor css files -->
     <link rel="stylesheet"
-        href="{{ $setting->default_url }}app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
+        href="{{ asset('') }}app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
     <link rel="stylesheet"
-        href="{{ $setting->default_url }}app-assets/vendors/css/forms/select/select2.min.css">
+        href="{{ asset('') }}app-assets/vendors/css/forms/select/select2.min.css">
 @endsection
 
 @section('page-style')
     <!-- Page css files -->
     <link rel="stylesheet"
-        href="{{ $setting->default_url }}app-assets/css-rtl/plugins/forms/form-validation.css">
+        href="{{ asset('') }}app-assets/css-rtl/plugins/forms/form-validation.css">
     <link rel="stylesheet"
-        href="{{ $setting->default_url }}app-assets/css-rtl/plugins/forms/form-wizard.css">
+        href="{{ asset('') }}app-assets/css-rtl/plugins/forms/form-wizard.css">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -78,16 +78,16 @@
                                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                                     />
                                                 </div>
-                                                
+
                                                 <!--<div class="form-group col-md-6">
                                                     <label class="form-label" for="modern-first-name">Company Logo</label>
                                                     <input type="file" id="modern-first-name" name="logo" class="form-control"/>
                                                 </div>-->
                                             </div>
-                                            
+
                                             <div class="row">
-                                                
-                                                
+
+
                                                 <div class="form-group col-md-6">
                                                     <label class="form-label" for="modern-first-name">Company Name</label>
                                                     <input type="text" id="modern-first-name" name="company_name" class="form-control" placeholder="John"  value="{{ $partner->company_name }}"/>
@@ -120,8 +120,8 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                               
-                                               
+
+
                                                 <div class="form-group col-md-6">
                                                     <label class="form-label" for="modern-address">Contact Person Email</label>
                                                     <input
@@ -131,12 +131,12 @@
                                                         class="form-control" value="{{ $partner->contact_person_email }}"
                                                     />
                                                 </div>
-                                                
+
                                                 <div class="form-group col-md-6">
                                                     <label class="form-label" for="modern-address">Address</label>
                                                     <textarea name="address" id="modern-address" class="form-control">{{ $partner->address }}</textarea>
                                                 </div>
-                                                 
+
                                             </div>
                                             <div class="row">
                                                <div class="form-group col-md-6">
@@ -155,9 +155,9 @@
                                             </div>
                                             <button type="submit" class="btn btn-success">Submit</button>
                                         </div>
-                                        
-                                        
-                                        
+
+
+
                                     </div>
                                 </form>
                             </div>
@@ -174,15 +174,15 @@
 @section('vendor-script')
     <!-- vendor files -->
     <script
-        src="{{ $setting->default_url }}app-assets/vendors/js/forms/wizard/bs-stepper.min.js">
+        src="{{ asset('') }}app-assets/vendors/js/forms/wizard/bs-stepper.min.js">
     </script>
     <script
-        src="{{ $setting->default_url }}app-assets/vendors/js/forms/select/select2.full.min.js">
+        src="{{ asset('') }}app-assets/vendors/js/forms/select/select2.full.min.js">
     </script>
     <script
-        src="{{ $setting->default_url }}app-assets/vendors/js/forms/validation/jquery.validate.min.js">
+        src="{{ asset('') }}app-assets/vendors/js/forms/validation/jquery.validate.min.js">
     </script>
 @endsection
 @section('page-script')
-    <script src="{{ $setting->default_url }}app-assets/js/scripts/forms/form-wizard.js"> </script>
+    <script src="{{ asset('') }}app-assets/js/scripts/forms/form-wizard.js"> </script>
 @endsection
