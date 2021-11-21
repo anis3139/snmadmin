@@ -4,100 +4,117 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
-use App\Config\Curl;
-use Illuminate\Http\Request;
-use App\View\Components\FlashMessages;
-
-
 
 class UserController extends Controller
 {
-	use FlashMessages;	
-   
-    public function index(Curl $curl)
+    protected $enumStatuses = [
+        'active', 'inactive', 'pending', 'freez', 'block',
+    ];
+    public function index()
     {
-		$getResponse = $curl->send('GET','admin','', '','display');		
-		if($getResponse->success){
-			return view('admin.pages.users.index',compact('getResponse'));
-		}
-		else{
-			return view('admin.pages.notfound');
-		}
+
+        return view('admin.pages.users.index', [
+            'prefixname' => 'Admin',
+            'title' => 'User List',
+            'page_title' => 'User List',
+            'users' => User::all(),
+        ]);
     }
     public function create()
     {
+        if (Auth::user()->hasRole(['Admin'])) {
             return view('admin.pages.users.create', [
                 'prefixname' => 'Admin',
                 'title' => 'User Create',
                 'page_title' => 'User Create',
                 'roles' => Role::all(),
+                'enumStatuses' => $this->enumStatuses,
             ]);
-    }
-
-    public function store(Request $request, Curl $curl)
-    {
-        $data = $request->all();		
-        $getResponse = $curl->send('POST','admin', '', $data,'insert');
-        if ($getResponse) {
-			self::message('success', 'Data Added successfully Done');
-            return redirect()->route('user.index');
+        } else {
+            abort(401, 'Unauthorized Error');
         }
-        
-		self::message('error', 'Data failed on create');
-        return redirect()->back();
     }
 
-    public function edit($id, Curl $curl)
+    public function store(UserRequest $request)
+    {
+        $user = new User();
+        $user->name = $request->get('name');
+        $user->username = $request->get('username');
+        $user->email = $request->get('email');
+        $user->phone = $request->get('phone');
+        $user->password = bcrypt($request->get('password'));
+
+        if ($user->save()) {
+            $user->assignRole($request->get('role'));
+            return redirect()->route('user.index')->with('success', 'Data Added successfully Done');
+        }
+        return redirect()->back()->withInput()->with('failed', 'Data failed on create');
+    }
+
+    public function edit($id)
     {
 
-        //if (Auth::user()->hasRole(['Admin'])) {
-			$getResponse = $curl->send('GET','admin', $id,'','display');
+        if (Auth::user()->hasRole(['Admin'])) {
+
             return view('admin.pages.users.edit', [
                 'prefixname' => 'Admin',
                 'title' => 'User Create',
                 'page_title' => 'User Create',
-                'user' => $getResponse->data,
+                'user' => User::with('roles')->findOrFail($id),
                 'roles' => Role::all(),
+                'enumStatuses' => $this->enumStatuses,
             ]);
-        /*} else {
+        } else {
             abort(401, 'Unauthorized Error');
-        }*/
-    }
-    public function update(Curl $curl, Request $request, $id)
-    {
-        $data = $request->all();		
-        $getResponse = $curl->send('POST','admin/update', $id, $data,'update');
-        if ($getResponse) {
-			self::message('success', 'Data Updated successfully Done');
-            return redirect()->route('user.index');
         }
-		self::message('error', 'Data failed on update');
-        return redirect()->back();
     }
-	
-	
-	public function show($id, Curl $curl)
+    public function update(UserRequest $request, $id)
     {
-        $getResponse = $curl->send('GET','admin', $id,'','display');
-            return view('admin.pages.users.details', [
-                'prefixname' => 'Admin',
-                'title' => 'User Create',
-                'page_title' => 'User Create',
-                'user' => $getResponse->data,
-                'roles' => Role::all(),
-            ]);
-    }
-    public function destroy($id, Curl $curl)
-    {		
-        $getResponse = $curl->send('DELETE','admin', $id, '','delete');
-        if ($getResponse) {
-			self::message('success', 'Data Deleted successfully Done');
-            return redirect()->route('user.index');
+        if (Auth::user()->hasRole(['Admin'])) {
+            $id = $id;
+            $name = $request->Input('name');
+            $username = $request->Input('username');
+            $phone = $request->Input('phone');
+            $email = strtolower($request->Input('email'));
+            $password = $request->Input('password');
+            $statusUpdate = $request->Input('status');
+            $role = $request->Input('role');
+
+            $user = User::find($id);
+            $user->name = $name;
+            if ($password) {
+                $user->password = bcrypt($password);
+            }
+            $user->username = $username;
+            $user->email = $email;
+            $user->phone = $phone;
+            $user->status = $statusUpdate;
+            $user->save();
+
+            if ($user) {
+                $user->roles()->detach();
+                $user->assignRole($role);
+                return redirect()->route('user.index')->with('success', 'Data Added successfully Done');
+            } else {
+                return redirect()->back()->withInput()->with('error', 'Data Added Failed');
+            }
+
+        } else {
+            abort(401, 'Unauthorized Error');
         }
-		self::message('error', 'Data failed on update');
-        return redirect()->back();
+    }
+    public function destroy($id)
+    {
+
+        $result = User::where('id', '=', $id)->delete();
+
+        if ($result) {
+            return redirect()->route('user.index');
+        } else {
+            return redirect()->back();
+        }
     }
 }

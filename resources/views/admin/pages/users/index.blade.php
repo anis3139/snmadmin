@@ -19,9 +19,9 @@
             </div>
 
         </div>
-		
+
         @include ('components.flash-messages')
-        
+
         <section id="advanced-search-datatable">
             <div class="row">
                 <div class="col-12">
@@ -144,8 +144,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($getResponse->data!="")
-                                    @foreach($getResponse->data as $response)
+                                @if($users!="")
+                                    @foreach($users as $response)
                                         <tr id="tablerow{{ $response->id }}">
                                         <td>{{ $response->id }}</td>
                                         <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="{{ $response->id }}" /></td>
@@ -168,7 +168,7 @@
                                     </tr>
                                     @endforeach
                                 @endif
-                                
+
                                 </tbody>
 
                             </table>
