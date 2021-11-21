@@ -1,0 +1,275 @@
+*{padding: 0;margin: 0;}
+body {
+    background-image: url(../webimg/body-bg3.png);
+    background-position: top center;
+}
+img{
+    width: 100%;
+}
+.fix{
+    overflow: hidden;
+}
+a .news_heading{
+    color: #000;
+}
+a:hover{
+    text-decoration: none;
+}
+.owl-prev,.owl-next{
+    display: none !important;
+}
+.container{
+    background: #fff;
+}
+
+input:focus,button:focus{
+    outline: none;
+}
+li{
+    list-style: none;
+}
+/*
+.news_shadow{
+    box-shadow: 0 0 40px #ddd;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: hidden
+}
+.single-catagori{
+    box-shadow: 0 0 0 50px #ddd;
+}
+*/
+a h2.main_news_heading{
+    color: dimgray;
+}
+a h2.main_news_heading:hover{
+    text-decoration: underline;
+}
+.post-share span{
+    display: inline-block;
+    padding: 5px 10px;
+    color: #fff;
+    background: red;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+.single-post{
+    box-sizing: border-box;
+    padding: 10px;
+}
+.about i{
+    font-size: 80px;
+    background: dimgray;
+    color: #fff;
+    padding: 10px;
+}
+.similer-post{
+    box-sizing: border-box;
+}
+
+.menusection nav ul{
+    background: green
+}
+
+.menusection nav ul li{
+    border-left: 1px solid #000;
+    
+}
+.menusection nav ul li:nth-child(1){
+    border-left: none;
+}
+.menusection nav ul li a{
+    color: aliceblue;
+    font-size: 18px;
+    transition: .3s;
+}
+.menusection nav ul li a:hover{
+    color: #ddd;
+    
+}
+
+.newsType .icon_wrap{
+    padding: 3px;
+    margin-right: 5px;
+    color: #fff;
+    background: red;
+}
+.strip{
+    background: url(../webimg/stripe.png);
+    height: 12px;
+    overflow: hidden;
+    margin-top: 7px;
+}
+.news_3_title{
+    padding: 9px 0;
+    overflow: hidden;
+}
+.logoSection img{
+    width: 150px;
+}
+.single-3-news{
+    padding: 10px;
+/*    border-radius: 10px;*/
+    box-shadow: 0 0 40px #dfdfdf;
+    border-bottom: 5px solid green;
+}
+.w-3{
+    width: 30%;
+    float: left;
+    margin-left: 2.2%;
+}
+.slide-content{
+    background: #000;
+    color: #fff;
+}
+
+.w-3 a h5{
+    font-size: 18px;
+    color: #c6c6c6;
+    transition: .3s;
+}
+.w-3 a h5:hover{
+    color: #fff;
+}
+.second-news .news_heading,.main_news_heading{
+    font-size: 18px;
+    
+}
+.readMore{
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background: green;
+    color: #fff;
+/*    width: 150px;*/
+    text-align: center;
+    transition: .5s;
+    border-radius: 5px;
+}
+.readMore:hover{
+    background: dimgray;
+    color: #fff;
+}
+
+.news-border{
+    border-bottom: 5px solid green;
+}
+.more_news .news_heading{
+    font-size: 18px;
+}
+.single-more-news .news_heading{
+    font-size: 18px;
+}
+.more_news{
+    overflow: hidden;
+    background: #ddd;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-top: 10px;
+}
+.wrap_more_news,.wrap_more_news-2{
+    box-sizing: border-box;
+    padding: 12px 5px;
+    padding-bottom: 0;
+    box-shadow: 0 0 40px rgb(161 161 161 / 48%);
+}
+
+.wrap_more_news-2{
+    box-shadow: 0 0 10px rgb(0 0 0 / 42%);
+    padding: 15px;
+}
+.single-file ul li{
+    list-style: none;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+.single-file ul li a{
+    color: dimgray;
+}
+.single-file ul li a i{
+    margin-right: 10px;
+}
+.single-file ul li a:hover{
+    text-decoration: underline;
+}
+.login input{
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #cacaca;
+    padding: 10px;
+    background: rgb(221 221 221 / 18%);
+}
+.item-center{
+    align-items: center;
+}
+.lost:hover{
+    text-decoration: underline;
+}
+/*
+.aside{
+    position: relative;
+    min-height: 2083.8px;
+    width: 310px;
+    overflow: visible;
+    box-sizing: border-box;
+}
+*/
+
+/*
+.sideber{
+    padding-top: 0px;
+    padding-bottom: 1px;
+    position: fixed;
+    width: 310px;
+    top: -729.6px;
+    left: 952.5px;
+}
+*/
+footer{
+    background: #000;
+    color: #fff;
+}
+
+footer .container{
+    background: #000;
+}
+
+footer img{
+    width: 200px;
+}
+
+.comment-input label{
+    display: block;
+    color: dimgray;
+}
+.comment-input textarea{
+    width: 100% !important;
+}
+.input-filed input,.comment-input textarea{
+    width: 250px;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 5px;
+    padding: 6px;
+}
+
+
+@media(max-width:1200px){
+    .menusection{
+        float: none !important;
+        overflow: hidden;
+        width: 100%;
+        padding-bottom: 65px;
+    }
+    .menusection li{
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+

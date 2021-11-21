@@ -1,0 +1,41 @@
+
+nav.top-menu ul.menu li {
+    list-style: none;
+    display: inline-block;
+    padding: 10px 20px;
+    
+}
+
+nav.top-menu ul.menu li a {
+    display: block;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.menuIcon {
+    display: none;
+}
+
+
+@media(max-width:1200px) {
+    .menuIcon {
+        display: block;
+        position: fixed;
+        right: 30px;
+        top: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    nav.top-menu ul.menu {
+        display: none;
+    }
+    nav.top-menu ul.menu{
+        position: relative;
+        top: 80px;
+    }
+    nav.top-menu ul.menu li {
+        display: block;
+        text-align: center;
+    }
+}
