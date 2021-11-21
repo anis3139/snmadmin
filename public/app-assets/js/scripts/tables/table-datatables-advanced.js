@@ -95,7 +95,7 @@ $(function () {
     dt_filter_table = $('.dt-column-search'),
     dt_adv_filter_table = $('.dt-advanced-search'),
     dt_responsive_table = $('.dt-responsive'),
-    assetPath = 'http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/';
+    assetPath = '{{ asset('') }}app-assets/';
 
   if ($('body').attr('data-framework') === 'laravel') {
     assetPath = $('body').attr('data-asset-path');

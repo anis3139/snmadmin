@@ -12,7 +12,7 @@ $(function () {
   'use strict';
 
   var dtInvoiceTable = $('.superadmin-list-table'),
-    assetPath = 'http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/',
+    assetPath = '{{ asset('') }}app-assets/',
 
     invoicePreview = 'app-invoice-preview.html',
     invoiceAdd = 'app-invoice-add.html',

@@ -2,16 +2,16 @@
 
 @section('vendor-style')
     {{-- Page Css files --}}
-    <link rel="stylesheet" href="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
-    <link rel="stylesheet" href="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
 @endsection
 
 @section('page-style')
     {{-- Page Css files --}}
-    <link rel="stylesheet" href="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/css/base/plugins/forms/form-validation.css">
-    <link rel="stylesheet" href="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/css/base/plugins/forms/pickers/form-flat-pickr.css">
+    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/form-validation.css">
+    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/pickers/form-flat-pickr.css">
 @endsection
 @section('content')
     <section id="advanced-search-datatable">
@@ -67,39 +67,7 @@
                                         </div></li>
                                 </ol>
                             </div>
-                           {{-- <div class="col-md-6 text-right">
-                                <button class="btn btn-info btn-sm"><i data-feather='file-text'></i> CSV</button>
-                                <button class="btn btn-success btn-sm"><i data-feather='download'></i> Excel</button>
-                                <button class="btn btn-danger btn-sm"><i data-feather='file'></i> PDF</button>
-                            </div>--}}
-                            {{--<div class="col-md-6 text-right">
-                                <a class="btn btn-primary btn-sm" href="{{ route('driver.create') }}"><i data-feather='eye'></i> View</a>
-                                <a class="btn btn-dark btn-sm" href="{{ route('driver.create') }}"><i data-feather='plus'></i> Create</a>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Column</button>
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                    >
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="javascript:void(0);">ID</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Image</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">License</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Vehicle</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Full Name</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Mobile</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Emergency Contact</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Email</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Address</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Status</a>
-                                    </div>
-                                </div>
-                            </div>--}}
+                           
                         </div>
                     </div>
                 </div>
@@ -200,14 +168,14 @@
 
 @section('vendor-script')
     {{-- Vendor js files --}}
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="{{ asset('') }}app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
 @endsection
 
 @section('page-script')
@@ -221,9 +189,9 @@
         }
     </script>--}}
     {{-- Page js files --}}
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/js/scripts/pages/app-user-list.js"></script>
+    <script src="{{ asset('') }}app-assets/js/scripts/pages/app-user-list.js"></script>
 
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/js/scripts/tables/table-datatables-advanced.js"></script>
-    <script src="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/data/table-datatable.json"></script>
+    <script src="{{ asset('') }}app-assets/js/scripts/tables/table-datatables-advanced.js"></script>
+    <script src="{{ asset('') }}app-assets/data/table-datatable.json"></script>
 @endsection
 

@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-style')
-    <link rel="stylesheet" type="text/css" href="http://192.168.1.224:8080/aleshatech-driver-app/atladmin/public/app-assets/css/modal-design.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('') }}app-assets/css/modal-design.css">
 @endsection
 
 @section('content')
