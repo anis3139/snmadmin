@@ -15,28 +15,23 @@ use App\Http\Controllers\Admin\PromoCodeController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
-
+ */
 
 Auth::routes();
 
-
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::namespace('\App\Http\Controllers\Admin')->group(function () {
+Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
     //manage user
-	 Route::prefix('common')->group(function () {
+    Route::prefix('common')->group(function () {
         Route::get('/delete', 'CommonController@destroy')->name('common.destroy');
-		Route::get('/print', 'CommonController@prints')->name('common.print');
-		Route::get('/export', 'CommonController@export')->name('common.export');
-		Route::post('/import','CommonController@import')->name('common.import');		
-		Route::get('/samplefiledownload','CommonController@sampleFileDownload')->name('common.samplefiledownload');
-			
+        Route::get('/print', 'CommonController@prints')->name('common.print');
+        Route::get('/export', 'CommonController@export')->name('common.export');
+        Route::post('/import', 'CommonController@import')->name('common.import');
+        Route::get('/samplefiledownload', 'CommonController@sampleFileDownload')->name('common.samplefiledownload');
+
     });
-	
-	
+
     Route::prefix('user')->group(function () {
         Route::get('/', 'Auth\UserController@index')->name('user.index');
         Route::get('/create', 'Auth\UserController@create')->name('user.create');
@@ -45,37 +40,73 @@ Route::namespace('\App\Http\Controllers\Admin')->group(function () {
         Route::get('/show/{id}', 'Auth\UserController@show')->name('user.show');
         Route::post('/update/{id}', 'Auth\UserController@update')->name('user.update');
         Route::get('/delete/{id}', 'Auth\UserController@destroy')->name('user.destroy');
-    });
-	
-	
-	Route::prefix('partner')->group(function () {
-        Route::get('/', 'PartnerController@index')->name('partner.index');
-        Route::get('/create', 'PartnerController@create')->name('partner.create');
-        Route::post('/store', 'PartnerController@store')->name('partner.store');
-        Route::get('/edit/{id}', 'PartnerController@edit')->name('partner.edit');
-        Route::get('/show/{id}', 'PartnerController@show')->name('partner.show');
-        Route::post('/update/{id}', 'PartnerController@update')->name('partner.update');
-        Route::get('/delete/{id}', 'PartnerController@destroy')->name('partner.destroy');
-    });
-		
 
-	//manage user
-    Route::prefix('delivery')->group(function () {
-        Route::get('/orders', 'DeliveryController@index')->name('delivery.orders');
-		Route::get('/orders/tracking', 'DeliveryController@tracking')->name('delivery.tracking');
+        Route::get('/profile/{id}', 'Auth\UserController@profile')->name('user.profile');
+        Route::post('/changePassword', 'Auth\UserController@changePassword')->name('user.changePassword');
+        Route::post('/user-role/update/{id}', 'Auth\UserController@roleUpdate')->name('user.role.update');
+    });
+    Route::prefix('category')->group(function () {
+        Route::get('/list', 'CategoryController@index')->name('category.index');
+        Route::get('/create', 'CategoryController@create')->name('category.create');
+        Route::post('/create', 'CategoryController@store')->name('category.store');
+        Route::get('/edit/{id}', 'CategoryController@edit')->name('category.edit');
+        Route::post('/edit/{id}', 'CategoryController@update')->name('category.update');
+        Route::delete('/delete/{id}', 'CategoryController@destroy')->name('category.delete');
+    });
+    Route::prefix('sub-category')->group(function () {
+        Route::get('/list', 'SubCategoryController@index')->name('subcategory.index');
+        Route::get('/create', 'SubCategoryController@create')->name('subcategory.create');
+        Route::post('/create', 'SubCategoryController@store')->name('subcategory.store');
+        Route::get('/edit/{id}', 'SubCategoryController@edit')->name('subcategory.edit');
+        Route::post('/edit/{id}', 'SubCategoryController@update')->name('subcategory.update');
+        Route::delete('/delete/{id}', 'SubCategoryController@destroy')->name('subcategory.delete');
+
+        //for catch subcategory image
+        Route::get('/subcategory/list', 'SubCategoryController@ajaxGetData')->name('subcategory.ajaxdata');
     });
 
-	//manage user
-    Route::prefix('fleet')->group(function () {
-        Route::get('/index', 'FleetController@index')->name('fleet.index');
-		Route::get('/create', 'FleetController@create')->name('fleet.create');
+    Route::prefix('tag')->group(function () {
+        Route::get('/list', 'TagController@index')->name('tag.index');
+        Route::get('/create', 'TagController@create')->name('tag.create');
+        Route::post('/create', 'TagController@store')->name('tag.store');
+        Route::get('/edit/{id}', 'TagController@edit')->name('tag.edit');
+        Route::post('/edit/{id}', 'TagController@update')->name('tag.update');
+        Route::delete('/delete/{id}', 'TagController@destroy')->name('tag.delete');
     });
 
-    //Complaints
-    Route::prefix('complaint')->group(function () {
-        Route::get('/list', 'ComplaintsController@index')->name('complaint.view');
+    //manage comment
+    Route::prefix('comment')->group(function () {
+        Route::get('comment', 'CommentController@index')->name('comment.list');
+        Route::get('approve/approve-list', 'CommentController@approveList')->name('comment.approve.list');
+        Route::get('pending/pending-list', 'CommentController@pendingList')->name('comment.pending.list');
+        Route::get('pending/list/approve/{id}', 'CommentController@pendingListApprove')->name('comment.pending.list.approve');
+        Route::delete('delete/{id}', 'CommentController@destroy')->name('comment.destroy');
+    });
+
+    //filter data
+    Route::prefix('filter')->group(function () {
+        Route::get('/list', 'FilterController@index')->name('filter.view');
+        Route::get('/list/data', 'FilterController@filter')->name('filter.list');
+        Route::get('/subcategory/list', 'FilterController@ajaxGetSubcategoryData')->name('filter.getsubcategory');
 
     });
+
+    Route::prefix('news')->group(function () {
+        Route::get('/list', 'NewsController@index')->name('news.index');
+        Route::get('/create', 'NewsController@create')->name('news.create');
+        Route::post('/create', 'NewsController@store')->name('news.store');
+        Route::get('/view/{id}', 'NewsController@view')->name('news.view');
+        Route::get('/edit/{id}', 'NewsController@edit')->name('news.edit');
+        Route::post('/edit/{id}', 'NewsController@update')->name('news.update');
+        Route::delete('/delete/{id}', 'NewsController@destroy')->name('news.delete');
+    });
+
+    //manage Contact
+    Route::prefix('contact')->group(function () {
+        Route::get('/list', 'ContactController@index')->name('contact.index');
+
+    });
+
 
     //manage setting
     Route::prefix('setting')->group(function () {
@@ -86,30 +117,23 @@ Route::namespace('\App\Http\Controllers\Admin')->group(function () {
     });
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-    //driver
-    Route::resource('driver','DriverController');
-    //Route::resource('partner','PartnerController');
-
 });
 
-Route::namespace('\App\Http\Controllers\GeneralSettings')->group(function () {
-	Route::prefix('vehicle_type')->group(function () {
+Route::namespace ('\App\Http\Controllers\GeneralSettings')->group(function () {
+    Route::prefix('vehicle_type')->group(function () {
         Route::get('/', 'VehicleTypeController@index')->name('vehicle_type.index');
         Route::post('/store', 'VehicleTypeController@store')->name('vehicle_type.store');
         Route::post('/update/{id}', 'VehicleTypeController@update')->name('vehicle_type.update');
         Route::get('/delete/{id}', 'VehicleTypeController@destroy')->name('vehicle_type.destroy');
     });
-	
-	Route::prefix('delivery_status')->group(function () {
+
+    Route::prefix('delivery_status')->group(function () {
         Route::get('/', 'DeliveryStatusController@index')->name('delivery_status.index');
         Route::post('/store', 'DeliveryStatusController@store')->name('delivery_status.store');
         Route::post('/update/{id}', 'DeliveryStatusController@update')->name('delivery_status.update');
         Route::get('/delete/{id}', 'DeliveryStatusController@destroy')->name('delivery_status.destroy');
     });
-});	
-/*Route::get('/user', function(){
-    return view('index');
-});*/
+});
 
 //banner
 Route::resource('banners', BannerController::class);
@@ -117,12 +141,4 @@ Route::resource('banners', BannerController::class);
 //role
 Route::resource('roles', RoleController::class);
 
-//role
-Route::resource('promo-code', PromoCodeController::class);
-
-//general settings
-Route::resource('user_type','\App\Http\Controllers\GeneralSettings\UserTypeController');
-//Route::resource('vehicle_type','\App\Http\Controllers\GeneralSettings\VehicleTypeController');
-Route::resource('general_status','\App\Http\Controllers\GeneralSettings\GeneralStatusController');
-//Route::resource('delivery_status','\App\Http\Controllers\GeneralSettings\DeliveryStatusController');
-Route::resource('subscription_type','\App\Http\Controllers\GeneralSettings\SubscriptionTypeController');
+Route::resource('subscription_type', '\App\Http\Controllers\GeneralSettings\SubscriptionTypeController');

@@ -39,8 +39,8 @@
                                 <a href="{{ url()->previous() }}" class="btn btn-dark btn-sm"><i class="fas fa-arrow-circle-left"></i> Back</a>
                             </div>
                             <div class="right">
-                                <a class="btn btn-primary btn-learge" href="{{ route('user.index') }}"><i data-feather='eye'></i> View {{ request()->name }}</a>
-                                <a class="btn btn-dark btn-learge" href="{{ route('user.index') }}"><i data-feather='plus'></i> Create New</a>
+                                <a class="btn btn-primary btn-learge" href=""><i data-feather='eye'></i> View {{ request()->name }}</a>
+                                <a class="btn btn-dark btn-learge" href=""><i data-feather='plus'></i> Create New</a>
                             </div>
                         </div>
                     </div>
