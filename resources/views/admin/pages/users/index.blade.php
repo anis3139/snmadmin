@@ -50,8 +50,8 @@
                                             <li style="margin: 2px;">
                                             <a class="btn btn-warning btn-sm" href="{{ route('common.print',['action'=>'print','api'=>'admin']) }}" target="_blank">
                                             <i data-feather='printer'></i> Print</a></li>
-                                            <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('user.index') }}"><i data-feather='eye'></i> View</a></li>
-                                            <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('user.create') }}"><i data-feather='plus'></i> Create</a></li>
+                                            <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('admin.index') }}"><i data-feather='eye'></i> View</a></li>
+                                            <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('admin.create') }}"><i data-feather='plus'></i> Create</a></li>
                                             <li style="margin: 2px;"><div class="btn-group">
                                                     <button type="button" class="btn btn-sm btn-outline-secondary">Column</button>
                                                     <button
@@ -104,9 +104,9 @@
                                         <td>{{ $user->id }}</td>
                                         <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="{{ $user->id }}" /></td>
                                         <td class="text-nowrap">
-                                            <a href="{{ route('user.show',$user->id) }}"><i data-feather='eye'></i></a>
-                                            <a href="{{ route('user.edit',$user->id) }}"><i data-feather='edit'></i></a>
-                                            <!--<a href="{{ route('user.destroy',$user->id) }}"><i data-feather='trash-2'></i></a>
+                                            <a href="{{ route('admin.show',$user->id) }}"><i data-feather='eye'></i></a>
+                                            <a href="{{ route('admin.edit',$user->id) }}"><i data-feather='edit'></i></a>
+                                            <!--<a href="{{ route('admin.destroy',$user->id) }}"><i data-feather='trash-2'></i></a>
                                             <a href="{{ url('common/delete/') }}?id={{ $user->id }}&&api=admins&&type=single"><i data-feather='trash-2'></i></a>-->
                                             <a href="#" onclick="singleDelete({{ $user->id }},'admin');"><i data-feather='trash-2'></i></a>
                                             <a href="#"><i data-feather='more-vertical'></i></a>

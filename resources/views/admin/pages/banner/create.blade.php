@@ -46,7 +46,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <form class="" action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data" files="true">
+                            <form class="" action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">

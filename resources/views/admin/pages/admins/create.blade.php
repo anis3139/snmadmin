@@ -34,7 +34,7 @@
 
             <section class="tooltip-validations" id="tooltip-validation">
                 <div class="row">
-                    <div class="col-12 p-5">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header d-flex">
                                 <div class="left">

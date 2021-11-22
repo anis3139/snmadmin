@@ -31,7 +31,7 @@ class LoginController extends Controller
             if (Auth::guard('admin')->user()->status != 1) {
                 auth::guard('admin')->logout();
                 return 0;
-            } else { 
+            } else {
                 $request->session()->regenerate();
                 return redirect()->route('admin.index')->with('success', 'Login successfull');
             }
@@ -48,4 +48,5 @@ class LoginController extends Controller
         auth::guard('admin')->logout();
         return redirect('/admin/login');
     }
+
 }

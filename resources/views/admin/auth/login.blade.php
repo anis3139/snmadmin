@@ -104,8 +104,7 @@
                                 </div>
                                 <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
                             </form>
-                            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{ route('register') }}"><span>&nbsp;Create an account</span></a></p>
-                            <div class="divider my-2">
+                             <div class="divider my-2">
                                 <div class="divider-text">or</div>
                             </div>
                             <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a></div>

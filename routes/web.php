@@ -21,9 +21,9 @@ use App\Http\Controllers\Admin\PromoCodeController;
 
 
 
-Route::get('admin/login', '\App\Http\Controllers\Admin\LoginController@login')->name('admin.login');
-Route::post('admin/onLogin', '\App\Http\Controllers\Admin\LoginController@onLogin')->name('admin.onLogin');
-Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
+Route::get('admin/login', '\App\Http\Controllers\Admin\LoginController@login')->name('admin.login')->middleware('admin.guest');
+Route::post('admin/onLogin', '\App\Http\Controllers\Admin\LoginController@onLogin')->name('admin.onLogin')->middleware('admin.guest');
+Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     //manage user
     Route::prefix('common')->group(function () {
@@ -36,6 +36,8 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
+
+        Route::resource('roles', 'RolesController', ['names' => 'admin.roles']);
         Route::get('/dashboard', 'Auth\AdminController@index')->name('admin.index');
         Route::get('/create', 'Auth\AdminController@create')->name('admin.create');
         Route::post('/store', 'Auth\AdminController@store')->name('admin.store');
@@ -48,7 +50,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
         Route::post('/changePassword', 'Auth\AdminController@changePassword')->name('admin.changePassword');
         Route::post('/admin-role/update/{id}', 'Auth\AdminController@roleUpdate')->name('admin.role.update');
     });
-   
+
     Route::prefix('category')->group(function () {
         Route::get('/list', 'CategoryController@index')->name('category.index');
         Route::get('/create', 'CategoryController@create')->name('category.create');
@@ -121,8 +123,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
     });
     //banner
     Route::resource('banners', 'BannerController');
-    //role
-    Route::resource('roles', 'RoleController');
-    Route::get('logout', 'LoginController@logout')->name('admin.logout');
+    
 
+    Route::post('admin/logout', 'LoginController@onLogout')->name('admin.logout');
 });

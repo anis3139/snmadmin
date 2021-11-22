@@ -31,11 +31,11 @@
                                     <h4 class="card-title"></h4>
                                 </div>
                                 <div class="right">
-                                    <a class="btn btn-primary btn-learge" href="{{ route('user.index') }}">User List</a>
+                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.index') }}">User List</a>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form class="" action=" {{ route('user.update', $user->id) }}" method="post"
+                                <form class="" action=" {{ route('admin.update', $user->id) }}" method="post"
                                     enctype="multipart/form-data" files="true">
                                     @csrf
                                     <div class="row">

@@ -219,7 +219,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <a class="float-right btn btn-primary" href="{{ route('user.index') }}">View All</a>
+                                            <a class="float-right btn btn-primary" href="{{ route('admin.index') }}">View All</a>
                                         </div>
 
                                     </div>

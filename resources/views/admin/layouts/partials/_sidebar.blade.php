@@ -85,9 +85,9 @@
         <li class="{{ Request::is('user') || Request::is('user/*') ? 'active' : '' }} bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">content_paste</i><span class="menu-title" data-i18n="Pages">Users</span></a>
             <div class="collapsible-body">
                 <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                    <li class="{{ Request::is('user/list') ? 'active' : '' }}"><a class="{{ Request::is('user/list') ? 'active' : '' }}" href="{{ route('user.index') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">List</span></a>
+                    <li class="{{ Request::is('user/list') ? 'active' : '' }}"><a class="{{ Request::is('user/list') ? 'active' : '' }}" href="{{ route('admin.index') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">List</span></a>
                     </li>
-                    <li class="{{ Request::is('user/create') ? 'active' : '' }}"><a class="{{ Request::is('user/create') ? 'active' : '' }}" href="{{ route('user.create') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">Add</span></a>
+                    <li class="{{ Request::is('user/create') ? 'active' : '' }}"><a class="{{ Request::is('user/create') ? 'active' : '' }}" href="{{ route('admin.create') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">Add</span></a>
                     </li>
                 </ul>
             </div>

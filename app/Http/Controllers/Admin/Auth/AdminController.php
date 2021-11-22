@@ -26,7 +26,7 @@ class AdminController extends Controller
     }
     public function create()
     {
-        if (Auth::admin()->hasRole(['Admin'])) {
+
             return view('admin.pages.admins.create', [
                 'prefixname' => 'Admin',
                 'title' => 'Admin Create',
@@ -34,9 +34,7 @@ class AdminController extends Controller
                 'roles' => Role::all(),
                 'enumStatuses' => $this->enumStatuses,
             ]);
-        } else {
-            abort(401, 'Unauthorized Error');
-        }
+
     }
 
     public function store(AdminRequest $request)
@@ -58,8 +56,6 @@ class AdminController extends Controller
     public function edit($id)
     {
 
-        if (Auth::admin()->hasRole(['Admin'])) {
-
             return view('admin.pages.admins.edit', [
                 'prefixname' => 'Admin',
                 'title' => 'Admin Create',
@@ -68,13 +64,10 @@ class AdminController extends Controller
                 'roles' => Role::all(),
                 'enumStatuses' => $this->enumStatuses,
             ]);
-        } else {
-            abort(401, 'Unauthorized Error');
-        }
+
     }
     public function update(Request $request, $id)
     {
-        if (Auth::admin()->hasRole(['Admin'])) {
             $id = $id;
             $name = $request->Input('name');
             $username = $request->Input('username');
@@ -102,10 +95,7 @@ class AdminController extends Controller
             } else {
                 return redirect()->back()->withInput()->with('error', 'Data Added Failed');
             }
-
-        } else {
-            abort(401, 'Unauthorized Error');
-        }
+ 
     }
     public function destroy($id)
     {

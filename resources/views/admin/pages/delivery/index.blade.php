@@ -68,8 +68,8 @@
                                 <button class="btn btn-danger btn-sm">PDF</button>
                             </div>
                             <!--<div class="col-md-6">
-                                <a class="btn btn-primary btn-sm" href="{{ route('user.create') }}"><i data-feather='eye'></i> View {{ request()->name }}</a>
-                                <a class="btn btn-dark btn-sm" href="{{ route('user.create') }}"><i data-feather='plus'></i> Create New</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.create') }}"><i data-feather='eye'></i> View {{ request()->name }}</a>
+                                <a class="btn btn-dark btn-sm" href="{{ route('admin.create') }}"><i data-feather='plus'></i> Create New</a>
                             </div>
                         </div>-->
                         </div>--}}
