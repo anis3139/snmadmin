@@ -45,11 +45,11 @@
                 class="menu-title text-truncate" data-i18n="Board">Role</span></a>
         <ul class="menu-content">
             <li class="{{ Route::currentRouteName() === 'roles.create' ? 'active' : '' }}"><a
-                    class="d-flex align-items-center" href="{{ route('roles.create') }}"><i
+                    class="d-flex align-items-center" href="{{ route('admin.roles.create') }}"><i
                         data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
             </li>
             <li class="{{ Route::currentRouteName() === 'roles.index' ? 'active' : '' }}"><a
-                    class="d-flex align-items-center" href="{{ route('roles.index') }}"><i
+                    class="d-flex align-items-center" href="{{ route('admin.roles.index') }}"><i
                         data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
             </li>
         </ul>

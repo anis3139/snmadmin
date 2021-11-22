@@ -122,8 +122,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::post('/update/{id}', 'SettingController@update')->name('setting.update');
     });
     //banner
-    Route::resource('banners', 'BannerController');
-    
+    Route::resource('banners', 'BannerController'); 
 
     Route::post('admin/logout', 'LoginController@onLogout')->name('admin.logout');
 });

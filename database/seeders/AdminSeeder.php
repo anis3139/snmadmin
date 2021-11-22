@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
@@ -13,6 +15,15 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        //
+
+            $admin           = new Admin();
+            $admin->name     = "Super Admin";
+            $admin->email    = "superadmin@example.com";
+            $admin->username = "superadmin";
+            $admin->phone = "01105050051";
+            $admin->status = 1;
+            $admin->password = Hash::make('12345678');
+            $admin->save();
+        
     }
 }

@@ -28,9 +28,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        if (is_null($this->user) || !$this->user->can('role.view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.view')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to view any role !');
+        // }
 
         $roles = Role::all();
         return view('admin.pages.roles.index', compact('roles'));
@@ -48,7 +48,7 @@ class RolesController extends Controller
         }
         $all_permissions  = Permission::all();
         $permission_groups = User::getpermissionGroups();
-        return view('backend.pages.roles.create', compact('all_permissions', 'permission_groups'));
+        return view('admin.pages.roles.create', compact('all_permissions', 'permission_groups'));
     }
 
     /**
@@ -59,9 +59,9 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        if (is_null($this->user) || !$this->user->can('role.create')) {
-            abort(403, 'Sorry !! You are Unauthorized to create any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.create')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to create any role !');
+        // }
 
         // Validation Data
         $request->validate([
@@ -103,14 +103,14 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        if (is_null($this->user) || !$this->user->can('role.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to edit any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.edit')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to edit any role !');
+        // }
 
         $role = Role::findById($id, 'admin');
         $all_permissions = Permission::all();
         $permission_groups = User::getpermissionGroups();
-        return view('backend.pages.roles.edit', compact('role', 'all_permissions', 'permission_groups'));
+        return view('admin.pages.roles.edit', compact('role', 'all_permissions', 'permission_groups'));
     }
 
     /**
@@ -122,9 +122,9 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (is_null($this->user) || !$this->user->can('role.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to edit any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.edit')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to edit any role !');
+        // }
 
         // Validation Data
         $request->validate([
@@ -154,9 +154,9 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        if (is_null($this->user) || !$this->user->can('role.delete')) {
-            abort(403, 'Sorry !! You are Unauthorized to delete any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.delete')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to delete any role !');
+        // }
 
 
         $role = Role::findById($id, 'admin');
