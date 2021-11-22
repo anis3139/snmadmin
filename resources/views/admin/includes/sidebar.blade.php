@@ -30,12 +30,12 @@
     <li class="nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span
                 class="menu-title text-truncate" data-i18n="Board">User</span></a>
         <ul class="menu-content">
-            <li class="{{ Route::currentRouteName() === 'user.create' ? 'active' : '' }}"><a
-                    class="d-flex align-items-center" href="{{ route('user.create') }}"><i
+            <li class="{{ Route::currentRouteName() === 'admin.create' ? 'active' : '' }}"><a
+                    class="d-flex align-items-center" href="{{ route('admin.create') }}"><i
                         data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
             </li>
-            <li class="{{ Route::currentRouteName() === 'user.index' ? 'active' : '' }}"><a
-                    class="d-flex align-items-center" href="{{ route('user.index') }}"><i
+            <li class="{{ Route::currentRouteName() === 'admin.index' ? 'active' : '' }}"><a
+                    class="d-flex align-items-center" href="{{ route('admin.index') }}"><i
                         data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
             </li>
         </ul>
@@ -197,7 +197,7 @@
                         class="menu-item text-truncate" data-i18n="Second Level">Subscription Settings</span></a>
                 <ul class="menu-content">
                     <li class="{{ Route::currentRouteName() === 'subscription_type.index' ? 'active' : '' }}"><a
-                            class="d-flex align-items-center" href="{{ route('subscription_type.index') }}"><span
+                            class="d-flex align-items-center" href="#"><span
                                 class="menu-item text-truncate" data-i18n="Third Level">Subscription Type</span></a>
                     </li>
                 </ul>

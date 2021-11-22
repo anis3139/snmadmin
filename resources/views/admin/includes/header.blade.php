@@ -107,13 +107,13 @@
           <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{ Auth::user()->name ?? '' }}</span><span class="user-status">Super Admin</span></div><span class="avatar"><img class="round" src="{{asset('')}}app-assets/images/portrait/small/avatar-s-10.jpg" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-          <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+          <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
             <i class="mr-50" data-feather="power"></i>
             {{ __('Logout') }}
           </a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
             @csrf
           </form>
 

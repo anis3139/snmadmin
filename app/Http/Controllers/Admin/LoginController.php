@@ -17,25 +17,21 @@ class LoginController extends Controller
 
     function onLogin(Request $request)
     {
-        $this->validate($request, [
-            'username'  => 'required',
-            'password'  => 'required',
-        ]);
 
 
         $credentials = $request->only('password');
 
-        if (filter_var($request->get('username'), FILTER_VALIDATE_EMAIL) !== FALSE) {
-            $credentials['email'] = $request->get('username');
+        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) !== FALSE) {
+            $credentials['email'] = $request->get('email');
         }else{
-            $credentials['username'] = $request->get('username');
+            $credentials['username'] = $request->get('eamil');
         }
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            if (Auth::guard('admin')->user()->status == 0) {
+            if (Auth::guard('admin')->user()->status != 1) {
                 auth::guard('admin')->logout();
                 return 0;
-            } else {
+            } else { 
                 $request->session()->regenerate();
                 return redirect()->route('admin.index')->with('success', 'Login successfull');
             }
@@ -43,7 +39,7 @@ class LoginController extends Controller
             return redirect()->back()->withInput()->with('failed', 'These credentials do not match our records.');
         }
 
-        
+
     }
 
 

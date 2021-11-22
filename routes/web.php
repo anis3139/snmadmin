@@ -17,16 +17,14 @@ use App\Http\Controllers\Admin\PromoCodeController;
 |
  */
 
-Auth::routes();
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
-Route::get('admin/login', '\App\Http\Controllers\Admin\LoginController@login');
-Route::post('admin/onLogin', '\App\Http\Controllers\Admin\LoginController@onLogin')->name('admin.login');
 
+Route::get('admin/login', '\App\Http\Controllers\Admin\LoginController@login')->name('admin.login');
+Route::post('admin/onLogin', '\App\Http\Controllers\Admin\LoginController@onLogin')->name('admin.onLogin');
 Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     //manage user
     Route::prefix('common')->group(function () {
         Route::get('/delete', 'CommonController@destroy')->name('common.destroy');
@@ -38,7 +36,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
-        Route::get('/', 'Auth\AdminController@index')->name('admin.index');
+        Route::get('/dashboard', 'Auth\AdminController@index')->name('admin.index');
         Route::get('/create', 'Auth\AdminController@create')->name('admin.create');
         Route::post('/store', 'Auth\AdminController@store')->name('admin.store');
         Route::get('/edit/{id}', 'Auth\AdminController@edit')->name('admin.edit');
@@ -50,19 +48,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
         Route::post('/changePassword', 'Auth\AdminController@changePassword')->name('admin.changePassword');
         Route::post('/admin-role/update/{id}', 'Auth\AdminController@roleUpdate')->name('admin.role.update');
     });
-    Route::prefix('user')->group(function () {
-        Route::get('/', 'Auth\UserController@index')->name('user.index');
-        Route::get('/create', 'Auth\UserController@create')->name('user.create');
-        Route::post('/store', 'Auth\UserController@store')->name('user.store');
-        Route::get('/edit/{id}', 'Auth\UserController@edit')->name('user.edit');
-        Route::get('/show/{id}', 'Auth\UserController@show')->name('user.show');
-        Route::post('/update/{id}', 'Auth\UserController@update')->name('user.update');
-        Route::get('/delete/{id}', 'Auth\UserController@destroy')->name('user.destroy');
-
-        Route::get('/profile/{id}', 'Auth\UserController@profile')->name('user.profile');
-        Route::post('/changePassword', 'Auth\UserController@changePassword')->name('user.changePassword');
-        Route::post('/user-role/update/{id}', 'Auth\UserController@roleUpdate')->name('user.role.update');
-    });
+   
     Route::prefix('category')->group(function () {
         Route::get('/list', 'CategoryController@index')->name('category.index');
         Route::get('/create', 'CategoryController@create')->name('category.create');
@@ -133,30 +119,10 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
         Route::post('/store', 'SettingController@store')->name('setting.store');
         Route::post('/update/{id}', 'SettingController@update')->name('setting.update');
     });
-    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('admin.logout');
+    //banner
+    Route::resource('banners', 'BannerController');
+    //role
+    Route::resource('roles', 'RoleController');
+    Route::get('logout', 'LoginController@logout')->name('admin.logout');
 
 });
-
-Route::namespace ('\App\Http\Controllers\GeneralSettings')->group(function () {
-    Route::prefix('vehicle_type')->group(function () {
-        Route::get('/', 'VehicleTypeController@index')->name('vehicle_type.index');
-        Route::post('/store', 'VehicleTypeController@store')->name('vehicle_type.store');
-        Route::post('/update/{id}', 'VehicleTypeController@update')->name('vehicle_type.update');
-        Route::get('/delete/{id}', 'VehicleTypeController@destroy')->name('vehicle_type.destroy');
-    });
-
-    Route::prefix('delivery_status')->group(function () {
-        Route::get('/', 'DeliveryStatusController@index')->name('delivery_status.index');
-        Route::post('/store', 'DeliveryStatusController@store')->name('delivery_status.store');
-        Route::post('/update/{id}', 'DeliveryStatusController@update')->name('delivery_status.update');
-        Route::get('/delete/{id}', 'DeliveryStatusController@destroy')->name('delivery_status.destroy');
-    });
-});
-
-//banner
-Route::resource('banners', BannerController::class);
-
-//role
-Route::resource('roles', RoleController::class);
-
-Route::resource('subscription_type', '\App\Http\Controllers\GeneralSettings\SubscriptionTypeController');

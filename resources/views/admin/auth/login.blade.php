@@ -70,7 +70,7 @@
                             <h2 class="card-title font-weight-bold mb-1">Welcome to Alesha Tech Driver App</h2>
                             <p class="card-text mb-2">Please sign-in to your account</p>
 
-                            <form class="mt-2" action="{{ route('admin.login') }}" method="POST">
+                            <form class="mt-2" action="{{ route('admin.onLogin') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label class="form-label" for="login-email">Email</label>
