@@ -21,6 +21,11 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
+Route::get('admin/login', '\App\Http\Controllers\Admin\LoginController@login');
+Route::post('admin/onLogin', '\App\Http\Controllers\Admin\LoginController@onLogin')->name('admin.login');
+
 Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
     //manage user
     Route::prefix('common')->group(function () {
@@ -32,6 +37,19 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
 
     });
 
+    Route::prefix('admin')->group(function () {
+        Route::get('/', 'Auth\AdminController@index')->name('admin.index');
+        Route::get('/create', 'Auth\AdminController@create')->name('admin.create');
+        Route::post('/store', 'Auth\AdminController@store')->name('admin.store');
+        Route::get('/edit/{id}', 'Auth\AdminController@edit')->name('admin.edit');
+        Route::get('/show/{id}', 'Auth\AdminController@show')->name('admin.show');
+        Route::post('/update/{id}', 'Auth\AdminController@update')->name('admin.update');
+        Route::get('/delete/{id}', 'Auth\AdminController@destroy')->name('admin.destroy');
+
+        Route::get('/profile/{id}', 'Auth\AdminController@profile')->name('admin.profile');
+        Route::post('/changePassword', 'Auth\AdminController@changePassword')->name('admin.changePassword');
+        Route::post('/admin-role/update/{id}', 'Auth\AdminController@roleUpdate')->name('admin.role.update');
+    });
     Route::prefix('user')->group(function () {
         Route::get('/', 'Auth\UserController@index')->name('user.index');
         Route::get('/create', 'Auth\UserController@create')->name('user.create');
@@ -115,7 +133,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->group(function () {
         Route::post('/store', 'SettingController@store')->name('setting.store');
         Route::post('/update/{id}', 'SettingController@update')->name('setting.update');
     });
-    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('admin.logout');
 
 });
 

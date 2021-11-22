@@ -9,7 +9,7 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Register Page - Vuexy - Bootstrap HTML admin template</title>
+    <title>{{ $setting->site_title }} | Login</title>
     <link rel="apple-touch-icon" href="{{ asset('') }}app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
@@ -42,7 +42,7 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
+<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
 <!-- BEGIN: Content-->
 <div class="app-content content ">
     <div class="content-overlay"></div>
@@ -61,46 +61,57 @@
                     <!-- /Brand logo-->
                     <!-- Left Text-->
                     <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{ asset('') }}app-assets/images/pages/register-v2.svg" alt="Register V2" /></div>
+                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{ asset('') }}app-assets/images/pages/login-v2.svg" alt="Login V2" /></div>
                     </div>
                     <!-- /Left Text-->
-                    <!-- Register-->
+                    <!-- Login-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                             <h2 class="card-title font-weight-bold mb-1">Welcome to Alesha Tech Driver App</h2>
-                            <form class="auth-register-form mt-2"  action="{{ route('register') }}"  method="POST">
+                            <p class="card-text mb-2">Please sign-in to your account</p>
+
+                            <form class="mt-2" action="{{ route('admin.login') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="form-label" for="register-username">Username</label>
-                                    <input class="form-control" id="register-username" type="text" name="register-username" placeholder="johndoe" aria-describedby="register-username" autofocus="" tabindex="1" />
+                                    <label class="form-label" for="login-email">Email</label>
+                                    <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label" for="register-email">Email</label>
-                                    <input class="form-control" id="register-email" type="text" name="register-email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="register-password">Password</label>
+                                    <div class="d-flex justify-content-between">
+                                        <label for="login-password">Password</label><a href="#"><small>Forgot Password?</small></a>
+                                    </div>
                                     <div class="input-group input-group-merge form-password-toggle">
-                                        <input class="form-control form-control-merge" id="register-password" type="password" name="register-password" placeholder="············" aria-describedby="register-password" tabindex="3" />
+                                        <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                         <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
-                                        <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:void(0);">&nbsp;privacy policy & terms</a></label>
+                                        <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />
+                                        <label class="custom-control-label" for="remember-me"> Remember Me</label>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-block" tabindex="5">Sign up</button>
+                                <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
                             </form>
-                            <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
+                            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{ route('register') }}"><span>&nbsp;Create an account</span></a></p>
                             <div class="divider my-2">
                                 <div class="divider-text">or</div>
                             </div>
                             <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a></div>
                         </div>
                     </div>
-                    <!-- /Register-->
+                    <!-- /Login-->
                 </div>
             </div>
         </div>
@@ -123,7 +134,7 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="{{ asset('') }}app-assets/js/scripts/pages/page-auth-register.js"></script>
+<script src="{{ asset('') }}app-assets/js/scripts/pages/page-auth-login.js"></script>
 <!-- END: Page JS-->
 
 <script>

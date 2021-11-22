@@ -23,9 +23,7 @@ class UserTableSeeder extends Seeder
         $admin->phone = '01740144461';
         $admin->password = bcrypt('password');
 
-        if($admin->save()){
-            $admin->assignRole('Admin');
-        }
+
 
         // System Author
         $author = new User();
@@ -35,9 +33,7 @@ class UserTableSeeder extends Seeder
         $author->phone = '01740144462';
         $author->password = bcrypt('password');
 
-        if($author->save()){
-            $author->assignRole('Author');
-        }
+
 
         // Editor
         $editor = new User();
@@ -47,9 +43,7 @@ class UserTableSeeder extends Seeder
         $editor->phone = '01740144463';
         $editor->password = bcrypt('password');
 
-        if($editor->save()){
-            $editor->assignRole('Editor');
-        }
+
 
         // viewer
         $_viewer = new User();
@@ -59,9 +53,7 @@ class UserTableSeeder extends Seeder
         $_viewer->phone = '01740144464';
         $_viewer->password = bcrypt('password');
 
-        if($_viewer->save()){
-            $_viewer->assignRole('Viewer');
-        }
+       
 
     }
 }

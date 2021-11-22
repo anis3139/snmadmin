@@ -70,8 +70,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($getResponse->data!="")
-                                    @foreach($getResponse->data as $response)
+                                @if($user!="")
+                                    @foreach($user as $response)
                                         <tr id="tablerow{{ $response->id }}">
                                         <td>{{ $response->id }}</td>
                                         <td>{{ $response->name }}</td>
@@ -84,25 +84,25 @@
                                     </tr>
                                     @endforeach
                                 @endif
-                                
+
                                 </tbody>
 
                             </table>
     </div>
   </page>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
+
 <script>
   function getPrint() {
   	window.print();
- }	
+ }
 
 function getPdf() {
      //html2pdf().from(url).save();
 	    const element = document.querySelector('body');
 		const opt = {
-		  filename: '{{ $api }}' +'.pdf',
+		  filename: "user"+date()+".pdf",
 		  margin: 2,
 		  image: {type: 'jpeg', quality: 0.9},
 		  jsPDF: {format: 'letter', orientation: 'portrait'}
@@ -112,7 +112,7 @@ function getPdf() {
 		// Old monolithic-style usage:
 		html2pdf(element, opt);
  }
- 
+
 </script>
 @if($action=='pdf')
 	<script> window.onload  = getPdf; </script>
@@ -124,4 +124,3 @@ function getPdf() {
 
 
 
-    
