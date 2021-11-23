@@ -21,8 +21,9 @@ use App\Http\Controllers\Admin\PromoCodeController;
 
 
 
-Route::get('admin/login', '\App\Http\Controllers\Admin\LoginController@login')->name('admin.login')->middleware('admin.guest');
-Route::post('admin/onLogin', '\App\Http\Controllers\Admin\LoginController@onLogin')->name('admin.onLogin')->middleware('admin.guest');
+Route::get('admin/login', '\App\Http\Controllers\Admin\Auth\LoginController@login')->name('admin.login')->middleware('admin.guest');
+Route::post('admin/onLogin', '\App\Http\Controllers\Admin\Auth\LoginController@onLogin')->name('admin.onLogin')->middleware('admin.guest');
+
 Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     //manage user
@@ -122,7 +123,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::post('/update/{id}', 'SettingController@update')->name('setting.update');
     });
     //banner
-    Route::resource('banners', 'BannerController'); 
+    Route::resource('banners', 'BannerController');
 
-    Route::post('admin/logout', 'LoginController@onLogout')->name('admin.logout');
+    Route::post('admin/logout', 'Auth\LoginController@onLogout')->name('admin.logout');
 });

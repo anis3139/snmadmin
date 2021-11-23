@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -12,12 +14,22 @@ class LoginController extends Controller
 
     function login()
     {
+
         return view('admin.auth.login');
     }
 
     function onLogin(Request $request)
     {
 
+        $validator = Validator::make(request()->all(), [
+            'email' => 'required',
+            'password' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
 
         $credentials = $request->only('password');
 
@@ -30,13 +42,13 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt($credentials)) {
             if (Auth::guard('admin')->user()->status != 1) {
                 auth::guard('admin')->logout();
-                return 0;
+                return redirect()->back()->withInput()->with('warning', 'You are not active user.');
             } else {
                 $request->session()->regenerate();
                 return redirect()->route('admin.index')->with('success', 'Login successfull');
             }
         } else {
-            return redirect()->back()->withInput()->with('failed', 'These credentials do not match our records.');
+            return redirect()->back()->withInput()->with('error', 'These credentials do not match our records.');
         }
 
 
