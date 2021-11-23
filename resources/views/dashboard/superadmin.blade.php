@@ -71,7 +71,7 @@
                 <div class="col-12">
                     <div class="card invoice-list-wrapper">
                         <div class="card-header border-bottom">
-                            <h2>Activity Log</h2>
+                            <h2>Activity Log For {{ ucfirst(Auth::user()->roles->pluck('name')[0]) }}</h2>
                             <div class="col-sm-10 mt-1">
                                 <div class="row">
                                     <div class="col-sm-12">

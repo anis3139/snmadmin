@@ -4,26 +4,37 @@
     <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('home') }}"><i
                 data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
         <ul class="menu-content">
-            <li><a class="d-flex align-items-center"
-                    href="{{ route('home', ['admintype' => base64_encode('Super Admin')]) }}"><i
-                        data-feather="activity"></i><span class="menu-item text-truncate" data-i18n="List">Super
-                        Admin</span></a></li>
-            <li><a class="d-flex align-items-center"
-                    href="{{ route('home', ['admintype' => base64_encode('Admin')]) }}"><i
-                        data-feather="activity"></i><span class="menu-item text-truncate"
-                        data-i18n="List">Admin</span></a></li>
-            <li><a class="d-flex align-items-center"
-                    href="{{ route('home', ['admintype' => base64_encode('Driver')]) }}"><i
-                        data-feather="activity"></i><span class="menu-item text-truncate"
-                        data-i18n="List">Driver</span></a></li>
-            <li><a class="d-flex align-items-center"
-                    href="{{ route('home', ['admintype' => base64_encode('HRM')]) }}"><i
-                        data-feather="activity"></i><span class="menu-item text-truncate"
-                        data-i18n="List">HRM</span></a></li>
-            <li><a class="d-flex align-items-center"
-                    href="{{ route('home', ['admintype' => base64_encode('Finance')]) }}"><i
-                        data-feather="activity"></i><span class="menu-item text-truncate"
-                        data-i18n="List">Finance</span></a></li>
+            @hasrole('superadmin')
+                <li><a class="d-flex align-items-center"
+                        href="{{ route('home', ['admintype' => base64_encode('Super Admin')]) }}"><i
+                            data-feather="activity"></i><span class="menu-item text-truncate" data-i18n="List">Super
+                            Admin</span></a></li>
+            @endhasrole
+            @hasrole('admin')
+                <li><a class="d-flex align-items-center"
+                        href="{{ route('home', ['admintype' => base64_encode('Admin')]) }}"><i
+                            data-feather="activity"></i><span class="menu-item text-truncate"
+                            data-i18n="List">Admin</span></a></li>
+            @endhasrole
+            @hasrole('editor')
+                <li><a class="d-flex align-items-center"
+                        href="{{ route('home', ['admintype' => base64_encode('Driver')]) }}"><i
+                            data-feather="activity"></i><span class="menu-item text-truncate"
+                            data-i18n="List">Driver</span></a></li>
+            @endhasrole
+            @hasrole('hr')
+                <li><a class="d-flex align-items-center"
+                        href="{{ route('home', ['admintype' => base64_encode('HRM')]) }}"><i
+                            data-feather="activity"></i><span class="menu-item text-truncate"
+                            data-i18n="List">HRM</span></a></li>
+            @endhasrole
+            @hasrole('finance')
+                <li><a class="d-flex align-items-center"
+                        href="{{ route('home', ['admintype' => base64_encode('Finance')]) }}"><i
+                            data-feather="activity"></i><span class="menu-item text-truncate"
+                            data-i18n="List">Finance</span></a></li>
+            @endhasrole
+
         </ul>
     </li>
 

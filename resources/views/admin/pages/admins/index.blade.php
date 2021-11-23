@@ -91,6 +91,7 @@
                                     <th style="width: 2%"><input name="checkbox" onclick='checkedAll();' type="checkbox" readonly="readonly" /></th>
                                     <th style="width: 10%">Action</th>
                                     <th style="width: 20%">Full Name</th>
+                                    <th style="width: 20%">User Name</th>
                                     <th style="width: 10%">Email</th>
                                     <th style="width: 10%">Phone</th>
                                     <th style="width: 10%">Admin Type</th>
@@ -112,6 +113,7 @@
                                             <a href="#"><i data-feather='more-vertical'></i></a>
                                         </td>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td><button class="btn btn-sm btn-primary">{{ ucfirst($user->getRoleNames()[0]) }}</button></td>

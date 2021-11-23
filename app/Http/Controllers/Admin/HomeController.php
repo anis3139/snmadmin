@@ -22,7 +22,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-		$admintype = base64_decode(Auth::user()->roles->pluck('name')[0]);
+		$admintype = Auth::user()->roles->pluck('name')[0];
 
 		switch($admintype){
 			case 'superadmin':
@@ -32,7 +32,7 @@ class HomeController extends Controller
 				$page = 'dashboard/admin';
 				break;
 			case 'editor':
-				$page = 'dashboard/Editor';
+				$page = 'dashboard/editor';
 				break;
 			case 'hr':
 				$page = 'dashboard/hrm';

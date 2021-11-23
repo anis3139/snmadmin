@@ -49,8 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Modern Horizontal Wizard -->
-                        @include('ErrorMessage')
+                        <!-- Modern Horizontal Wizard --> 
                         <form class="mt-2" action="{{ route('admin.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
