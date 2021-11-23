@@ -71,27 +71,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body mt-2">
-                    <form class="dt_adv_search" method="POST">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-row mb-1">
-                                    <div class="col-lg-4">
-                                        <label>Role:</label>
-                                        <input type="text"  class="form-control" />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label>Permission:</label>
-                                        <input type="text"  class="form-control" />
-                                    </div>
-                                <div class="form-row mb-1">
-                                    <div class="col-lg-4" style="margin-top:22px;">
-                                        <input type="submit"  class="btn btn-success btn-sm" name="submit" value="Search"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <div>
+                    @include('Message')
                 </div>
                 <hr>
                 <div class="card-datatable mb-2">
@@ -111,9 +92,9 @@
                                <tr>
                                 <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="" /></td>
                                 <td class="text-nowrap">
-                                    <a href="#" title="view"><i data-feather='eye'></i></a>
+                                    <a href="{{ route('admin.roles.show', $role->id) }}" title="view"><i data-feather='eye'></i></a>
 
-                                    <a href="{{ route('admin.roles.edit', $role->id) }}"title="edit"><i data-feather='edit'></i></a>
+                                    <a href="{{ route('admin.roles.edit', $role->id) }}" title="edit"><i data-feather='edit'></i></a>
 
                                     <a href="{{ route('admin.roles.destroy', $role->id) }}"
                                         onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();" title="delete"><i data-feather='trash-2'></i></a>

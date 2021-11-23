@@ -1,10 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\PromoCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +118,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::post('/store', 'SettingController@store')->name('setting.store');
         Route::post('/update/{id}', 'SettingController@update')->name('setting.update');
     });
+
     //banner
     Route::resource('banners', 'BannerController');
 

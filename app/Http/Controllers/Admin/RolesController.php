@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,7 @@ class RolesController extends Controller
             abort(403, 'Sorry !! You are Unauthorized to create any role !');
         }
         $all_permissions  = Permission::all();
-        $permission_groups = User::getpermissionGroups();
+        $permission_groups = Admin::getpermissionGroups();
         return view('admin.pages.roles.create', compact('all_permissions', 'permission_groups'));
     }
 
@@ -80,8 +81,8 @@ class RolesController extends Controller
             $role->syncPermissions($permissions);
         }
 
-        session()->flash('success', 'Role has been created !!');
-        return back();
+        return redirect()->route('admin.roles.index')->with('success', 'Role has been created !!');
+
     }
 
     /**
@@ -92,7 +93,10 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::findById($id, 'admin');
+        $all_permissions = Permission::all();
+        $permission_groups = Admin::getpermissionGroups();
+        return view('admin.pages.roles.view', compact('role', 'all_permissions', 'permission_groups'));
     }
 
     /**
@@ -109,7 +113,7 @@ class RolesController extends Controller
 
         $role = Role::findById($id, 'admin');
         $all_permissions = Permission::all();
-        $permission_groups = User::getpermissionGroups();
+        $permission_groups = Admin::getpermissionGroups();
         return view('admin.pages.roles.edit', compact('role', 'all_permissions', 'permission_groups'));
     }
 
@@ -142,8 +146,7 @@ class RolesController extends Controller
             $role->syncPermissions($permissions);
         }
 
-        session()->flash('success', 'Role has been updated !!');
-        return back();
+        return redirect()->route('admin.roles.index')->with('success', 'Role has been Updated !!');
     }
 
     /**

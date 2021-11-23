@@ -24,16 +24,10 @@
         <!-- Responsive tables start -->
         <div class="row" id="table-responsive">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Contact List</h4>
-                    </div>
-                    <div class="card-body">
+                <div class="card"> 
 
-
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table mb-0">
+                    <div class="table-responsive p-1">
+                        <table  id="dataTable" class="table table-bordered table-striped common-datatables" style="width:100%; padding: 10px">
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-nowrap">#</th>
@@ -53,8 +47,6 @@
                                     <td>{{ $contact->phone_number}}</td>
                                     <td>{{ $contact->msg_subject}}</td>
                                     <td>{{ $contact->message}}</td>
-
-
                                 </tr>
                                 @empty
                                 @endforelse

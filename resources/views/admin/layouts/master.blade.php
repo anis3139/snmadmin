@@ -150,6 +150,7 @@
 
     <!-- BEGIN: Page Vendor JS-->
     <!--<script src="{{ asset('') }}app-assets/vendors/js/charts/apexcharts.min.js"></script>-->
+
     <script src="{{ asset('') }}app-assets/vendors/js/extensions/toastr.min.js"></script>
     <script src="{{ asset('') }}app-assets/vendors/js/extensions/moment.min.js"></script>
     <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
@@ -193,6 +194,8 @@
     @stack('custom-js')
     @yield('vendor-script')
     @yield('page-script')
+    @yield('role')
+
 </body>
 <!-- END: Body-->
 

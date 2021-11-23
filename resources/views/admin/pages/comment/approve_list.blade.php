@@ -37,8 +37,8 @@
 
 
                     </div>
-                    <div class="table-responsive">
-                        <table class="table mb-0">
+                    <div class="table-responsive p-1">
+                        <table  id="dataTable" class="table table-bordered table-striped common-datatables p-1" style="width:100%; padding: 10px">
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-nowrap">#</th>

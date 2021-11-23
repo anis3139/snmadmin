@@ -25,6 +25,7 @@
          }
 
          function checkSinglePermission(groupClassName, groupID, countTotalPermission) {
+            
             const classCheckbox = $('.'+groupClassName+ ' input');
             const groupIDCheckBox = $("#"+groupID);
 

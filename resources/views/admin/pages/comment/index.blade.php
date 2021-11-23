@@ -40,8 +40,8 @@
 
 
                         </div>
-                        <div class="table-responsive">
-                            <table class="table mb-0">
+                        <div class="table-responsive p-1">
+                            <table  id="dataTable" class="table table-bordered table-striped common-datatables p-1" style="width:100%; padding: 10px">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-nowrap">#</th>
@@ -69,7 +69,7 @@
                                                     class="badge badge-{{ $tag->status == 1 ? 'success' : 'danger' }}  ">{{ $tag->status == 1 ? 'Approved' : 'Pending' }}</span>
                                             </td>
                                             <td>
-                                              
+
                                                 <div class="icon-preview col s6 m3">
                                                     <a href="{{ route('news.view', $tag->news_id) }}" method="GET"
                                                         title="View">

@@ -44,7 +44,7 @@
                                     </button>
                                 </div>
                             @endif
-                            <table id="page-length-option" class="display">
+                            <table   id="dataTable" class="table table-bordered table-striped common-datatables" style="width:100%; padding: 10px">
                                 <thead>
                                 <tr>
                                     <th>SL</th>

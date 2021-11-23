@@ -46,8 +46,8 @@
             <div class="card-content">
                 Total = {{ $news->count() }}
                 <!-- datatable start -->
-                <div class="responsive-table">
-                    <table id="" class="table">
+                <div class="responsive-table p-1">
+                    <table  id="dataTable" class="table table-bordered table-striped common-datatables" style="width:100%; padding: 10px">
                         <thead>
                             <tr>
                                 <th>SL</th>

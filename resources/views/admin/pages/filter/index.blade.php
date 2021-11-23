@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Filter</h4>
                     </div>
-                    
+
                     <div class="card-body">
                         <form action="{{ route('filter.list') }}" method="get">
                             @csrf
@@ -61,8 +61,8 @@
                             </div>
                         </form>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table mb-0">
+                    <div class="table-responsive p-1">
+                        <table  id="dataTable" class="table table-bordered table-striped common-datatables" style="width:100%; padding: 10px">
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-nowrap">#</th>
