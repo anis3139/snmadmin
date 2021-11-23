@@ -19,6 +19,7 @@ class CreateAdminsTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
+            $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('status')->default(1)->comment('0 => inactive, 1 => active, 2 => pending, 3 => freez, 4 => block' );

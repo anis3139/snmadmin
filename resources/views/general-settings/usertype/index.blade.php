@@ -246,7 +246,7 @@
                                             <a href="#"><i data-feather='more-vertical'></i></a>
                                         </td>
                                         <td>Aleshamart</td>
-                                        <td>Driver</td>
+                                        <td>User</td>
                                         <td><button class="btn btn-sm btn-success">Active</button></td>
                                         <td>2021-10-31 12:10:14</td>
                                         <td>2021-10-31 12:10:14</td>
@@ -312,7 +312,7 @@
                                             <a href="#"><i data-feather='more-vertical'></i></a>
                                         </td>
                                         <td>Daraz</td>
-                                        <td>Driver</td>
+                                        <td>User</td>
                                         <td><button class="btn btn-sm btn-success">Active</button></td>
                                         <td>2021-10-31 12:10:14</td>
                                         <td>2021-10-31 12:10:14</td>
@@ -378,7 +378,7 @@
                                             <a href="#"><i data-feather='more-vertical'></i></a>
                                         </td>
                                         <td>Evaly</td>
-                                        <td>Driver</td>
+                                        <td>User</td>
                                         <td><button class="btn btn-sm btn-success">Active</button></td>
                                         <td>2021-10-31 12:10:14</td>
                                         <td>2021-10-31 12:10:14</td>
@@ -443,7 +443,7 @@
                                             <a href="#"><i data-feather='more-vertical'></i></a>
                                         </td>
                                         <td>Chaldal</td>
-                                        <td>Driver</td>
+                                        <td>User</td>
                                         <td><button class="btn btn-sm btn-success">Active</button></td>
                                         <td>2021-10-31 12:10:14</td>
                                         <td>2021-10-31 12:10:14</td>
@@ -507,7 +507,7 @@
                                          <a href="#"><i data-feather='more-vertical'></i></a>
                                      </td>
                                      <td>Aleshamart</td>
-                                     <td>Driver</td>
+                                     <td>User</td>
                                      <td><button class="btn btn-sm btn-success">Active</button></td>
                                      <td>2021-10-31 12:10:14</td>
                                      <td>2021-10-31 12:10:14</td>

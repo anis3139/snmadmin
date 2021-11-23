@@ -117,7 +117,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="modern-username">Site Name</label>
-                                                <input type="text" id="modern-username" class="form-control" placeholder="Driver App" />
+                                                <input type="text" id="modern-username" class="form-control" placeholder="Site Name" />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="modern-username">Copyright Message</label>
@@ -125,11 +125,11 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="modern-username">Design & Developed By</label>
-                                                <input type="text" id="modern-username" class="form-control" placeholder="Alesha Tech Limited" />
+                                                <input type="text" id="modern-username" class="form-control" placeholder="{{  $setting->design_develop_by_name }}" />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="modern-username">Design & Developed By URL</label>
-                                                <input type="text" id="modern-username" class="form-control" placeholder="aleshatech.net" />
+                                                <input type="text" id="modern-username" class="form-control" placeholder="{{  $setting->design_develop_by_url }}" />
                                             </div>
 
 
@@ -179,7 +179,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="modern-first-name">Mail Driver</label>
+                                                <label class="form-label" for="modern-first-name">Mail User</label>
                                                 <input type="text" id="modern-first-name" class="form-control" placeholder="SMTP" />
                                             </div>
                                             <div class="form-group col-md-6">

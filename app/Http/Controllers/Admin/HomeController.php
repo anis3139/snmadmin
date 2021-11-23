@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -11,31 +13,31 @@ class HomeController extends Controller
      *
      * @return void
      */
-  
+
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
-		$admintype = base64_decode($request->admintype);
+		$admintype = base64_decode(Auth::user()->roles->pluck('name')[0]);
 
 		switch($admintype){
-			case 'Super Admin':
+			case 'superadmin':
 				$page = 'dashboard/superadmin';
 				break;
-			case 'Admin':
+			case 'admin':
 				$page = 'dashboard/admin';
 				break;
-			case 'Driver':
-				$page = 'dashboard/driver';
+			case 'editor':
+				$page = 'dashboard/Editor';
 				break;
-			case 'HRM':
+			case 'hr':
 				$page = 'dashboard/hrm';
 				break;
-			case 'Finance':
+			case 'finance':
 				$page = 'dashboard/finance';
 				break;
 			default:

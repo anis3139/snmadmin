@@ -110,7 +110,7 @@
                                 role="tab"
                                 aria-selected="true"
                             >
-                                <i class="far fa-building"></i><span class="d-none d-sm-block">Aleshamart</span>
+                                <i class="far fa-building"></i><span class="d-none d-sm-block">{{  $setting->site_name }}</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -184,29 +184,29 @@
                                         <td>{{ $response->created_at }}</td>
                                          <td>{{ $response->updated_at }}</td>
                                     </tr>
-                                   		 <div class="modal fade" id="exampleModal{{ $response->id }}" tabindex="-1" role="dialog" 
+                                   		 <div class="modal fade" id="exampleModal{{ $response->id }}" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                       <form action="{{ route('delivery_status.update', $response->id) }}" method="post" enctype="multipart/form-data" files="true">
                                     					@csrf
                                                       <div class="modal-body">
-                                                      	
+
                                                         <div class="form-group row">
                                                         	<div class="col-lg-4"><label>Company Name:</label></div>
-                                                        	<div class="col-lg-6">                                                                
+                                                        	<div class="col-lg-6">
                                                                 <input type="text" value="1" class="form-control" name="partner_id" />
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                         	<div class="col-lg-4"><label>Name:</label></div>
-                                                        	<div class="col-lg-6">                                                                
+                                                        	<div class="col-lg-6">
                                                                 <input type="text" value="{{ $response->name }}" class="form-control" name="name" />
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                         	<div class="col-lg-4"><label>Status:</label></div>
-                                                        	<div class="col-lg-6">                                                                
+                                                        	<div class="col-lg-6">
                                                                 <select class="form-control" name="status">
                                                                     <option value="{{ $response->status }}">@if($response->status==1) Active @else Inactive @endif</option>
                                                                     <option value="1">Active</option>
@@ -220,7 +220,7 @@
                                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                                       </div>
                                                       </form>
-                                                      
+
                                                     </div>
                                                   </div>
                                                 </div>

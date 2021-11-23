@@ -55,8 +55,8 @@
                 <div class="auth-inner row m-0">
                     <!-- Brand logo-->
                     <a class="brand-logo" href="javascript:void(0);">
-                        <img src="{{asset('images/logo.png')}}" height="auto" width="130px" alt="Alesha Tech Driver App">
-                        <h2 class="brand-text text-primary ml-1 mt-1">Alesha Tech Driver App</h2>
+                        <img src="{{asset('images/logo.png')}}" height="auto" width="130px" alt="{{  $setting->site_name }}">
+                        <h2 class="brand-text text-primary ml-1 mt-1">{{  $setting->site_name }}</h2>
                     </a>
                     <!-- /Brand logo-->
                     <!-- Left Text-->
@@ -67,7 +67,7 @@
                     <!-- Login-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                            <h2 class="card-title font-weight-bold mb-1">Welcome to Alesha Tech Driver App</h2>
+                            <h2 class="card-title font-weight-bold mb-1">{{  $setting->site_name }}</h2>
                             <p class="card-text mb-2">Please sign-in to your account</p>
 
                             <form class="mt-2" action="#" method="POST">

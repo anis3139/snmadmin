@@ -45,7 +45,7 @@ class LoginController extends Controller
                 return redirect()->back()->withInput()->with('warning', 'You are not active user.');
             } else {
                 $request->session()->regenerate();
-                return redirect()->route('admin.index')->with('success', 'Login successfull');
+                return redirect()->route('home')->with('success', 'Login successfull');
             }
         } else {
             return redirect()->back()->withInput()->with('error', 'These credentials do not match our records.');

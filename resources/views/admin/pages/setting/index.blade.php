@@ -44,8 +44,8 @@
                                         <li style="margin: 2px;"><button class="btn btn-success btn-sm"><i data-feather='download'></i> Excel</button></li>
                                         <li style="margin: 2px;"><button class="btn btn-danger btn-sm"><i data-feather='file'></i> PDF</button></li>
                                         <li style="margin: 2px;"><button class="btn btn-warning btn-sm"><i data-feather='printer'></i> Print</button></li>
-                                        <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('driver.create') }}"><i data-feather='eye'></i> View</a></li>
-                                        <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('driver.create') }}"><i data-feather='plus'></i> Create</a></li>
+                                        <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('user.create') }}"><i data-feather='eye'></i> View</a></li>
+                                        <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('user.create') }}"><i data-feather='plus'></i> Create</a></li>
                                         <li style="margin: 2px;"><div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">Column</button>
                                                 <button
@@ -64,7 +64,7 @@
                                                     <a class="dropdown-item" href="javascript:void(0);">Logo</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Copyright Message</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Design & Developed By URL</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Mail Driver</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);">Mail User</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Mail Port</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Mail Password</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Mail From Name</a>
@@ -92,7 +92,7 @@
                                 <div class="col-12">
                                     <div class="form-row mb-1">
                                         <div class="col-lg-3">
-                                            <label>Mail Driver</label>
+                                            <label>Mail User</label>
                                             <input type="text"  class="form-control" />
                                         </div>
                                         <div class="col-lg-3">
@@ -130,7 +130,7 @@
                                     <th>Design & Developed By</th>
                                     <th>Logo</th>
                                     <th>Copyright Message</th>
-                                    <th>Mail Driver</th>
+                                    <th>Mail User</th>
                                     <th>Mail Port</th>
                                     <th>Mail Password</th>
                                     <th>Mail From Name</th>
@@ -156,8 +156,8 @@
                                     </td>
                                     <td>{{$i++}}</td>
                                     <td>1234</td>
-                                    <td>Driver App</td>
-                                    <td>Alesha Tech Limited</td>
+                                    <td>User App</td>
+                                    <td>{{  $setting->site_name }}</td>
                                     <td>Logo</td>
                                     <td>All right reserved</td>
                                     <td>SMTP</td>
@@ -183,8 +183,8 @@
                                     </td>
                                     <td>{{$i++}}</td>
                                     <td>1234</td>
-                                    <td>Driver App</td>
-                                    <td>Alesha Tech Limited</td>
+                                    <td>User App</td>
+                                    <td>{{  $setting->site_name }}</td>
                                     <td>Logo</td>
                                     <td>All right reserved</td>
                                     <td>SMTP</td>
@@ -210,8 +210,8 @@
                                     </td>
                                     <td>{{$i++}}</td>
                                     <td>1234</td>
-                                    <td>Driver App</td>
-                                    <td>Alesha Tech Limited</td>
+                                    <td>User App</td>
+                                    <td>{{  $setting->site_name }}</td>
                                     <td>Logo</td>
                                     <td>All right reserved</td>
                                     <td>SMTP</td>
@@ -237,8 +237,8 @@
                                     </td>
                                     <td>{{$i++}}</td>
                                     <td>1234</td>
-                                    <td>Driver App</td>
-                                    <td>Alesha Tech Limited</td>
+                                    <td>User App</td>
+                                    <td>{{  $setting->site_name }}</td>
                                     <td>Logo</td>
                                     <td>All right reserved</td>
                                     <td>SMTP</td>
@@ -264,8 +264,8 @@
                                     </td>
                                     <td>{{$i++}}</td>
                                     <td>1234</td>
-                                    <td>Driver App</td>
-                                    <td>Alesha Tech Limited</td>
+                                    <td>User App</td>
+                                    <td>{{  $setting->site_name }}</td>
                                     <td>Logo</td>
                                     <td>All right reserved</td>
                                     <td>SMTP</td>
@@ -291,8 +291,8 @@
                                     </td>
                                     <td>{{$i++}}</td>
                                     <td>1234</td>
-                                    <td>Driver App</td>
-                                    <td>Alesha Tech Limited</td>
+                                    <td>User App</td>
+                                    <td>{{  $setting->site_name }}</td>
                                     <td>Logo</td>
                                     <td>All right reserved</td>
                                     <td>SMTP</td>
@@ -318,8 +318,8 @@
                                     </td>
                                     <td>{{$i++}}</td>
                                     <td>1234</td>
-                                    <td>Driver App</td>
-                                    <td>Alesha Tech Limited</td>
+                                    <td>User App</td>
+                                    <td>{{  $setting->site_name }}</td>
                                     <td>Logo</td>
                                     <td>All right reserved</td>
                                     <td>SMTP</td>

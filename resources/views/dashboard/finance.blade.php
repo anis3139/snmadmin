@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-10">
-                                <h3 class="card-text">Total Driver</h3>
+                                <h3 class="card-text">Total User</h3>
                                 <h4 class="font-weight-bolder mt-1">400</h4>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-10">
-                                <h3 class="card-text">New Driver Request</h3>
+                                <h3 class="card-text">New User Request</h3>
                                 <h4 class="font-weight-bolder mt-1">200</h4>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                                         <th>Total Order Value</th>
                                         <th>Merchant Paid</th>
                                         <th class="text-truncate">Merchant Due</th>
-                                        <th>Driver Payment</th>
+                                        <th>User Payment</th>
                                         <th>Payment Status</th>
                                         <th class="cell-fit">Actions</th>
                                     </tr>

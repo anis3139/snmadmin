@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
 use App\View\Components\FlashMessages;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
 
-	use FlashMessages;
+    use FlashMessages;
     /**
      * Register any application services.
      *
@@ -29,16 +29,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-		
-		view()->composer('*',function($view){
-			$setting = Setting::first();
-			return $view->with('setting',$setting);
-		});
-		
-		view()->composer('components.flash-messages', function ($view) {
 
-          $messages = self::messages();
-          return $view->with('messages', $messages);
-      });
+        view()->composer('*', function ($view) {
+            $setting = Setting::first();
+            return $view->with('setting', $setting);
+        });
+
+        view()->composer('components.flash-messages', function ($view) {
+
+            $messages = self::messages();
+            return $view->with('messages', $messages);
+        });
     }
 }

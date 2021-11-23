@@ -2,26 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-
-
-
-
-
 Route::get('admin/login', '\App\Http\Controllers\Admin\Auth\LoginController@login')->name('admin.login')->middleware('admin.guest');
 Route::post('admin/onLogin', '\App\Http\Controllers\Admin\Auth\LoginController@onLogin')->name('admin.onLogin')->middleware('admin.guest');
 
 Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    //Home Page
+    Route::get('/', 'HomeController@index')->name('home');
     //manage user
     Route::prefix('common')->group(function () {
         Route::get('/delete', 'CommonController@destroy')->name('common.destroy');
@@ -33,9 +20,8 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
     });
 
     Route::prefix('admin')->group(function () {
-
         Route::resource('roles', 'RolesController', ['names' => 'admin.roles']);
-        Route::get('/dashboard', 'Auth\AdminController@index')->name('admin.index');
+        Route::get('/list', 'Auth\AdminController@index')->name('admin.index');
         Route::get('/create', 'Auth\AdminController@create')->name('admin.create');
         Route::post('/store', 'Auth\AdminController@store')->name('admin.store');
         Route::get('/edit/{id}', 'Auth\AdminController@edit')->name('admin.edit');
@@ -109,7 +95,6 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::get('/list', 'ContactController@index')->name('contact.index');
 
     });
-
 
     //manage setting
     Route::prefix('setting')->group(function () {

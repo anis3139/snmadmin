@@ -57,7 +57,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="form-label" for="modern-username">Legal Name</label>
-                                                    <input type="text" id="modern-username" name="legal_name" class="form-control" placeholder="Alesha Mart Ltd."  value="{{ $partner->legal_name }}"/>
+                                                    <input type="text" id="modern-username" name="legal_name" class="form-control" placeholder="{{  $setting->site_name }}"  value="{{ $partner->legal_name }}"/>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="form-label" for="modern-username">Status</label>
