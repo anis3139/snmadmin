@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Visitor;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,12 @@ class LoginController extends Controller
 
     function login()
     {
-
+        //Server ip
+        $UserIP = $_SERVER['REMOTE_ADDR']; 
+        date_default_timezone_set("Asia/Dhaka");
+        $timeDate = date("Y-m-d h:i:sa");
+        Visitor::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);
+    //Server ip
         return view('admin.auth.login');
     }
 

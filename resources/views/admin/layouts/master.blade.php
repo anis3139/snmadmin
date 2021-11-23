@@ -102,7 +102,7 @@
                              <img src="{{ asset('/').$setting->logo }}" alt="{{  $setting->site_name }}">
                         </span>
                         <h2 class="brand-text">{{  $setting->site_name }}</h2>
-                     
+
                     </a>
                 </li>
                 <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
@@ -164,6 +164,8 @@
 	<script type="text/javascript" src="{{ asset('') }}app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
 	<script type="text/javascript" src="{{ asset('') }}app-assets/js/scripts/custom.js"></script>
 
+    <script type="text/javascript" src="{{ asset('admin/editor/ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/editor/ckfinder/ckfinder.js') }}"></script>
     <!-- END: Page JS-->
 
     <script>
@@ -180,11 +182,44 @@
             $('.common-datatables').DataTable();
         });
     </script>
+ <script>
+    var host = window.document.location.host;
+    var hostArr = host.split(':');
+    let SiteUrl;
+    if(hostArr[0]=='127.0.0.1' ){
+        SiteUrl = window.location.protocol + '//' + window.document.location.host;
+    }{
+        SiteUrl = window.location.protocol + '//' + window.document.location.host+'/public';
+    }
 
+    var MyEditor;
+
+    document.querySelectorAll('.ckeditor').forEach(e => {
+        ClassicEditor
+            .create(e, {
+                ckfinder: {
+                    // Upload the images to the server using the CKFinder QuickUpload command.
+
+                    uploadUrl: SiteUrl +
+                        '/admin/editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                }
+            })
+            .then(editor => {
+                window.editor = editor;
+                MyEditor = window.editor;
+                editor.model.document.on('change:data', () => {
+                    e.value = editor.getData();
+
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    })
+</script>
     @stack('custom-js')
     @yield('vendor-script')
     @yield('page-script')
-    @yield('role')
 
 </body>
 <!-- END: Body-->
