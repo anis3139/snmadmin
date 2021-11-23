@@ -1,15 +1,5 @@
 @extends('admin.layouts.master')
-@section('vendor-style')
-    <!-- vendor css files -->
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/forms/select/select2.min.css">
-@endsection
 
-@section('page-style')
-    <!-- Page css files -->
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/form-validation.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/form-wizard.css">
-@endsection
 @section('content')
     <div class="content-wrapper">
         <div class="content-header row">
@@ -127,19 +117,6 @@
         </div>
     </div>
 @endsection
-
-@section('vendor-script')
-    <!-- vendor files -->
-    <script src="{{ asset('') }}app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/forms/select/select2.full.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
-@endsection
-@section('page-script')
-    <!-- Page js files -->
-    <script src="{{ asset('') }}app-assets/js/scripts/forms/form-wizard.js"></script>
-
-@endsection
-
 
 
 

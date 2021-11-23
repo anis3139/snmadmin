@@ -1,18 +1,5 @@
 @extends('admin.layouts.master')
 
-@section('vendor-style')
-    {{-- Page Css files --}}
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
-@endsection
-
-@section('page-style')
-    {{-- Page Css files --}}
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/form-validation.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/pickers/form-flat-pickr.css">
-@endsection
 @section('content')
     <section id="advanced-search-datatable">
         <div class="content-header row">
@@ -126,23 +113,5 @@
         </div>
     </div>
     </section>
-@endsection
-
-
-@section('vendor-script')
-    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
-@endsection
-
-@section('page-script')
-    <script src="{{ asset('') }}app-assets/js/scripts/pages/app-user-list.js"></script>
-    <script src="{{ asset('') }}app-assets/js/scripts/tables/table-datatables-advanced.js"></script>
-    <script src="{{ asset('') }}app-assets/data/table-datatable.json"></script>
 @endsection
 

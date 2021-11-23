@@ -1,15 +1,5 @@
 @extends('admin.layouts.master')
-@section('vendor-style')
-    <!-- vendor css files -->
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/forms/select/select2.min.css">
-@endsection
 
-@section('page-style')
-    <!-- Page css files -->
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/form-validation.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/base/plugins/forms/form-wizard.css">
-@endsection
 @section('content')
     <div class="content-wrapper">
         <div class="content-header row">
@@ -48,18 +38,24 @@
                             </div>
                         </div>
                         <div class="card">
-                            <div class="card-body">
-                                @include('ErrorMessage')
+                            <div class="card-body"> 
                                 <form action="{{ route('admin.roles.update', $role->id) }}" method="POST"
                                     enctype="multipart/form-data" files="true">
                                     @method('PUT')
                                     @csrf
 
                                     <div class="form-group">
-                                        <label class="card-title" for="name">Role Name</label>
 
-                                        <input type="text" class="form-control" id="name" value="{{ $role->name }}"
-                                            name="name" placeholder="Enter a Role Name">
+                                            <label class="card-title" for="name">Role Name</label>
+                                            <input id="name" placeholder="Name" type="name"
+                                                class="form-control @error('name') is-invalid @enderror" name="name"
+                                                value="{{ $role->name }}" autocomplete="name" autofocus>
+
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div>
 
                                     <div class="form-group row">
@@ -150,17 +146,6 @@
     </div>
 @endsection
 
-@section('vendor-script')
-    <!-- vendor files -->
-    <script src="{{ asset('') }}app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/forms/select/select2.full.min.js"></script>
-    <script src="{{ asset('') }}app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
-@endsection
-@section('page-script')
-    <!-- Page js files -->
-    <script src="{{ asset('') }}app-assets/js/scripts/forms/form-wizard.js"></script>
-
-@endsection
 @section('role')
     @include('admin.pages.roles.partials.scripts')
 @endsection
