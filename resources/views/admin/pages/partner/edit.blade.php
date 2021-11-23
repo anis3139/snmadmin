@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('partner.update', $partner->id) }}" method="post" enctype="multipart/form-data" files="true">
+                                <form action="{{ route('user.update', $partner->id) }}" method="post" enctype="multipart/form-data" files="true">
                                     @csrf
                                     <div class="bs-stepper-content">
                                         <div id="account-details-modern" class="content m-0">

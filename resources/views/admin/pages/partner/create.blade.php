@@ -44,8 +44,8 @@
                                     <a href="{{ url()->previous() }}" class="btn btn-dark btn-sm"><i class="fas fa-arrow-circle-left"></i> Back</a>
                                 </div>
                                 <div class="right">
-                                    <a class="btn btn-primary btn-learge" href="{{ route('partner.index') }}"><i data-feather='eye'></i> View Partner</a>
-                                    <a class="btn btn-dark btn-learge" href="{{ route('partner.create') }}"><i data-feather='plus'></i> Create New</a>
+                                    <a class="btn btn-primary btn-learge" href="{{ route('user.index') }}"><i data-feather='eye'></i> View Partner</a>
+                                    <a class="btn btn-dark btn-learge" href="{{ route('user.create') }}"><i data-feather='plus'></i> Create New</a>
                                 </div>
                             </div>
 
@@ -109,7 +109,7 @@
                                     </div>
 
                                 </div>
-                                <form action="{{ route('partner.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="bs-stepper-content">
                                         <div id="account-details-modern" class="content m-0">

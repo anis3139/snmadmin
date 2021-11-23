@@ -35,8 +35,8 @@
                                             <li style="margin: 2px;"><button class="btn btn-secondary btn-sm"><i data-feather='download'></i> Excel</button></li>
                                             <li style="margin: 2px;"><button class="btn btn-danger btn-sm"><i data-feather='file'></i> PDF</button></li>
                                             <li style="margin: 2px;"><button class="btn btn-warning btn-sm"><i data-feather='printer'></i> Print</button></li>
-                                            <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('partner.index') }}"><i data-feather='eye'></i> View</a></li>
-                                            <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('partner.create') }}"><i data-feather='plus'></i> Create</a></li>
+                                            <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('user.index') }}"><i data-feather='eye'></i> View</a></li>
+                                            <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('user.create') }}"><i data-feather='plus'></i> Create</a></li>
                                             <li style="margin: 2px;"><div class="btn-group">
                                                     <button type="button" class="btn btn-sm btn-outline-secondary">Column</button>
                                                     <button
@@ -111,14 +111,10 @@
                                     <th><input name="checkbox" onclick='checkedAll();' type="checkbox" readonly="readonly"/></th>
                                     <th>Action</th>
                                     <th>ID</th>
-                                    <th>Legal Name</th>
-                                    <th>Address</th>
-                                    <th>Company Name</th>
-                                    <th>Company Mobile</th>
-                                    <th>Company Email</th>
-                                    <th>Contact Person Name</th>
-                                    <th>Contact Person Mobile</th>
-                                    <th>Contact Person Email</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
                                     <th>Subscription Type</th>
                                     <th>Subscription Expiry Date</th>
                                     <th>Status</th>
@@ -127,47 +123,31 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($getResponse->data as $response)
+                                @foreach($users as $user)
                                 	<tr>
                                     <td>1</td>
-                                    <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="{{ $response->id }}"/></td>
+                                    <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="{{ $user->id }}"/></td>
                                     <td class="text-nowrap">
-                                        	<a href="{{ route('partner.show',$response->id) }}"><i data-feather='eye'></i></a>
-                                            <a href="{{ route('partner.edit',$response->id) }}"><i data-feather='edit'></i></a>
-                                            <a href="{{ route('partner.destroy',$response->id) }}"><i data-feather='trash-2'></i></a>
+                                        	<a href="{{ route('user.show',$user->id) }}"><i data-feather='eye'></i></a>
+                                            <a href="{{ route('user.edit',$user->id) }}"><i data-feather='edit'></i></a>
+                                            <a href="{{ route('user.destroy',$user->id) }}"><i data-feather='trash-2'></i></a>
                                     </td>
-                                    <td>{{ $response->id }}</td>
-                                    <td><a href="#">{{ $response->legal_name }}</a></td>
-                                    <td>{{ $response->address }}</td>
-                                    <td>{{ $response->company_name }}</td>
-                                    <td>{{ $response->company_phone }}</td>
-                                    <td>{{ $response->company_email }}</td>
-                                    <td>{{ $response->contact_person_name }}</td>
-                                    <td>{{ $response->contact_person_phone }}</td>
-                                    <td>{{ $response->contact_person_email }}</td>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->username }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    <td>General User</td>
+                                    <td>{{ $user->created_at }}</td>
                                     <td>
-                                        <div class="row">
-                                            <button class="btn btn-warning btn-sm">{{ $response->subscription_type }}</button>
-                                            <div class="btn-group">
-                                                <a class="btn btn-sm dropdown-toggle hide-arrow text-primary m-0" data-toggle="dropdown"><i data-feather='more-vertical'></i></a>
-                                                <div class="dropdown-menu dropdown-menu-left m-0 p-0">
-                                                    <a href="#" class="dropdown-item">Gold</a>
-                                                    <a href="#" class="dropdown-item">Silver</a>
-                                                    <a href="#" class="dropdown-item delete-record">Bronze</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>{{ $response->subscription_expiry }}</td>
-                                    <td>
-                                        @if($response->status == '1')
+                                        @if($user->status == '1')
                                             <button class="btn btn-success btn-sm">Active</button>
-                                        @elseif($response->status == '0')
+                                        @elseif($user->status == '0')
                                             <button class="btn btn-warning btn-sm">Inactive</button>
                                         @endif
                                     </td>
-                                    <td>{{ $response->created_at }}</td>
-                                    <td>{{ $response->updated_at }}</td>
+                                    <td>{{ $user->created_at }}</td>
+                                    <td>{{ $user->updated_at }}</td>
                                 </tr>
                                 @endforeach
 

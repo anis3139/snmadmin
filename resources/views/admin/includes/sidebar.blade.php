@@ -28,7 +28,7 @@
     </li>
 
     <li class="nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span
-                class="menu-title text-truncate" data-i18n="Board">User</span></a>
+                class="menu-title text-truncate" data-i18n="Board">Admin</span></a>
         <ul class="menu-content">
             <li class="{{ Route::currentRouteName() === 'admin.create' ? 'active' : '' }}"><a
                     class="d-flex align-items-center" href="{{ route('admin.create') }}"><i
@@ -40,6 +40,7 @@
             </li>
         </ul>
     </li>
+
 
     <li class="nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='shield'></i><span
                 class="menu-title text-truncate" data-i18n="Board">Role</span></a>
@@ -145,42 +146,54 @@
                     </li>
                 </ul>
             </li>
-            <li><a
-                    class="d-flex align-items-center" href="#"><i
-                        data-feather="message-square"></i><span class="menu-item text-truncate"
-                        data-i18n="List">Comment</span></a>
-                        <ul class="menu-content">
+            <li><a class="d-flex align-items-center" href="#"><i data-feather="message-square"></i><span
+                        class="menu-item text-truncate" data-i18n="List">Comment</span></a>
+                <ul class="menu-content">
 
-                            <li class="{{ Route::currentRouteName() === 'comment.list' ? 'active' : '' }}"><a
-                                    class="d-flex align-items-center" href="{{ route('comment.list') }}"><i
-                                        data-feather="list"></i><span class="menu-item text-truncate"
-                                        data-i18n="List">All Comment</span></a>
-                            </li>
-                            <li class="{{ Route::currentRouteName() === 'comment.approve.list' ? 'active' : '' }}"><a
-                                    class="d-flex align-items-center" href="{{ route('comment.approve.list') }}"><i
-                                        data-feather="list"></i><span class="menu-item text-truncate"
-                                        data-i18n="List">Approved List</span></a>
-                            </li>
-                            <li class="{{ Route::currentRouteName() === 'comment.pending.list' ? 'active' : '' }}"><a
-                                    class="d-flex align-items-center" href="{{ route('comment.pending.list') }}"><i
-                                        data-feather="list"></i><span class="menu-item text-truncate"
-                                        data-i18n="List">Pending List</span></a>
-                            </li>
-                        </ul>
+                    <li class="{{ Route::currentRouteName() === 'comment.list' ? 'active' : '' }}"><a
+                            class="d-flex align-items-center" href="{{ route('comment.list') }}"><i
+                                data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">All
+                                Comment</span></a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'comment.approve.list' ? 'active' : '' }}"><a
+                            class="d-flex align-items-center" href="{{ route('comment.approve.list') }}"><i
+                                data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">Approved
+                                List</span></a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'comment.pending.list' ? 'active' : '' }}"><a
+                            class="d-flex align-items-center" href="{{ route('comment.pending.list') }}"><i
+                                data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">Pending
+                                List</span></a>
+                    </li>
+                </ul>
             </li>
             <li class="{{ Route::currentRouteName() === 'filter.view' ? 'active' : '' }}"><a
                     class="d-flex align-items-center" href="{{ route('filter.view') }}"><i
-                        data-feather="filter"></i><span class="menu-item text-truncate" data-i18n="List">Filter News</span></a>
+                        data-feather="filter"></i><span class="menu-item text-truncate" data-i18n="List">Filter
+                        News</span></a>
             </li>
         </ul>
     </li>
-
+    <li class="nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span
+                class="menu-title text-truncate" data-i18n="Board">User</span></a>
+        <ul class="menu-content">
+            <li class="{{ Route::currentRouteName() === 'user.create' ? 'active' : '' }}"><a
+                    class="d-flex align-items-center" href="{{ route('user.create') }}"><i
+                        data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
+            </li>
+            <li class="{{ Route::currentRouteName() === 'user.index' ? 'active' : '' }}"><a
+                    class="d-flex align-items-center" href="{{ route('user.index') }}"><i
+                        data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
+            </li>
+        </ul>
+    </li>
     <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='mail'></i><span
                 class="menu-title text-truncate" data-i18n="Board">Contacts</span></a>
         <ul class="menu-content">
             <li class="{{ Route::currentRouteName() === 'contact.index' ? 'active' : '' }}"><a
                     class="d-flex align-items-center" href="{{ route('contact.index') }}"><i
-                        data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">List</span></a>
+                        data-feather="circle"></i><span class="menu-item text-truncate"
+                        data-i18n="List">List</span></a>
             </li>
         </ul>
     </li>
@@ -197,8 +210,8 @@
                         class="menu-item text-truncate" data-i18n="Second Level">Subscription Settings</span></a>
                 <ul class="menu-content">
                     <li class="{{ Route::currentRouteName() === 'subscription_type.index' ? 'active' : '' }}"><a
-                            class="d-flex align-items-center" href="#"><span
-                                class="menu-item text-truncate" data-i18n="Third Level">Subscription Type</span></a>
+                            class="d-flex align-items-center" href="#"><span class="menu-item text-truncate"
+                                data-i18n="Third Level">Subscription Type</span></a>
                     </li>
                 </ul>
             </li>

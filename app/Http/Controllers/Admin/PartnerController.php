@@ -11,10 +11,10 @@ class PartnerController extends Controller
 {
 
 	use FlashMessages;
-	
+
 	public function index(Curl $curl)
     {
-		$getResponse = $curl->send('GET','partner','', '','display');	
+		$getResponse = $curl->send('GET','partner','', '','display');
 		//dd($getResponse);
 		if($getResponse->success){
 			return view('admin.pages.partner.index',compact('getResponse'));
@@ -23,7 +23,7 @@ class PartnerController extends Controller
 			return view('admin.pages.notfound');
 		}
     }
-	
+
 	public function create()
     {
             return view('admin.pages.partner.create', [
@@ -32,22 +32,22 @@ class PartnerController extends Controller
                 'page_title' => 'Partner Create'
             ]);
     }
-	
-	
+
+
     public function store(Request $request, Curl $curl)
     {
 	   $request['status'] = 0;
-       $data = $request->all();		
+       $data = $request->all();
         $getResponse = $curl->send('POST','partner', '', $data,'insert');
         if ($getResponse) {
 			self::message('success', 'Data Added successfully Done');
-            return redirect()->route('partner.index');
+            return redirect()->route('user.index');
         }
-        
+
 		self::message('error', 'Data failed on create');
         return redirect()->back();
     }
-	
+
 	public function edit($id, Curl $curl)
     {
 
@@ -69,13 +69,13 @@ class PartnerController extends Controller
         $getResponse = $curl->send('POST','partner/update', $id, $data,'update');
         if ($getResponse) {
 			self::message('success', 'Data Updated successfully Done');
-            return redirect()->route('partner.index');
+            return redirect()->route('user.index');
         }
 		self::message('error', 'Data failed on update');
         return redirect()->back();
     }
-	
-	
+
+
 	public function show($id, Curl $curl)
     {
         $getResponse = $curl->send('GET','partner', $id,'','display');
@@ -91,7 +91,7 @@ class PartnerController extends Controller
         $getResponse = $curl->send('DELETE','partner', $id, '','delete');
         if ($getResponse) {
 			self::message('success', 'Data Deleted successfully Done');
-            return redirect()->route('partner.index');
+            return redirect()->route('user.index');
         }
 		self::message('error', 'Data failed on update');
         return redirect()->back();

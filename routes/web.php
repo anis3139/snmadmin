@@ -121,6 +121,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
 
     //banner
     Route::resource('banners', 'BannerController');
+    Route::resource('user', 'UserController');
 
     Route::post('admin/logout', 'Auth\LoginController@onLogout')->name('admin.logout');
 });
