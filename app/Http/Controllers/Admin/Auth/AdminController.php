@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\AdminUpdateRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -11,7 +12,7 @@ use Spatie\Permission\Models\Role;
 class AdminController extends BaseController
 {
     protected $enumStatuses = [
-        'active', 'inactive', 'pending', 'freez', 'block',
+        'Active', 'Inactive', 'Pending', 'Freez', 'Block',
     ];
     public function index()
     {
@@ -24,6 +25,7 @@ class AdminController extends BaseController
             'title' => 'Admin List',
             'page_title' => 'Admin List',
             'admins' => Admin::all(),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
     public function create()
@@ -44,7 +46,7 @@ class AdminController extends BaseController
 
     public function store(AdminRequest $request)
     {
-        if (is_null($this->user) || !$this->user->can('admin.store')) {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
             abort(403, 'Sorry !! You are Unauthorized to store any Admin !');
         }
         $admin = new Admin();
@@ -76,9 +78,9 @@ class AdminController extends BaseController
             ]);
 
     }
-    public function update(Request $request, $id)
+    public function update(AdminUpdateRequest $request, $id)
     {
-        if (is_null($this->user) || !$this->user->can('admin.update')) {
+        if (is_null($this->user) || !$this->user->can('admin.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to update any Admin !');
         }
             $id = $id;

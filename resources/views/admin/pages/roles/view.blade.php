@@ -1,44 +1,48 @@
 @extends('admin.layouts.master')
-
-@section('content')
-    <div class="content-wrapper">
-        <div class="content-header row">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Home</h2>
-                        <div class="breadcrumb-wrapper">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">Role</a>
-                                </li>
-                                <li class="breadcrumb-item active">Edit {{ $role->name }}</li>
-                            </ol>
+@can('role.view')
+    @section('content')
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Home</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="">Role</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Edit {{ $role->name }}</li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="content-body">
+            <div class="content-body">
 
-            <section class="tooltip-validations" id="tooltip-validation">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header d-flex">
-                                <div class="left">
-                                    <a href="{{ url()->previous() }}" class="btn btn-dark btn-sm"><i
-                                            class="fas fa-arrow-circle-left"></i> Back</a>
-                                </div>
-                                <div class="right">
-                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.roles.index') }}"><i
-                                            data-feather='eye'></i> View List{{ request()->name }}</a>
-                                    <a class="btn btn-dark btn-learge" href="{{ route('admin.roles.create') }}"><i
-                                            data-feather='plus'></i> Create New</a>
+                <section class="tooltip-validations" id="tooltip-validation">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header d-flex">
+                                    <div class="left">
+                                        <a href="{{ url()->previous() }}" class="btn btn-dark btn-sm"><i
+                                                class="fas fa-arrow-circle-left"></i> Back</a>
+                                    </div>
+                                    <div class="right">
+                                        @can('role.view')
+                                            <a class="btn btn-primary btn-learge" href="{{ route('admin.roles.index') }}"><i
+                                                    data-feather='eye'></i> View List{{ request()->name }}</a>
+                                        @endcan
+                                        @can('role.create')
+                                            <a class="btn btn-dark btn-learge" href="{{ route('admin.roles.create') }}"><i
+                                                    data-feather='plus'></i> Create New</a>
+                                        @endcan
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
 
 
                                     <div class="form-group">
@@ -69,8 +73,7 @@
                                                 <div class="col-md-3">
                                                     <div class="form-check">
                                                         <input type="checkbox" class="form-check-input" readonly
-                                                            id="{{ $i }}Management"
-                                                            value=""
+                                                            id="{{ $i }}Management" value=""
                                                             onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)"
                                                             {{ App\Models\Admin::roleHasPermissions($role, $permissions) ? 'checked' : '' }}>
                                                         <label class="form-check-label"
@@ -108,22 +111,13 @@
 
                                     </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- Tooltip validations end -->
+                </section>
+                <!-- Tooltip validations end -->
+            </div>
         </div>
-    </div>
-@endsection
-
-
-
-
-
-
-
-
-
-
+    @endsection
+@endcan

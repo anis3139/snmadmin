@@ -21,10 +21,10 @@ class SettingsTableSeeder extends Seeder
         $setting->default_image = "default_image/default.jpeg";
         $setting->copyright_message = "© 2020 All rights reserved";
         $setting->copyright_name = "PIXINVENT";
-        $setting->copyright_url = "https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent";
+        $setting->copyright_url = "https://facebook.com/anis3139";
         $setting->design_develop_by_text = "Design and Developed by";
         $setting->design_develop_by_name = "PIXINVENT";
-        $setting->design_develop_by_url = "https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent";
+        $setting->design_develop_by_url = "https://facebook.com/anis3139";
         $setting->save();
     }
 }

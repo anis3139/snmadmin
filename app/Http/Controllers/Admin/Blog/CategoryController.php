@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Admin\Blog;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Utlity;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     public function index(){
         return view('admin.pages.category.index', [
@@ -19,7 +16,7 @@ class CategoryController extends Controller
             'categories' => Category::latest()->get()
         ]);
     }
- 
+
     public function create(){
         return view('admin.pages.category.create', [
             'prefixname' => 'Admin',

@@ -35,59 +35,59 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
     });
 
     Route::prefix('category')->group(function () {
-        Route::get('/list', 'CategoryController@index')->name('category.index');
-        Route::get('/create', 'CategoryController@create')->name('category.create');
-        Route::post('/create', 'CategoryController@store')->name('category.store');
-        Route::get('/edit/{id}', 'CategoryController@edit')->name('category.edit');
-        Route::post('/edit/{id}', 'CategoryController@update')->name('category.update');
-        Route::delete('/delete/{id}', 'CategoryController@destroy')->name('category.delete');
+        Route::get('/list', 'Blog\CategoryController@index')->name('category.index');
+        Route::get('/create', 'Blog\CategoryController@create')->name('category.create');
+        Route::post('/create', 'Blog\CategoryController@store')->name('category.store');
+        Route::get('/edit/{id}', 'Blog\CategoryController@edit')->name('category.edit');
+        Route::post('/edit/{id}', 'Blog\CategoryController@update')->name('category.update');
+        Route::delete('/delete/{id}', 'Blog\CategoryController@destroy')->name('category.delete');
     });
     Route::prefix('sub-category')->group(function () {
-        Route::get('/list', 'SubCategoryController@index')->name('subcategory.index');
-        Route::get('/create', 'SubCategoryController@create')->name('subcategory.create');
-        Route::post('/create', 'SubCategoryController@store')->name('subcategory.store');
-        Route::get('/edit/{id}', 'SubCategoryController@edit')->name('subcategory.edit');
-        Route::post('/edit/{id}', 'SubCategoryController@update')->name('subcategory.update');
-        Route::delete('/delete/{id}', 'SubCategoryController@destroy')->name('subcategory.delete');
+        Route::get('/list', 'Blog\SubCategoryController@index')->name('subcategory.index');
+        Route::get('/create', 'Blog\SubCategoryController@create')->name('subcategory.create');
+        Route::post('/create', 'Blog\SubCategoryController@store')->name('subcategory.store');
+        Route::get('/edit/{id}', 'Blog\SubCategoryController@edit')->name('subcategory.edit');
+        Route::post('/edit/{id}', 'Blog\SubCategoryController@update')->name('subcategory.update');
+        Route::delete('/delete/{id}', 'Blog\SubCategoryController@destroy')->name('subcategory.delete');
 
         //for catch subcategory image
-        Route::get('/subcategory/list', 'SubCategoryController@ajaxGetData')->name('subcategory.ajaxdata');
+        Route::get('/subcategory/list', 'Blog\SubCategoryController@ajaxGetData')->name('subcategory.ajaxdata');
     });
 
     Route::prefix('tag')->group(function () {
-        Route::get('/list', 'TagController@index')->name('tag.index');
-        Route::get('/create', 'TagController@create')->name('tag.create');
-        Route::post('/create', 'TagController@store')->name('tag.store');
-        Route::get('/edit/{id}', 'TagController@edit')->name('tag.edit');
-        Route::post('/edit/{id}', 'TagController@update')->name('tag.update');
-        Route::delete('/delete/{id}', 'TagController@destroy')->name('tag.delete');
+        Route::get('/list', 'Blog\TagController@index')->name('tag.index');
+        Route::get('/create', 'Blog\TagController@create')->name('tag.create');
+        Route::post('/create', 'Blog\TagController@store')->name('tag.store');
+        Route::get('/edit/{id}', 'Blog\TagController@edit')->name('tag.edit');
+        Route::post('/edit/{id}', 'Blog\TagController@update')->name('tag.update');
+        Route::delete('/delete/{id}', 'Blog\TagController@destroy')->name('tag.delete');
     });
 
     //manage comment
     Route::prefix('comment')->group(function () {
-        Route::get('comment', 'CommentController@index')->name('comment.list');
-        Route::get('approve/approve-list', 'CommentController@approveList')->name('comment.approve.list');
-        Route::get('pending/pending-list', 'CommentController@pendingList')->name('comment.pending.list');
-        Route::get('pending/list/approve/{id}', 'CommentController@pendingListApprove')->name('comment.pending.list.approve');
-        Route::delete('delete/{id}', 'CommentController@destroy')->name('comment.destroy');
+        Route::get('comment', 'Blog\CommentController@index')->name('comment.list');
+        Route::get('approve/approve-list', 'Blog\CommentController@approveList')->name('comment.approve.list');
+        Route::get('pending/pending-list', 'Blog\CommentController@pendingList')->name('comment.pending.list');
+        Route::get('pending/list/approve/{id}', 'Blog\CommentController@pendingListApprove')->name('comment.pending.list.approve');
+        Route::delete('delete/{id}', 'Blog\CommentController@destroy')->name('comment.destroy');
     });
 
     //filter data
     Route::prefix('filter')->group(function () {
-        Route::get('/list', 'FilterController@index')->name('filter.view');
-        Route::get('/list/data', 'FilterController@filter')->name('filter.list');
-        Route::get('/subcategory/list', 'FilterController@ajaxGetSubcategoryData')->name('filter.getsubcategory');
+        Route::get('/list', 'Blog\FilterController@index')->name('filter.view');
+        Route::get('/list/data', 'Blog\FilterController@filter')->name('filter.list');
+        Route::get('/subcategory/list', 'Blog\FilterController@ajaxGetSubcategoryData')->name('filter.getsubcategory');
 
     });
 
     Route::prefix('news')->group(function () {
-        Route::get('/list', 'NewsController@index')->name('news.index');
-        Route::get('/create', 'NewsController@create')->name('news.create');
-        Route::post('/create', 'NewsController@store')->name('news.store');
-        Route::get('/view/{id}', 'NewsController@view')->name('news.view');
-        Route::get('/edit/{id}', 'NewsController@edit')->name('news.edit');
-        Route::post('/edit/{id}', 'NewsController@update')->name('news.update');
-        Route::delete('/delete/{id}', 'NewsController@destroy')->name('news.delete');
+        Route::get('/list', 'Blog\NewsController@index')->name('news.index');
+        Route::get('/create', 'Blog\NewsController@create')->name('news.create');
+        Route::post('/create', 'Blog\NewsController@store')->name('news.store');
+        Route::get('/view/{id}', 'Blog\NewsController@view')->name('news.view');
+        Route::get('/edit/{id}', 'Blog\NewsController@edit')->name('news.edit');
+        Route::post('/edit/{id}', 'Blog\NewsController@update')->name('news.update');
+        Route::delete('/delete/{id}', 'Blog\NewsController@destroy')->name('news.delete');
     });
 
     //manage Contact

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Admin\Blog;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Utlity;
 use Illuminate\Http\Request;
 
-class SubCategoryController extends Controller
+class SubCategoryController extends BaseController
 {
     public function index(){
         return view('admin.pages.sub_category.index', [

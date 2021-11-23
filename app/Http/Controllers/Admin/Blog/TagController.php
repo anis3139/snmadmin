@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Admin\Blog;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\TagRequest;
-use App\Models\Tag;
-use Illuminate\Http\Request;
+use App\Models\Tag; 
 
-class TagController extends Controller
+class TagController extends BaseController
 {
     public function index(){
         return view('admin.pages.tag.index', [

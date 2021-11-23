@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Admin\Blog;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\NewsRequest;
 use App\Models\Category;
 use App\Models\Deviceinformation;
@@ -13,7 +12,7 @@ use App\Utlity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class NewsController extends Controller
+class NewsController extends BaseController
 {
     public function index()
     {

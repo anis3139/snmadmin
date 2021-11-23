@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@can('role.edit')
 @section('content')
     <div class="content-wrapper">
         <div class="content-header row">
@@ -30,15 +30,19 @@
                                             class="fas fa-arrow-circle-left"></i> Back</a>
                                 </div>
                                 <div class="right">
+                                    @can('role.view')
                                     <a class="btn btn-primary btn-learge" href="{{ route('admin.roles.index') }}"><i
                                             data-feather='eye'></i> View List{{ request()->name }}</a>
+                                            @endcan
+                                            @can('role.create')
                                     <a class="btn btn-dark btn-learge" href="{{ route('admin.roles.create') }}"><i
                                             data-feather='plus'></i> Create New</a>
+                                            @endcan
                                 </div>
                             </div>
                         </div>
                         <div class="card">
-                            <div class="card-body"> 
+                            <div class="card-body">
                                 <form action="{{ route('admin.roles.update', $role->id) }}" method="POST"
                                     enctype="multipart/form-data" files="true">
                                     @method('PUT')
@@ -152,7 +156,7 @@
 
 
 
-
+@endcan
 
 
 

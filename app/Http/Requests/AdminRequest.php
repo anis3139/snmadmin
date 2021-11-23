@@ -25,12 +25,12 @@ class AdminRequest extends FormRequest
     {
 
         $rules = [
-            'name' => 'required',
-            'username' => ['required','unique:users'],
+            'name' => 'required', 
             'username' => 'required|string|max:255|min:4|unique:users,username,'.$this->id,
             'email' => 'required|string|email|max:255|min:4|unique:users,email,'.$this->id,
             'phone' => 'required|unique:users,email,'.$this->id,
             'status' => 'required',
+            'role' => 'required',
             'password'=> 'required|min:6',
             'password_confirmation'=> 'required|same:password'
         ];

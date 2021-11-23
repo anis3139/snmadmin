@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@can('role.create')
 @section('content')
     <div class="content-wrapper">
         <div class="content-header row">
@@ -30,10 +30,14 @@
                                             class="fas fa-arrow-circle-left"></i> Back</a>
                                 </div>
                                 <div class="right">
+                                    @can('role.view')
                                     <a class="btn btn-primary btn-learge" href="{{ route('admin.roles.index') }}"><i
                                             data-feather='eye'></i> View List{{ request()->name }}</a>
+                                            @endcan
+                                            @can('role.create')
                                     <a class="btn btn-dark btn-learge" href="{{ route('admin.roles.create') }}"><i
                                             data-feather='plus'></i> Create New</a>
+                                            @endcan
                                 </div>
                             </div>
                         </div>
@@ -45,7 +49,7 @@
 
                                     <div class="form-group">
                                         <label class="card-title" for="name">Role Name</label>
-                                       
+
                                             <label class="card-title" for="name">Role Name</label>
                                             <input id="name" placeholder="Name" type="name"
                                                 class="form-control @error('name') is-invalid @enderror" name="name"
@@ -140,3 +144,4 @@
 @section('role')
     @include('admin.pages.roles.partials.scripts')
 @endsection
+@endcan

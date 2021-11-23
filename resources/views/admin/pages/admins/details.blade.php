@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@can('admin.view')
 @section('content')
     <div class="content-wrapper">
         <div class="content-header row">
@@ -83,3 +84,4 @@
         </div>
     </div>
 @endsection
+@endcan

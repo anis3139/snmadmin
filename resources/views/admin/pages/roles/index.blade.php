@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@can('role.view')
 @section('content')
     <section id="advanced-search-datatable">
         <div class="content-header row">
@@ -31,8 +31,12 @@
                                     <li style="margin: 2px;"><button class="btn btn-success btn-sm"><i data-feather='download'></i> Excel</button></li>
                                     <li style="margin: 2px;"><button class="btn btn-danger btn-sm"><i data-feather='file'></i> PDF</button></li>
                                     <li style="margin: 2px;"><button class="btn btn-warning btn-sm"><i data-feather='printer'></i> Print</button></li>
+                                    @can('role.view')
                                     <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('admin.roles.index') }}"><i data-feather='eye'></i> View</a></li>
+                                    @endcan
+                                    @can('role.create')
                                     <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('admin.roles.create') }}"><i data-feather='plus'></i> Create</a></li>
+                                    @endcan
                                     <li style="margin: 2px;"><div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">Column</button>
                                             <button
@@ -79,17 +83,23 @@
                                <tr>
                                 <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="" /></td>
                                 <td class="text-nowrap">
+                                    @can('role.view')
                                     <a href="{{ route('admin.roles.show', $role->id) }}" title="view"><i data-feather='eye'></i></a>
-
+                                    @endcan
+                                    @can('role.edit')
                                     <a href="{{ route('admin.roles.edit', $role->id) }}" title="edit"><i data-feather='edit'></i></a>
-
+                                    @endcan
+                                    @can('role.delete')
+                                    @if ( $role->id!=1)
                                     <a href="{{ route('admin.roles.destroy', $role->id) }}"
                                         onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();" title="delete"><i data-feather='trash-2'></i></a>
 
-                                    <form id="delete-form-{{ $role->id }}" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: none;">
-                                        @method('DELETE')
-                                        @csrf
-                                    </form>
+                                        <form id="delete-form-{{ $role->id }}" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: none;">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                        @endif
+                                    @endcan
                                     <a href="#" title="info"><i data-feather='more-vertical'></i></a>
                                 </td>
                                     <td>{{ $role->name }}</td>
@@ -114,4 +124,4 @@
     </div>
     </section>
 @endsection
-
+@endcan

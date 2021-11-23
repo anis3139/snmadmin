@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@can('admin.edit')
 @section('content')
     <div class="content-wrapper">
         <div class="content-header row">
@@ -8,10 +9,16 @@
                         <h2 class="content-header-title float-left mb-0">Admin</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
+                                @can('admin.view')
+
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a>
                                 </li>
+                                @endcan
+                                @can('admin.create')
+
                                 <li class="breadcrumb-item active">Admin Create
                                 </li>
+                                @endcan
                             </ol>
                         </div>
                     </div>
@@ -20,7 +27,6 @@
 
         </div>
         <div class="content-body">
-            @include('ErrorMessage')
             <!-- Tooltip validations start -->
             <section class="tooltip-validations" id="tooltip-validation">
                 <div class="row">
@@ -41,59 +47,106 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control" placeholder="Enter Name" id="name"
-                                                    name="name" value="{{ $admin->name }}">
-                                                <div id="team-message">
+                                                <label class="form-label" for="login-name">Name</label>
+                                                <input id="name" placeholder="Name" type="name"
+                                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                                    value="{{ $admin->name ?? '' }}" autocomplete="name" autofocus>
+
+                                                @error('name')
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong></strong>
+                                                        <strong>{{ $message }}</strong>
                                                     </span>
-                                                </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
-                                                <label for="username">Username</label>
-                                                <input type="text" class="form-control" placeholder="Enter username"
-                                                    id="username" name="username" value="{{ $admin->username }}">
+
+                                                    <label class="form-label" for="login-username">User Name</label>
+                                                    <input id="username" placeholder="Admin Name" type="username"
+                                                        class="form-control @error('username') is-invalid @enderror" name="username"
+                                                        value="{{ $admin->username ?? ''  }}" autocomplete="username" autofocus>
+
+                                                    @error('username')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input type="text" class="form-control" placeholder="Enter email"
-                                                    id="email" name="email" value="{{ $admin->email }}">
+
+                                                    <label class="form-label" for="login-email">Email</label>
+                                                <input id="email" placeholder="Email" type="email"
+                                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                                    value="{{ $admin->email ?? '' }}" autocomplete="email" autofocus>
+
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
-                                                <label for="phone">phone</label>
-                                                <input type="text" class="form-control" placeholder="Enter phone"
-                                                    id="phone" name="phone" value="{{ $admin->phone }}">
+                                                <label class="form-label" for="login-phone">Mobile</label>
+                                                <input id="phone" placeholder="Mobile" type="phone"
+                                                    class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                                    value="{{ $admin->phone ??'' }}" autocomplete="phone" autofocus>
+
+                                                @error('phone')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
 
 
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
+
                                             <div class="form-group">
-                                                <label for="status">Status</label>
-                                                <select class="form-control" name="status">
-                                                    <option value="1">Active</option>
-                                                    <option value="0">Inactive</option>
+                                                <label class="form-label" for="status">Status</label>
+                                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror"
+                                                    value="{{ old('status') }}" autocomplete="status" autofocus>
+                                                    <option value="">Select Status</option>
+                                                   @if ($enumStatuses)
+                                                   @foreach ($enumStatuses as $key => $status)
+                                                   <option {{$key==$admin->status?'selected':''}} value="{{$key}}">{{$status}}</option>
+                                               @endforeach
+                                                   @endif
                                                 </select>
+
+                                                @error('status')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
 
 
+
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
-                                                <label for="role">Role</label>
-                                                <select name="role" class="form-control">
-                                                    <option value="">---Select Role---</option>
-                                                    @foreach ($roles as $key => $role)
-                                                        <option value="{{ $role->id }}" {{$admin->getRoleNames()[0]==$role->name ? "selected": ''}}   >{{ $role->name }}</option>
-                                                    @endforeach
-                                                </select>
+
+                                                <label class="form-label" for="role">Role</label>
+                                                    <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
+                                                        value="{{ old('role') }}" autocomplete="role" autofocus>
+                                                        <option value="">Select Role</option>
+                                                        @foreach ($roles as  $role)
+                                                        <option value="{{$role->name}}" {{$admin->getRoleNames()[0]==$role->name ? "selected": ''}}   >{{ucFirst($role->name)}}</option>
+                                                        @endforeach
+
+                                                    </select>
+
+                                                    @error('role')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                             </div>
                                         </div>
 
@@ -114,3 +167,5 @@
         </div>
     </div>
 @endsection
+@endcan
+

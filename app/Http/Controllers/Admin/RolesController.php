@@ -65,9 +65,7 @@ class RolesController extends BaseController
 
         // Process Data
         $role = Role::create(['name' => $request->name, 'guard_name' => 'admin']);
-
         $permissions = $request->input('permissions');
-
         if (!empty($permissions)) {
             $role->syncPermissions($permissions);
         }

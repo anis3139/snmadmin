@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Admin\Blog;
+use App\Http\Controllers\BaseController;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class CommentController extends BaseController
 {
     public function index(){
         return view('admin.pages.comment.index', [

@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Admin\Blog;
+use App\Http\Controllers\BaseController;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
-class FilterController extends Controller
+class FilterController extends BaseController
 {
     public function index(){
         return view('admin.pages.filter.index', [

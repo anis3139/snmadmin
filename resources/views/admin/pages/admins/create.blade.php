@@ -1,16 +1,5 @@
 @extends('admin.layouts.master')
-@section('vendor-style')
-    <!-- vendor css files -->
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/vendors/css/forms/select/select2.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css/plugins/forms/form-validation.css">
-@endsection
-
-@section('page-style')
-    <!-- Page css files -->
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css-rtl/plugins/forms/form-validation.css">
-    <link rel="stylesheet" href="{{ asset('') }}app-assets/css-rtl/plugins/forms/form-wizard.css">
-@endsection
+@can('admin.create')
 @section('content')
     <div class="content-wrapper">
         <div class="content-header row">
@@ -42,14 +31,20 @@
                                             class="fas fa-arrow-circle-left"></i> Back</a>
                                 </div>
                                 <div class="right">
+                                    @can('admin.view')
+
                                     <a class="btn btn-primary btn-learge" href="{{ route('admin.index') }}"><i
-                                            data-feather='eye'></i> View Admin</a>
-                                    <a class="btn btn-dark btn-learge" href="{{ route('admin.create') }}"><i
+                                        data-feather='eye'></i> View Admin</a>
+                                        @endcan
+                                        @can('admin.create')
+
+                                        <a class="btn btn-dark btn-learge" href="{{ route('admin.create') }}"><i
                                             data-feather='plus'></i> Create New</a>
+                                            @endcan
                                 </div>
                             </div>
                         </div>
-                        <!-- Modern Horizontal Wizard --> 
+                        <!-- Modern Horizontal Wizard -->
                         <form class="mt-2" action="{{ route('admin.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
@@ -65,7 +60,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="login-username">Admin Name</label>
+                                <label class="form-label" for="login-username">User Name</label>
                                 <input id="username" placeholder="Admin Name" type="username"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
                                     value="{{ old('username') }}" autocomplete="username" autofocus>
@@ -105,14 +100,13 @@
                                 <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
                                     value="{{ old('role') }}" autocomplete="role" autofocus>
                                     <option value="">Select Role</option>
-
                                     @foreach ($roles as  $role)
                                     <option value="{{$role->name}}">{{ucFirst($role->name)}}</option>
                                     @endforeach
 
                                 </select>
 
-                                @error('status')
+                                @error('role')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -123,11 +117,9 @@
                                 <select name="status" id="status" class="form-control @error('status') is-invalid @enderror"
                                     value="{{ old('status') }}" autocomplete="status" autofocus>
                                     <option value="">Select Status</option>
-                                    <option value="0">Inactive</option>
-                                    <option value="1">Active</option>
-                                    <option value="2">Pending</option>
-                                    <option value="3">Freez</option>
-                                    <option value="4">Block</option>
+                                    @foreach ($enumStatuses as $key => $status)
+                                    <option   value="{{$key}}">{{$status}}</option>
+                                @endforeach
                                 </select>
 
                                 @error('status')
@@ -181,3 +173,4 @@
         </div>
     </div>
 @endsection
+@endcan
