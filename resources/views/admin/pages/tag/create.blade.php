@@ -25,9 +25,25 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title"></h4>
-                        </div>
+                       <div class="card-header d-flex">
+                                <div class="left">
+                                    <a href="{{ url()->previous() }}" class="btn btn-dark btn-sm"><i
+                                            class="fas fa-arrow-circle-left"></i> Back</a>
+                                </div>
+                                <div class="right">
+                                    @can('blog.view')
+
+                                    <a class="btn btn-primary btn-learge" href="{{ route('tag.index') }}"><i
+                                        data-feather='eye'></i> View Tag</a>
+                                        @endcan
+                                        @can('blog.create')
+
+                                        <a class="btn btn-dark btn-learge" href="{{ route('tag.create') }}"><i
+                                            data-feather='plus'></i> Create New</a>
+                                            @endcan
+                                </div>
+                            </div> 
+                            <hr>
                         <div class="card-body">
                             <form class="" action="{{ route('tag.store') }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf

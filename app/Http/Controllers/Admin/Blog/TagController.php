@@ -7,12 +7,16 @@ use App\Models\Tag;
 
 class TagController extends BaseController
 {
+    protected $enumStatuses = [
+        'Inactive', 'Active'
+    ];
     public function index(){ 
         return view('admin.pages.tag.index', [
             'prefixname' => 'Admin',
             'title' => 'Tag List',
             'page_title' => 'Tag List',
-            'tags' => Tag::latest()->get()
+            'tags' => Tag::latest()->get(),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -21,6 +25,7 @@ class TagController extends BaseController
             'prefixname' => 'Admin',
             'title' => 'Tag Create',
             'page_title' => 'Tag Create',
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -45,6 +50,7 @@ class TagController extends BaseController
             'title' => 'Tag Edit',
             'page_title' => 'Tag Edit',
             'tag' => Tag::findOrFail($id),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -56,7 +62,7 @@ class TagController extends BaseController
         $tag->status = $request->status;
         if ($tag->save()) {
 
-            return redirect()->route('tag.edit', $tag->id)->with('success', 'Data Updated successfully Done');
+            return redirect()->route('tag.index', $tag->id)->with('success', 'Data Updated successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on update');
     }

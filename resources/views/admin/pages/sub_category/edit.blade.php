@@ -26,11 +26,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title"></h4>
+                        <div class="card-header d-flex">
+                            <div class="left">
+                                <h4 class="card-title">{{ $category->nameEn ?? $category->nameBn }} Edit</h4>
+                            </div>
+                            <div class="right">
+                                <a class="btn btn-primary btn-learge" href="{{ route('subcategory.index') }}">Category List</a>
+                            </div>
                         </div>
+                        <hr>
                         <div class="card-body">
-                            <form class="" action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data" files="true">
+                            <form class="" action="{{ route('subcategory.update', $category->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
                                 <div class="row">
                                 <div class="col-xl-4 col-md-6 col-12 mb-1">

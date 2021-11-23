@@ -42,6 +42,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::get('/list', 'Blog\CategoryController@index')->name('category.index');
         Route::get('/create', 'Blog\CategoryController@create')->name('category.create');
         Route::post('/create', 'Blog\CategoryController@store')->name('category.store');
+        Route::get('/show/{id}', 'Blog\CategoryController@show')->name('category.show');
         Route::get('/edit/{id}', 'Blog\CategoryController@edit')->name('category.edit');
         Route::post('/edit/{id}', 'Blog\CategoryController@update')->name('category.update');
         Route::delete('/delete/{id}', 'Blog\CategoryController@destroy')->name('category.delete');

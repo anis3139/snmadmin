@@ -5,12 +5,12 @@
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="content-header-title float-left mb-0">Category</h2>
+                    <h2 class="content-header-title float-left mb-0">Sub Category</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Category Edit
+                            <li class="breadcrumb-item active">Sub Category Edit
                             </li>
                         </ol>
                     </div>
@@ -26,9 +26,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title"></h4>
+                        <div class="card-header d-flex">
+                            <div class="left">
+                                <h4 class="card-title">{{$category->nameEn??$category->nameBn }} Edit</h4>
+                            </div>
+                            <div class="right">
+                                <a class="btn btn-primary btn-learge" href="{{ route('category.index') }}">Category List</a>
+                            </div>
                         </div>
+                        <hr>
                         <div class="card-body">
                             <form class="" action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf

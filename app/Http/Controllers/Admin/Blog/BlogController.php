@@ -12,13 +12,17 @@ use Illuminate\Http\Request;
 
 class BlogController extends BaseController
 {
+    protected $enumStatuses = [
+        'Inactive', 'Active'
+    ];
     public function index()
     {
         return view('admin.pages.blog.list', [
             'prefixname' => 'Admin',
             'title' => 'Blog List',
             'page_title' => 'Blog List',
-            'blog' => Blog::latest()->get()
+            'blogs' => Blog::latest()->get(),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -31,6 +35,7 @@ class BlogController extends BaseController
             'categories' => Category::where('status', 1)->get(),
             'subcategories' => Subcategory::where('status', 1)->get(),
             'tags' => Tag::where('status', 1)->latest()->get(),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -65,6 +70,7 @@ class BlogController extends BaseController
             'title' => 'Blog View',
             'page_title' => 'Blog View',
             'blog' => Blog::findOrFail($id),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -78,6 +84,7 @@ class BlogController extends BaseController
             'categories' => Category::where('status', 1)->get(),
             'subcategories' => Subcategory::where('status', 1)->get(),
             'tags'=>Tag::where('status', 1)->latest()->get(),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -100,7 +107,7 @@ class BlogController extends BaseController
             $blog->image = $path;
         }
         $blog->status = $request->status;
-        if ($blog->save()) { 
+        if ($blog->save()) {
             $blog->tags()->sync($request->tags);
             return redirect()->route('blog.index', $blog->id)->with('success', 'Data Updated successfully Done');
         }

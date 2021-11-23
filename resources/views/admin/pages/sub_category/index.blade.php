@@ -1,97 +1,197 @@
 @extends('admin.layouts.master')
-@section('content')
+@can('category.view')
+    @section('content')
 
-<div class="content-wrapper">
-    <div class="content-header row">
-        <div class="content-header-left col-md-9 col-12 mb-2">
-            <div class="row breadcrumbs-top">
-                <div class="col-12">
-                    <h2 class="content-header-title float-left mb-0">Sub Category</h2>
-                    <div class="breadcrumb-wrapper">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active">Sub Category List
-                            </li>
-                        </ol>
+        <!-- Advanced Search -->
+        <section id="advanced-search-datatable">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Sub Category</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                    <li class="breadcrumb-item active">View Sub Category</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </div>
 
-    </div>
-    <div class="content-body">
-        <!-- Responsive tables start -->
-        <div class="row" id="table-responsive">
-            <div class="col-12">
-                <div class="card">
+            @include ('components.flash-messages')
 
-                    <div class="card-header d-flex">
-                        <div class="left">
-                            <h4 class="card-title">Sub Category  List</h4>
-                        </div>
-                        <div class="right">
-                            <a class="btn btn-primary btn-learge" href="{{ route('subcategory.create') }}">Add Blog</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-
-                    </div>
-                    <div class="table-responsive p-1">
-                        <table  id="dataTable" class="table table-bordered table-striped common-datatables" style="width:100%; padding: 10px">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="text-nowrap">#</th>
-                                    <th>Category</th>
-                                    <th>Name Bn</th>
-                                    <th>Name En</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
-                                    <th>Blog Count</th>
-                                    <th>Status</th>
-                                    <th scope="col" class="text-nowrap text-right">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($subcategories as $category)
-                                <tr>
-                                    <td class="text-nowrap">{{ $loop->iteration }}</td>
-                                    <td>{{ $category->category->nameBn }} ({{ $category->category->nameEn }})</td>
-                                    <td>{{ $category->nameBn }}</td>
-                                    <td>{{ $category->nameEn }}</td>
-                                    <td>
-                                        <img src="{{ asset($category->image) }}" style="border-radius: 5px;" width="50" height="50" class="responsive-img mb-10" alt="">
-                                    </td>
-                                    <td>{{ $category->description }}</td>
-                                    <td>{{ $category->blog->count() }}</td>
-                                    <td>
-                                        <span class="{{ $category->status == 1 ? 'badge badge-success' : 'badge badge-danger' }}">{{ $category->status == 1 ? 'Active' : 'Deactive' }}</span>
-                                    </td>
-                                    <td>
-                                        <div class="float-right">
-                                            <form action="{{route('subcategory.delete', $category->id)}}" method="post">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                @csrf
-                                                <a href="{{ route('subcategory.edit', $category->id) }}" class="btn btn-primary">
-                                                    <i class="fa fa-pencil-square-o"></i>
-                                                    Edit
-                                                </a>
-                                                <button id="btnDelete" class="btn btn-danger">Delete</button>
-                                            </form>
-
+            <section id="advanced-search-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <a href="{{ url()->previous() }}" class="btn btn-dark btn-sm"><i
+                                        class="fas fa-arrow-circle-left"></i> Back</a>
+                                <div class="col-sm-10 mt-1">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <ol class="breadcrumb float-sm-right">
+                                                <li style="margin: 2px;">
+                                                    <a class="btn btn-info btn-sm"
+                                                        href="{{ route('common.export', ['extension' => 'csv', 'type' => 'category']) }}">
+                                                        <i data-feather='file-text'></i> CSV</a>
+                                                </li>
+                                                <li style="margin: 2px;">
+                                                    <a class="btn btn-secondary btn-sm"
+                                                        href="{{ route('common.export', ['extension' => 'xlsx', 'type' => 'category']) }}">
+                                                        <i data-feather='download'></i> Excel</a>
+                                                </li>
+                                                <li style="margin: 2px;">
+                                                    <a class="btn btn-primary btn-sm" href="javascript:void(0)"
+                                                        onclick="showModal(' for Category','category')">
+                                                        <i data-feather='upload'></i> Import</a>
+                                                </li>
+                                                <li style="margin: 2px;">
+                                                    <a class="btn btn-danger btn-sm"
+                                                        href="{{ route('common.print', ['action' => 'pdf', 'api' => 'category']) }}"
+                                                        target="_blank">
+                                                        <i data-feather='file'></i> PDF</a>
+                                                </li>
+                                                <li style="margin: 2px;">
+                                                    <a class="btn btn-warning btn-sm"
+                                                        href="{{ route('common.print', ['action' => 'print', 'api' => 'category']) }}"
+                                                        target="_blank">
+                                                        <i data-feather='printer'></i> Print</a>
+                                                </li>
+                                                @can('category.view')
+                                                    <li style="margin: 2px;"><a class="btn btn-primary btn-sm"
+                                                            href="{{ route('subcategory.index') }}"><i data-feather='eye'></i> View</a>
+                                                    </li>
+                                                @endcan
+                                                @can('category.create')
+                                                    <li style="margin: 2px;"><a class="btn btn-dark btn-sm"
+                                                            href="{{ route('subcategory.create') }}"><i data-feather='plus'></i>
+                                                            Create</a></li>
+                                                @endcan
+                                                <li style="margin: 2px;">
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-outline-secondary">Column</button>
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="javascript:void(0);"><input
+                                                                    name="checkbox" type="checkbox" readonly="readonly" />
+                                                                Name</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><input
+                                                                    name="checkbox" type="checkbox" readonly="readonly" />
+                                                                Email</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><input
+                                                                    name="checkbox" type="checkbox" readonly="readonly" />
+                                                                Phone</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><input
+                                                                    name="checkbox" type="checkbox" readonly="readonly" />
+                                                                Address</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><input
+                                                                    name="checkbox" type="checkbox" readonly="readonly" />
+                                                                Category Type</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><input
+                                                                    name="checkbox" type="checkbox" readonly="readonly" />
+                                                                Status</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><input
+                                                                    name="checkbox" type="checkbox" readonly="readonly" />
+                                                                Social Links</a>
+                                                            <div class="col-md-12 p-1">
+                                                                <button class="btn btn-sm btn-primary btn-block">Apply</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ol>
                                         </div>
-                                    </td>
-                                </tr>
-                                @empty
-                                @endforelse
-                            </tbody>
-                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-0" />
+                            <div class="col-sm-12">
+                                <table class="table table-bordered table-responsive common-datatables"
+                                    style="width:100%; padding: 10px">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%">SL</th>
+                                            <th style="width: 2%"><input name="checkbox" onclick='checkedAll();' type="checkbox"
+                                                    readonly="readonly" /></th>
+                                            <th style="width: 10%">Action</th>
+                                            <th>Name Bn</th>
+                                            <th>Name En</th>
+                                            <th>Image</th>
+                                            <th>Description</th> 
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($subcategories != '')
+                                            @foreach ($subcategories as  $key=> $category)
+                                                <tr>
+                                                <tr id="tablerow{{ $key }}">
+                                                    <td>{{ $category->id }}</td>
+                                                    <td><input type="checkbox" name="summe_code[]" id="summe_code"
+                                                            value="{{ $category->id }}" /></td>
+                                                    <td class="text-nowrap">
+                                                         
+                                                        @can('category.edit')
+                                                            <a href="{{ route('subcategory.edit', $category->id) }}"><i
+                                                                    data-feather='edit'></i></a>
+                                                        @endcan
+                                                        @can('category.delete')
+                                                            <a href="#" onclick="singleDelete({{ $category->id }},'category');"><i
+                                                                    data-feather='trash-2'></i></a>
+
+                                                        @endcan
+                                                        <a href="#"><i data-feather='more-vertical'></i></a>
+                                                    </td>
+                                                    <td>{{ $category->nameBn }}</td>
+                                                    <td>{{ $category->nameEn }}</td>
+                                                    <td>
+                                                        <img src="{{ asset($category->image) }}" style="border-radius: 5px;"
+                                                            width="50" height="50" class="responsive-img mb-10" alt="">
+                                                    </td>
+                                                    <td>{{ $category->description }}</td> 
+                                                     
+                                                    <td>
+                                                        @php
+                                                            $btnClass = ['danger', 'success'];
+                                                        @endphp
+                                                        @foreach ($enumStatuses as $key => $status)
+                                                            @if ($category->status == $key)
+                                                                <button class="btn btn-sm btn-{{ $btnClass[$key] }}">
+                                                                    {{ $enumStatuses[$key] }}
+                                                                </button>
+                                                            @endif
+                                                        @endforeach
+
+                                                    </td>
+                                                </tr>
+
+                                            @endforeach
+
+                                        @endif
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Responsive tables end -->
-    </div>
-</div>
-@endsection
+            </section>
+        </section>
+        <!--/ Advanced Search -->
+
+
+    @endsection
+
+@endcan

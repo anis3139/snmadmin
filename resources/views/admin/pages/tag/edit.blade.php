@@ -25,9 +25,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title"></h4>
+                        <div class="card-header d-flex">
+                            <div class="left">
+                                <h4 class="card-title">{{ $tag->nameEn ?? $tag->nameBn }} Edit</h4>
+                            </div>
+                            <div class="right">
+                                <a class="btn btn-primary btn-learge" href="{{ route('tag.index') }}">Tag List</a>
+                            </div>
                         </div>
+                        <hr>
                         <div class="card-body">
                         <form class="" action="{{ route('tag.update', $tag->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                     @csrf

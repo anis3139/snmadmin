@@ -99,22 +99,9 @@
     </div>
 
 @endsection
-@push('custom-css')
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/vendors/data-tables/css/jquery.dataTables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css/pages/data-tables.css')}}">
-
-@endpush
+ 
 @push('custom-js')
-    <!-- BEGIN PAGE VENDOR JS-->
-    <script src="{{asset('admin/app-assets/vendors/data-tables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin/app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('admin/app-assets/vendors/data-tables/js/dataTables.select.min.js')}}"></script>
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <script src="{{asset('admin/app-assets/js/scripts/data-tables.js')}}"></script>
-    <!-- END PAGE LEVEL JS-->
+   
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="{{ asset('admin/app-assets/js/scripts/ui-alerts.js')}}"></script>
     <!-- END PAGE LEVEL JS-->

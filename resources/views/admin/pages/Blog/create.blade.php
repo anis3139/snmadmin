@@ -8,6 +8,7 @@
     <div class="row">
         <div class="col s12">
             <div id="input-fields" class="card card-tabs">
+             
                 <div class="card-content">
                     <div class="card-title">
                         <div class="row">
@@ -35,16 +36,7 @@
                                         </button>
                                     </div>
                                 @endif
-                                @if ($message = Session::get('failed'))
-                                        <div class="card-alert card red">
-                                            <div class="card-content white-text">
-                                                <p>DANGER : {{ $message }}</p>
-                                            </div>
-                                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                @endif
+                                @include('ErrorMessage')
 
                                 <form class="row" action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data" files="true">
                                     @csrf

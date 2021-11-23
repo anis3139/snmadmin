@@ -8,12 +8,17 @@ use App\Utlity;
 
 class CategoryController extends BaseController
 {
+    protected $enumStatuses = [
+        'Inactive', 'Active'
+    ];
+
     public function index(){
         return view('admin.pages.category.index', [
             'prefixname' => 'Admin',
             'title' => 'Category List',
             'page_title' => 'Category List',
-            'categories' => Category::latest()->get()
+            'categories' => Category::latest()->get(),
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -22,6 +27,7 @@ class CategoryController extends BaseController
             'prefixname' => 'Admin',
             'title' => 'Category Create',
             'page_title' => 'Category Create',
+            'enumStatuses' => $this->enumStatuses,
         ]);
     }
 
@@ -45,6 +51,16 @@ class CategoryController extends BaseController
             return redirect()->route('category.index')->with('success', 'Data Added successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on create');
+    }
+
+    public function show($id){
+        return view('admin.pages.category.edit', [
+            'prefixname' => 'Admin',
+            'title' => 'Category Show',
+            'page_title' => 'Category Edit',
+            'category' => Category::findOrFail($id),
+            'enumStatuses' => $this->enumStatuses,
+        ]);
     }
 
     public function edit($id){

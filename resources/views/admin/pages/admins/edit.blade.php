@@ -34,7 +34,7 @@
                         <div class="card">
                             <div class="card-header d-flex">
                                 <div class="left">
-                                    <h4 class="card-title"></h4>
+                                    <h4 class="card-title">{{Auth::user()->roles->pluck('name')[0]?? ''}} Edit</h4>
                                 </div>
                                 <div class="right">
                                     <a class="btn btn-primary btn-learge" href="{{ route('admin.index') }}">Admin List</a>
@@ -128,28 +128,30 @@
                                         </div>
 
 
-
+                                        @if ($admin->id!=1)
+                                            
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
-
+                                                
                                                 <label class="form-label" for="role">Role</label>
-                                                    <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
+                                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
                                                         value="{{ old('role') }}" autocomplete="role" autofocus>
                                                         <option value="">Select Role</option>
                                                         @foreach ($roles as  $role)
                                                         <option value="{{$role->name}}" {{$admin->getRoleNames()[0]==$role->name ? "selected": ''}}   >{{ucFirst($role->name)}}</option>
                                                         @endforeach
-
+                                                        
                                                     </select>
-
+                                                    
                                                     @error('role')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
+                                                </div>
                                             </div>
-                                        </div>
-
+                                            
+                                        @endif
 
                                     </div>
                                     <div class="row">
