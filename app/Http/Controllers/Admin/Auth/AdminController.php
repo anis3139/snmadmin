@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     protected $enumStatuses = [
         'active', 'inactive', 'pending', 'freez', 'block',
     ];
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('admin.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any Admin !');
+        }
 
         return view('admin.pages.admins.index', [
             'prefixname' => 'Admin',
@@ -26,6 +28,9 @@ class AdminController extends Controller
     }
     public function create()
     {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any Admin !');
+        }
 
             return view('admin.pages.admins.create', [
                 'prefixname' => 'Admin',
@@ -39,6 +44,9 @@ class AdminController extends Controller
 
     public function store(AdminRequest $request)
     {
+        if (is_null($this->user) || !$this->user->can('admin.store')) {
+            abort(403, 'Sorry !! You are Unauthorized to store any Admin !');
+        }
         $admin = new Admin();
         $admin->name = $request->get('name');
         $admin->username = $request->get('username');
@@ -55,7 +63,9 @@ class AdminController extends Controller
 
     public function edit($id)
     {
-
+        if (is_null($this->user) || !$this->user->can('admin.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any Admin !');
+        }
             return view('admin.pages.admins.edit', [
                 'prefixname' => 'Admin',
                 'title' => 'Admin Create',
@@ -68,6 +78,9 @@ class AdminController extends Controller
     }
     public function update(Request $request, $id)
     {
+        if (is_null($this->user) || !$this->user->can('admin.update')) {
+            abort(403, 'Sorry !! You are Unauthorized to update any Admin !');
+        }
             $id = $id;
             $name = $request->Input('name');
             $username = $request->Input('username');
@@ -95,11 +108,13 @@ class AdminController extends Controller
             } else {
                 return redirect()->back()->withInput()->with('error', 'Data Added Failed');
             }
- 
+
     }
     public function destroy($id)
     {
-
+        if (is_null($this->user) || !$this->user->can('admin.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to delete any Admin !');
+        }
         $result = Admin::where('id', '=', $id)->delete();
 
         if ($result) {

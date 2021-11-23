@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+
+use App\Http\Controllers\BaseController;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     /**
      * Create a new controller instance.
@@ -22,6 +22,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('home.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any Admin !');
+        }
+        
 		$admintype = Auth::user()->roles->pluck('name')[0];
 
 		switch($admintype){

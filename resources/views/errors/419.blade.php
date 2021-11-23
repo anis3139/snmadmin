@@ -20,7 +20,7 @@
     @endphp
     @if($pathToken[1]=='admin')
     <div class="container p-5 d-flex justify-content-between">
-        <a class="btn btn-primary btn-lg" href="{{ route('admin.adminHome') }}">Back to Dashboard</a>
+        <a class="btn btn-primary btn-lg" href="{{ route('home') }}">Back to Dashboard</a>
         <a class="btn btn-warning btn-lg" href="{{ route('admin.login') }}">Admin Login</a>
     </div>
     @else
