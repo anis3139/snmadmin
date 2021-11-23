@@ -32,6 +32,10 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::get('/profile/{id}', 'Auth\AdminController@profile')->name('admin.profile');
         Route::post('/changePassword', 'Auth\AdminController@changePassword')->name('admin.changePassword');
         Route::post('/admin-role/update/{id}', 'Auth\AdminController@roleUpdate')->name('admin.role.update');
+        //Visitor Table
+        Route::get('/visitor', 'VisitorController@VisitorIndex')->name('admin.VisitorIndex');
+
+
     });
 
     Route::prefix('category')->group(function () {
@@ -80,14 +84,14 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
 
     });
 
-    Route::prefix('news')->group(function () {
-        Route::get('/list', 'Blog\NewsController@index')->name('news.index');
-        Route::get('/create', 'Blog\NewsController@create')->name('news.create');
-        Route::post('/create', 'Blog\NewsController@store')->name('news.store');
-        Route::get('/view/{id}', 'Blog\NewsController@view')->name('news.view');
-        Route::get('/edit/{id}', 'Blog\NewsController@edit')->name('news.edit');
-        Route::post('/edit/{id}', 'Blog\NewsController@update')->name('news.update');
-        Route::delete('/delete/{id}', 'Blog\NewsController@destroy')->name('news.delete');
+    Route::prefix('blog')->group(function () {
+        Route::get('/list', 'Blog\BlogController@index')->name('blog.index');
+        Route::get('/create', 'Blog\BlogController@create')->name('blog.create');
+        Route::post('/create', 'Blog\BlogController@store')->name('blog.store');
+        Route::get('/view/{id}', 'Blog\BlogController@view')->name('blog.view');
+        Route::get('/edit/{id}', 'Blog\BlogController@edit')->name('blog.edit');
+        Route::post('/edit/{id}', 'Blog\BlogController@update')->name('blog.update');
+        Route::delete('/delete/{id}', 'Blog\BlogController@destroy')->name('blog.delete');
     });
 
     //manage Contact

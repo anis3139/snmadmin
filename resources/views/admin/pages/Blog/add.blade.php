@@ -23,12 +23,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">News</h2>
+                        <h2 class="content-header-title float-left mb-0">Blog</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">News Create
+                                <li class="breadcrumb-item active">Blog Create
                                 </li>
                             </ol>
                         </div>
@@ -46,7 +46,7 @@
                                 <h4 class="card-title"></h4>
                             </div>
                             <div class="card-body">
-                                <form class="" action="{{ route('news.store') }}" method="POST"
+                                <form class="" action="{{ route('blog.store') }}" method="POST"
                                     enctype="multipart/form-data" files="true" id="userAddForm">
                                     @csrf
                                     <div class="row">
@@ -110,16 +110,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
                                                 <label for="subcategory">Sub Category</label>
@@ -141,7 +131,7 @@
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
                                                 <label for="tag">Tag</label>
-                                                <select name="tag" id="tag" class="form-control select2" aria-label="tag"
+                                                <select name="tags[]" id="tag" class="form-control select2" aria-label="tag"
                                                     aria-describedby="tag" multiple>
                                                     @foreach ($tags as $key => $tag)
                                                         <option value="{{ $tag->id }}">{{ $tag->nameBn }}

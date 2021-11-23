@@ -31,7 +31,7 @@
                             <h4 class="card-title">Tag List</h4>
                         </div>
                         <div class="right">
-                            <a class="btn btn-primary btn-learge" href="{{ route('tag.create') }}">Add News</a>
+                            <a class="btn btn-primary btn-learge" href="{{ route('tag.create') }}">Add Tag</a>
                         </div>
                     </div>
                     <div class="card-body">

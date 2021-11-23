@@ -46,7 +46,7 @@
                                         </div>
                                 @endif
 
-                                <form class="row" action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data" files="true">
+                                <form class="row" action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data" files="true">
                                     @csrf
                                     <div class="row">
                                         <div class="col s12 m6 l8">

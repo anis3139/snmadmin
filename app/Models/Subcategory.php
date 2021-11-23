@@ -18,7 +18,7 @@ class Subcategory extends Model
         return $this->nameBn . ' ' .'('. $this->nameEn .')';
     }
 
-    public  function news(){
-        return $this->hasMany('App\Models\News');
+    public  function blog(){
+        return $this->hasMany('App\Models\Blog');
     }
 }

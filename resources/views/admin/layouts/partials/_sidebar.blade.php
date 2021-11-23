@@ -60,12 +60,12 @@
             </div>
         </li>
 
-        <li class="{{ Request::is('news') || Request::is('news/*') ? 'active' : '' }} bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">content_paste</i><span class="menu-title" data-i18n="Pages">News</span></a>
+        <li class="{{ Request::is('blog') || Request::is('blog/*') ? 'active' : '' }} bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">content_paste</i><span class="menu-title" data-i18n="Pages">Blog</span></a>
             <div class="collapsible-body">
                 <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                    <li class="{{ Request::is('news/list') ? 'active' : '' }}"><a class="{{ Request::is('news/list') ? 'active' : '' }}" href="{{ route('news.index') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">List</span></a>
+                    <li class="{{ Request::is('blog/list') ? 'active' : '' }}"><a class="{{ Request::is('blog/list') ? 'active' : '' }}" href="{{ route('blog.index') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">List</span></a>
                     </li>
-                    <li class="{{ Request::is('news/create') ? 'active' : '' }}"><a class="{{ Request::is('news/create') ? 'active' : '' }}" href="{{ route('news.create') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">Add</span></a>
+                    <li class="{{ Request::is('blog/create') ? 'active' : '' }}"><a class="{{ Request::is('blog/create') ? 'active' : '' }}" href="{{ route('blog.create') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Page Blank">Add</span></a>
                     </li>
                 </ul>
             </div>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\BaseController;
 use App\Models\Category;
-use App\Models\News;
+use App\Models\Blog;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class FilterController extends BaseController
             'page_title' => 'Search List',
             'categories' => Category::where('status',1)->get(),
             'subcategories' => Subcategory::where('status',1)->get(),
-            'news' => News::where('status',1)->paginate(20),
+            'blog' => Blog::where('status',1)->paginate(20),
         ]);
     }
 
@@ -26,16 +26,16 @@ class FilterController extends BaseController
         $subcategory_id = $request->get('subcateogry');
 
         if($category_id && $subcategory_id){
-            $story = News::where('category_id',$category_id)->where('subcategory_id', $subcategory_id)->where('status',1)->get();
+            $story = Blog::where('category_id',$category_id)->where('subcategory_id', $subcategory_id)->where('status',1)->get();
         }
         elseif($category_id){
-            $story = News::where('category_id',$category_id)->where('status',1)->get();
+            $story = Blog::where('category_id',$category_id)->where('status',1)->get();
         }
 //        else if($subcategory_id){
-//            $story = News::where('subcategory_id', $subcategory_id)->where('status',1)->get();
+//            $story = Blog::where('subcategory_id', $subcategory_id)->where('status',1)->get();
 //        }
 //        else if($category_id && $subcategory_id){
-//            $story = News::where('category_id',$category_id)->where('subcategory_id', $subcategory_id)->where('status',1)->get();
+//            $story = Blog::where('category_id',$category_id)->where('subcategory_id', $subcategory_id)->where('status',1)->get();
 //        }
         else {
             $story = null;
@@ -47,7 +47,7 @@ class FilterController extends BaseController
             'page_title' => 'Search List',
             'categories' => Category::where('status',1)->get(),
             'subcategories' => Subcategory::where('status',1)->get(),
-            'news' => $story
+            'blog' => $story
         ]);
     }
 

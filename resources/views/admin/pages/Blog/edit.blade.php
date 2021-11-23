@@ -16,12 +16,12 @@
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="content-header-title float-left mb-0">News</h2>
+                    <h2 class="content-header-title float-left mb-0">Blog</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">News Edit
+                            <li class="breadcrumb-item active">Blog Edit
                             </li>
                         </ol>
                     </div>
@@ -40,32 +40,32 @@
                             <h4 class="card-title"></h4>
                         </div>
                         <div class="card-body">
-                            <form id="userEditForm" action="{{ route('news.update', $news->id) }}" method="POST" enctype="multipart/form-data" files="true">
+                            <form id="userEditForm" action="{{ route('blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-6 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="first_name1">Title Bangla</label>
-                                            <input value="{{ $news->title }}" placeholder="Enter Bangla Title" id="title" type="text" name="title" class="form-control">
+                                            <input value="{{ $blog->title }}" placeholder="Enter Bangla Title" id="title" type="text" name="title" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="titleEn">Title English</label>
-                                            <input type="text" value="{{ $news->titleEn }}" class="form-control" placeholder="Enter English  Name" id="titleEn" name="titleEn">
+                                            <input type="text" value="{{ $blog->titleEn }}" class="form-control" placeholder="Enter English  Name" id="titleEn" name="titleEn">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="description">Description Bangla</label>
-                                            <textarea placeholder="Enter Description"  cols="30" rows="10" name="description" id="description" class="form-control ckeditor">{{ $news->description }}</textarea>
-                                      
+                                            <textarea placeholder="Enter Description"  cols="30" rows="10" name="description" id="description" class="form-control ckeditor">{{ $blog->description }}</textarea>
+
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="descriptionEn">Description English</label>
-                                            <textarea placeholder="Enter Description" cols="30" rows="10" name="descriptionEn" id="descriptionEn" class="form-control ckeditor">{{ $news->descriptionEn }}</textarea>
+                                            <textarea placeholder="Enter Description" cols="30" rows="10" name="descriptionEn" id="descriptionEn" class="form-control ckeditor">{{ $blog->descriptionEn }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
@@ -74,7 +74,7 @@
                                             <select id="category" name="category" class="form-control">
                                                 <option value="" selected>---- Select Category---</option>
                                                 @foreach($categories as $key => $category)
-                                                <option value="{{ $category->id }}" {{ $category->id == $news->category_id ? "selected" : '' }}>{{ $category->nameBn }} ({{ $category->nameEn }})</option>
+                                                <option value="{{ $category->id }}" {{ $category->id == $blog->category_id ? "selected" : '' }}>{{ $category->nameBn }} ({{ $category->nameEn }})</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -85,18 +85,18 @@
                                             <select id="subcategory" name="subcategory" class="form-control">
                                                 <option value="" selected>---- Select Sub Category---</option>
                                                 @foreach($subcategories as $key => $subcategory)
-                                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == $news->subcategory_id ? "selected" : '' }}>{{ $subcategory->nameBn }} ({{ $subcategory->nameEn }})</option>
+                                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == $blog->subcategory_id ? "selected" : '' }}>{{ $subcategory->nameBn }} ({{ $subcategory->nameEn }})</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                               
+
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="tag">Tag</label>
-                                            <select name="tags[]" id="tag" class="form-control select2" multiple> 
+                                            <select name="tags[]" id="tag" class="form-control select2" multiple>
                                                 @foreach($tags as $key => $tag)
-                                                <option value="{{ $tag->id }}" {{ $tag->id == $news->tag ? "selected" : '' }}>{{ $tag->nameBn }} ({{ $tag->nameEn }})</option>
+                                                <option value="{{ $tag->id }}" {{ $tag->id == $blog->tag ? "selected" : '' }}>{{ $tag->nameBn }} ({{ $tag->nameEn }})</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -105,8 +105,8 @@
                                         <div class="form-group">
                                             <label for="status">Satus</label>
                                             <select name="status" class="form-control">
-                                                <option {{ $news->status==1 ? "selected" : '' }} value="1">Active</option>
-                                                <option {{ $news->status==0 ? "selected" : '' }} value="0">Deactive</option>
+                                                <option {{ $blog->status==1 ? "selected" : '' }} value="1">Active</option>
+                                                <option {{ $blog->status==0 ? "selected" : '' }} value="0">Deactive</option>
                                             </select>
                                         </div>
                                     </div>
@@ -115,11 +115,11 @@
                                             <label for="description">Image</label>
                                             <input type="file" id="img" name="img" id="input-file-now" class="form-control" data-default-file="" />
                                         </div>
-                                       
+
                                     </div>
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
-                                            <img src="{{ asset($news->image) }}" alt="" id="imagePreview" width="200px" height="auto"
+                                            <img src="{{ asset($blog->image) }}" alt="" id="imagePreview" width="200px" height="auto"
                                                 class="text-center">
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
     <script>
         $('#userEditForm').validate({
             rules: {
-                title: "required", 
+                title: "required",
                 tag: "required",
                 status: "required",
                 category: "required",
@@ -163,7 +163,7 @@
                 }
             },
             messages: {
-                title: "Please specify Title (Bangla)", 
+                title: "Please specify Title (Bangla)",
                 tag: "Please Selcect Tag",
                 status: "Please Selcect Status",
                 category: "Please Selcect Category",
@@ -171,7 +171,7 @@
                 descriptionEn: "Please specify Description (English)",
                 description: "Please specify Description (Bangla)",
                 titleEn: {
-                    required: "Please specify Title (English)", 
+                    required: "Please specify Title (English)",
                 }
             }
         });

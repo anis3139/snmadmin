@@ -58,7 +58,7 @@
                                     @foreach ($comments as $key => $tag)
                                         <tr>
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ $tag->news->title }}</td>
+                                            <td>{{ $tag->blog->title }}</td>
                                             <td>{{ $tag->name }}</td>
                                             <td>{{ $tag->email }}</td>
                                             <td>{{ $tag->phone }}</td>
@@ -71,7 +71,7 @@
                                             <td>
 
                                                 <div class="icon-preview col s6 m3">
-                                                    <a href="{{ route('news.view', $tag->news_id) }}" method="GET"
+                                                    <a href="{{ route('blog.view', $tag->blog_id) }}" method="GET"
                                                         title="View">
                                                         <i data-feather="view"></i><span class="btn btn-sm btn-secondary">
                                                             View Post </span>

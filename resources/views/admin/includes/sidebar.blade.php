@@ -7,31 +7,31 @@
             <ul class="menu-content">
                 @hasrole('superadmin')
                     <li><a class="d-flex align-items-center"
-                            href="{{ route('home', ['admintype' => base64_encode('Super Admin')]) }}"><i
+                            href="{{ route('home') }}"><i
                                 data-feather="activity"></i><span class="menu-item text-truncate" data-i18n="List">Super
                                 Admin</span></a></li>
                 @endhasrole
                 @hasrole('admin')
                     <li><a class="d-flex align-items-center"
-                            href="{{ route('home', ['admintype' => base64_encode('Admin')]) }}"><i
+                            href="{{ route('home') }}"><i
                                 data-feather="activity"></i><span class="menu-item text-truncate"
                                 data-i18n="List">Admin</span></a></li>
                 @endhasrole
                 @hasrole('editor')
                     <li><a class="d-flex align-items-center"
-                            href="{{ route('home', ['admintype' => base64_encode('Driver')]) }}"><i
+                            href="{{ route('home') }}"><i
                                 data-feather="activity"></i><span class="menu-item text-truncate"
                                 data-i18n="List">Driver</span></a></li>
                 @endhasrole
                 @hasrole('hr')
                     <li><a class="d-flex align-items-center"
-                            href="{{ route('home', ['admintype' => base64_encode('HRM')]) }}"><i
+                            href="{{ route('home') }}"><i
                                 data-feather="activity"></i><span class="menu-item text-truncate"
                                 data-i18n="List">HRM</span></a></li>
                 @endhasrole
                 @hasrole('finance')
                     <li><a class="d-flex align-items-center"
-                            href="{{ route('home', ['admintype' => base64_encode('Finance')]) }}"><i
+                            href="{{ route('home') }}"><i
                                 data-feather="activity"></i><span class="menu-item text-truncate"
                                 data-i18n="List">Finance</span></a></li>
                 @endhasrole
@@ -48,7 +48,7 @@
                         class="d-flex align-items-center" href="{{ route('admin.create') }}"><i
                             data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
                 </li>
-                <li class="{{ Route::currentRouteName() === 'admin.index' ? 'active' : '' }}"><a
+                <li class="{{ Route::currentRouteName() === 'admin.index' ? 'active' : Route::currentRouteName() === 'admin.edit' ? 'active' :'' }}"><a
                         class="d-flex align-items-center" href="{{ route('admin.index') }}"><i
                             data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
                 </li>
@@ -63,7 +63,7 @@
                         class="d-flex align-items-center" href="{{ route('admin.roles.create') }}"><i
                             data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
                 </li>
-                <li class="{{ Route::currentRouteName() === 'roles.index' ? 'active' : '' }}"><a
+                <li class="{{ Route::currentRouteName() === 'roles.index' ? 'active' :  Route::currentRouteName() === 'roles.edit' ? 'active' : '' }}"><a
                         class="d-flex align-items-center" href="{{ route('admin.roles.index') }}"><i
                             data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
                 </li>
@@ -79,7 +79,7 @@
                         class="d-flex align-items-center" href="{{ route('banners.create') }}"><i
                             data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
                 </li>
-                <li class="{{ Route::currentRouteName() === 'banners.index' ? 'active' : '' }}"><a
+                <li class="{{ Route::currentRouteName() === 'banners.index' ? 'active' : Route::currentRouteName() === 'banners.edit' ? 'active' : '' }}"><a
                         class="d-flex align-items-center" href="{{ route('banners.index') }}"><i
                             data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
                 </li>
@@ -92,7 +92,7 @@
 
     @can('blog.view')
         <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='book-open'></i></i><span
-                    class="menu-title text-truncate" data-i18n="Board">News</span></a>
+                    class="menu-title text-truncate" data-i18n="Board">Blog</span></a>
             <ul class="menu-content">
 
 
@@ -100,13 +100,13 @@
                 <li><a class="d-flex align-items-center" href="#"><i data-feather="book-open"></i><span
                             class="menu-item text-truncate" data-i18n="Second Level">Post</span></a>
                     <ul class="menu-content">
-                        <li class="{{ Route::currentRouteName() === 'news.create' ? 'active' : '' }}"><a
-                                class="d-flex align-items-center" href="{{ route('news.create') }}"><i
+                        <li class="{{ Route::currentRouteName() === 'blog.create' ? 'active' : '' }}"><a
+                                class="d-flex align-items-center" href="{{ route('blog.create') }}"><i
                                     data-feather="plus"></i><span class="menu-item text-truncate"
                                     data-i18n="List">New</span></a>
                         </li>
-                        <li class="{{ Route::currentRouteName() === 'news.index' ? 'active' : '' }}"><a
-                                class="d-flex align-items-center" href="{{ route('news.index') }}"><i
+                        <li class="{{ Route::currentRouteName() === 'blog.index'? 'active' : Route::currentRouteName() === 'blog.edit' ? 'active' :'' }}"><a
+                                class="d-flex align-items-center" href="{{ route('blog.index') }}"><i
                                     data-feather="list"></i><span class="menu-item text-truncate"
                                     data-i18n="List">View</span></a>
                         </li>
@@ -121,7 +121,7 @@
                                     data-feather="plus"></i><span class="menu-item text-truncate"
                                     data-i18n="List">New</span></a>
                         </li>
-                        <li class="{{ Route::currentRouteName() === 'category.index' ? 'active' : '' }}"><a
+                        <li class="{{ Route::currentRouteName() === 'category.index' ? 'active' :Route::currentRouteName() === 'category.edit' ? 'active' : '' }}"><a
                                 class="d-flex align-items-center" href="{{ route('category.index') }}"><i
                                     data-feather="list"></i><span class="menu-item text-truncate"
                                     data-i18n="List">View</span></a>
@@ -137,7 +137,7 @@
                                     data-feather="plus"></i><span class="menu-item text-truncate"
                                     data-i18n="List">New</span></a>
                         </li>
-                        <li class="{{ Route::currentRouteName() === 'subcategory.index' ? 'active' : '' }}"><a
+                        <li class="{{ Route::currentRouteName() === 'subcategory.index' ? 'active' :Route::currentRouteName() === 'subcategory.edit' ? 'active' : '' }}"><a
                                 class="d-flex align-items-center" href="{{ route('subcategory.index') }}"><i
                                     data-feather="list"></i><span class="menu-item text-truncate"
                                     data-i18n="List">View</span></a>
@@ -153,7 +153,7 @@
                                     data-feather="plus"></i><span class="menu-item text-truncate"
                                     data-i18n="List">New</span></a>
                         </li>
-                        <li class="{{ Route::currentRouteName() === 'tag.index' ? 'active' : '' }}"><a
+                        <li class="{{ Route::currentRouteName() === 'tag.index' ? 'active' : Route::currentRouteName() === 'tag.edit' ? 'active' : '' }}"><a
                                 class="d-flex align-items-center" href="{{ route('tag.index') }}"><i
                                     data-feather="list"></i><span class="menu-item text-truncate"
                                     data-i18n="List">View</span></a>
@@ -184,7 +184,7 @@
                 <li class="{{ Route::currentRouteName() === 'filter.view' ? 'active' : '' }}"><a
                         class="d-flex align-items-center" href="{{ route('filter.view') }}"><i
                             data-feather="filter"></i><span class="menu-item text-truncate" data-i18n="List">Filter
-                            News</span></a>
+                            Blog</span></a>
                 </li>
             </ul>
         </li>
@@ -197,7 +197,7 @@
                         class="d-flex align-items-center" href="{{ route('user.create') }}"><i
                             data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
                 </li>
-                <li class="{{ Route::currentRouteName() === 'user.index' ? 'active' : '' }}"><a
+                <li class="{{ Route::currentRouteName() === 'user.index' ? 'active' : Route::currentRouteName() === 'user.edit' ? 'active' : '' }}"><a
                         class="d-flex align-items-center" href="{{ route('user.index') }}"><i
                             data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
                 </li>

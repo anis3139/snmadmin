@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class Blog extends Model
 {
     use HasFactory;
 
@@ -13,8 +13,8 @@ class News extends Model
         'status',
     ];
 
-    public function user(){
-        return $this->belongsTo('App\Models\User');
+    public function admin(){
+        return $this->belongsTo('App\Models\Admin');
     }
     public function category(){
         return $this->belongsTo('App\Models\Category');
@@ -23,7 +23,7 @@ class News extends Model
         return $this->belongsTo('App\Models\Subcategory');
     }
     public function tags(){
-        return $this->belongsToMany('App\Models\Tag', 'news_tag', 'news_id', 'tag_id')->withTimestamps();;
+        return $this->belongsToMany('App\Models\Tag', 'blog_tag', 'blog_id', 'tag_id')->withTimestamps();;
     }
 
 

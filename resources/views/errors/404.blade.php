@@ -23,8 +23,8 @@
     </div>
     @else
     <div class="container p-5 d-flex justify-content-between">
-        <a class="btn btn-primary btn-lg" href="{{ route('client.home') }}">Back to Home</a>
-        <a class="btn btn-warning btn-lg" href="{{ route('client.login') }}">User Login</a>
+        <a class="btn btn-primary btn-lg" href="{{ route('home') }}">Back to Home</a>
+        <a class="btn btn-warning btn-lg" href="{{ route('admin.login') }}">User Login</a>
     </div>
     @endif
 @endsection

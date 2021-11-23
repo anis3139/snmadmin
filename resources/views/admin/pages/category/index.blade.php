@@ -31,7 +31,7 @@
                                 <h4 class="card-title">category List</h4>
                             </div>
                             <div class="right">
-                                <a class="btn btn-primary btn-learge" href="{{ route('category.create') }}">Add News</a>
+                                <a class="btn btn-primary btn-learge" href="{{ route('category.create') }}">Add Blog</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -47,7 +47,7 @@
                                         <th>Name En</th>
                                         <th>Image</th>
                                         <th>Description</th>
-                                        <th>News Count</th>
+                                        <th>Blog Count</th>
                                         <th>Status</th>
                                         <th scope="col" class="text-nowrap text-right">Action</th>
                                     </tr>
@@ -63,7 +63,7 @@
                                                     width="50" height="50" class="responsive-img mb-10" alt="">
                                             </td>
                                             <td>{{ $category->description }}</td>
-                                            <td>{{ $category->news->count() }}</td>
+                                            <td>{{ $category->blog->count() }}</td>
                                             <td>
                                                 <span
                                                     class="{{ $category->status == 1 ? 'badge badge-success' : 'badge badge-danger' }}">{{ $category->status == 1 ? 'Active' : 'Deactive' }}</span>

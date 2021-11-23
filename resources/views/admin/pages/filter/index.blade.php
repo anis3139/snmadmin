@@ -74,7 +74,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($news as $key => $n)
+                                @forelse($blog as $key => $n)
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $n->title }}</td>
@@ -95,19 +95,19 @@
                                     {{-- </td>--}}
                                     <td>
                                         <div class="icon-preview col s6 m3">
-                                            <a href="{{ route('news.view', $n->id) }}" method="GET" title="View">
+                                            <a href="{{ route('blog.view', $n->id) }}" method="GET" title="View">
                                                 <i class="material-icons dp48">remove_red_eye</i>
                                             </a>
 
                                         </div>
                                         {{-- <div class="icon-preview col s6 m3">--}}
-                                        {{-- <a href="{{ route('news.edit', $n->id) }}" method="GET" title="Edit">--}}
+                                        {{-- <a href="{{ route('blog.edit', $n->id) }}" method="GET" title="Edit">--}}
                                         {{-- <i class="material-icons dp48">edit</i>--}}
                                         {{-- </a>--}}
 
                                         {{-- </div>--}}
                                         {{-- <div class="icon-preview col s6 m3">--}}
-                                        {{-- <form action="{{ route('news.delete', $n->id) }}" method="POST">--}}
+                                        {{-- <form action="{{ route('blog.delete', $n->id) }}" method="POST">--}}
                                         {{-- {{ csrf_field() }}--}}
                                         {{-- {{ method_field('DELETE') }}--}}
                                         {{-- <button class="btn" type="submit" onclick="return confirm(' you want to delete?');">--}}

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\TagRequest;
-use App\Models\Tag; 
+use App\Models\Tag;
 
 class TagController extends BaseController
 {
-    public function index(){
+    public function index(){ 
         return view('admin.pages.tag.index', [
             'prefixname' => 'Admin',
             'title' => 'Tag List',
             'page_title' => 'Tag List',
-            'tags' => Tag::has('news')->latest()->get()
+            'tags' => Tag::latest()->get()
         ]);
     }
 

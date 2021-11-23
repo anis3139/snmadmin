@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form class="row" action="{{ route('news.update', $news->id) }}" method="POST" enctype="multipart/form-data" files="true">
+                        <form class="row" action="{{ route('blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data" files="true">
                             @csrf
                             <div class="row">
                                 <div class="col s12 m6 l8">
@@ -38,15 +38,15 @@
                                         <div class="card-content">
                                             <div class="card-header pb-1">
                                                 <div class="card-text">
-                                                    <h6 class="m-0">{{ $news->title }}</h6>
-                                                    <small>{{ $news->created_at->toFormattedDateString() }}</small>
+                                                    <h6 class="m-0">{{ $blog->title }}</h6>
+                                                    <small>{{ $blog->created_at->toFormattedDateString() }}</small>
                                                 </div>
                                             </div>
                                             <div class="divider"></div>
 
                                             <br>
                                             <p class="card-text mt-1">
-                                                {{ $news->description }}
+                                                {{ $blog->description }}
                                             </p>
                                         </div>
                                     </div>
@@ -63,10 +63,10 @@
                                                         </div>
                                                         <div class="col s12">
 
-                                                            @if($news->image != null)
-                                                            <img class="responsive-img" style="width:100%; height: 200px" src="{{ asset($news->image) }}" alt="">
-                                                            @elseif(isset($news->subcategory->image))
-                                                            <img class="responsive-img" style="width:100%; height: 200px" src="{{ asset($news->subcategory->image) }}" alt="28.png">
+                                                            @if($blog->image != null)
+                                                            <img class="responsive-img" style="width:100%; height: 200px" src="{{ asset($blog->image) }}" alt="">
+                                                            @elseif(isset($blog->subcategory->image))
+                                                            <img class="responsive-img" style="width:100%; height: 200px" src="{{ asset($blog->subcategory->image) }}" alt="28.png">
                                                             @else
 
                                                             @endif

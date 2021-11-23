@@ -6,12 +6,12 @@
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-6">
-                    <h2 class="content-header-title float-left mb-0">News</h2>
+                    <h2 class="content-header-title float-left mb-0">Blog</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">News List
+                            <li class="breadcrumb-item active">Blog List
                             </li>
                         </ol>
                     </div>
@@ -27,10 +27,10 @@
                 <div class="card">
                     <div class="card-header d-flex">
                         <div class="left">
-                            <h4 class="card-title">News List</h4>
+                            <h4 class="card-title">Blog List</h4>
                         </div>
                         <div class="right">
-                            <a class="btn btn-primary btn-learge" href="{{ route('news.create') }}">Add News</a>
+                            <a class="btn btn-primary btn-learge" href="{{ route('blog.create') }}">Add Blog</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -51,13 +51,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($news as $key=>$n)
+                                @forelse($blog as $key=>$n)
                                 <tr>
                                     <td class="text-nowrap">{{ $loop->iteration }}</td>
                                     <td>{{ $n->title }}</td>
                                     <td>
                                         {!! nl2br(\Illuminate\Support\Str::limit($n->description, 100, '') ) !!}
-                                        ................
+                                         
                                     </td>
                                     <td>
                                         @if($n->image != null)
@@ -74,14 +74,14 @@
                                     </td>
                                     <td>
                                         <div class="float-right">
-                                            <form action="{{ route('news.delete', $n->id) }}" method="POST">
+                                            <form action="{{ route('blog.delete', $n->id) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <a href="{{ route('news.edit', $n->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('blog.edit', $n->id) }}" class="btn btn-primary">
                                                     <i class="fa fa-pencil-square-o"></i>
                                                     Edit
                                                 </a>
-                                                <a href="{{ route('news.view', $n->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('blog.view', $n->id) }}" class="btn btn-primary">
                                                     <i class="fa fa-pencil-square-o"></i>
                                                     show
                                                 </a>

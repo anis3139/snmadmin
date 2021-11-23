@@ -44,7 +44,7 @@
     <div class="users-list-table">
         <div class="card">
             <div class="card-content">
-                Total = {{ $news->count() }}
+                Total = {{ $blog->count() }}
                 <!-- datatable start -->
                 <div class="responsive-table p-1">
                     <table  id="dataTable" class="table table-bordered table-striped common-datatables" style="width:100%; padding: 10px">
@@ -59,7 +59,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($news as $key => $n)
+                            @forelse($blog as $key => $n)
                             <tr>
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $n->title }}</td>
@@ -77,7 +77,7 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('news.view', $n->id) }}" class="btn btn-primary">
+                                    <a href="{{ route('blog.view', $n->id) }}" class="btn btn-primary">
                                         <i class="fa fa-pencil-square-o"></i>
                                         show
                                     </a>
