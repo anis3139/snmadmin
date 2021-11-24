@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VehicleTypeStoreRequest extends FormRequest
+class AdminStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,13 @@ class VehicleTypeStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'company_id' => 'required|numeric',
+            'username' => 'required|string|max:255|min:4|unique:users,username,'.$this->id,
+            'email' => 'required|string|email|max:255|min:4|unique:users,email,'.$this->id,
+            'phone' => 'required|unique:users,email,'.$this->id,
             'status' => 'required',
+            'role' => 'required',
+            'password'=> 'required|min:6',
+            'password_confirmation'=> 'required|same:password'
         ];
     }
 }

@@ -19,12 +19,17 @@
                             </div>
                             <div class="col-sm-10">
                                 <h3 class="card-text">Total Users</h3>
-                                <h4 class="font-weight-bolder mt-1">1000</h4>
+                                <h4 class="font-weight-bolder mt-1">{{$user}}</h4>
                             </div>
                         </div>
                         <div id="#"></div>
                     </div>
                 </div>
+
+
+                {{-- @php
+                    dd($notifications);
+                @endphp --}}
                 <!-- total users Chart Card ends -->
 
                 <!-- Total Driver Chart Card starts -->
@@ -37,8 +42,8 @@
                                 </div>
                             </div>
                             <div class="col-sm-10">
-                                <h3 class="card-text">Total User</h3>
-                                <h4 class="font-weight-bolder mt-1">400</h4>
+                                <h3 class="card-text">Total Visitor</h3>
+                                <h4 class="font-weight-bolder mt-1">{{$visitor}}</h4>
                             </div>
                         </div>
                         <div id="#"></div>
@@ -57,7 +62,7 @@
                             </div>
                             <div class="col-sm-10">
                                 <h3 class="card-text">New User Request</h3>
-                                <h4 class="font-weight-bolder mt-1">200</h4>
+                                <h4 class="font-weight-bolder mt-1">{{$user}}</h4>
                             </div>
                         </div>
                         <div id="#"></div>

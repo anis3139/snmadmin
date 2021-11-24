@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Models\User;
+use App\Models\Visitor;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends BaseController
@@ -25,7 +26,7 @@ class HomeController extends BaseController
         if (is_null($this->user) || !$this->user->can('home.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view any Admin !');
         }
-        
+
 		$admintype = Auth::user()->roles->pluck('name')[0];
 
 		switch($admintype){
@@ -53,6 +54,8 @@ class HomeController extends BaseController
             'title' => 'Dashboard',
             'page_title' => 'Dashboard',
             'user' => User::count(),
+            'notifications' => Auth::user()->notifications,
+            'visitor' => Visitor::count(),
         ]);
     }
 }

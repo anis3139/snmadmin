@@ -14,20 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
 
-/*Route::namespace('\App\Http\Controllers\Api\V1')->group(function () {
+Route::namespace('\App\Http\Controllers\Api\V1')->group(function () {
     Route::prefix('v1')->group(function () {
+
         route::apiResource('user', 'UserController')->except('update');
-
-        route::post('user/{id}','UserController@update');
-
         route::post('user/update/{user}','UserController@update');
 
 
-        route::apiResource('partner', 'PartnerController')->except('update');
-        route::post('partner/update/{partner}','PartnerController@update');
+        Route::post('login', 'Auth\LoginController@login')->name('user.login');
+        Route::post('verify', 'Auth\LoginController@verify')->name('user.verify');
+
+        Route::prefix('user')->middleware('auth:api')->group(function () {
+                    Route::get('profile/{id}', function ($id) {
+                        return "Hello! I am from Auth";
+                    });
+        });
     });
-});*/
+});

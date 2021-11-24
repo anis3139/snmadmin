@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\AdminStoreRequest;
 use App\Http\Requests\AdminUpdateRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class AdminController extends BaseController
 
     }
 
-    public function store(AdminRequest $request)
+    public function store(AdminStoreRequest $request)
     {
         if (is_null($this->user) || !$this->user->can('admin.create')) {
             abort(403, 'Sorry !! You are Unauthorized to store any Admin !');

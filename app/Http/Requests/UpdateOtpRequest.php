@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VehicleTypeUpdateRequest extends FormRequest
+class UpdateOtpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class VehicleTypeUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,7 @@ class VehicleTypeUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'company_id' => 'required|numeric',
-            'status' => 'required',
+            'phone' => 'required|max:15|min:10|exists:otps,otp',
         ];
     }
 }
