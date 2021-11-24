@@ -61,18 +61,25 @@
                                         <tr>
                                         	<td>Status</td>
                                             <td>:</td>
-                                            <td>{{ $admin->status }}</td>
+                                            <td>
+                                                 @php
+                                                $btnClass=['danger', 'success', 'warning', 'info', 'danger']
+                                            @endphp
+                                            @foreach ($enumStatuses as $key => $status)
+                                                @if ($admin->status == $key)
+                                                    <button class="btn btn-sm btn-{{ $btnClass[$key]}}">
+                                                            {{$enumStatuses[$key]}}
+                                                        </button>
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         </tr>
                                         <tr>
-                                        	<td>Present Address</td>
+                                        	<td>Role</td>
                                             <td>:</td>
-                                            <td>{{ $admin->present_address }}</td>
+                                            <td>{{ $admin->roles()->pluck('name')[0] }}</td>
                                         </tr>
-                                        <tr>
-                                        	<td>Permanent Address</td>
-                                            <td>:</td>
-                                            <td>{{ $admin->permanent_address }}</td>
-                                        </tr>
+
                                     </table>
                                 </div>
                             </div>

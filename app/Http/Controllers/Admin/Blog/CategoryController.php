@@ -8,9 +8,7 @@ use App\Utlity;
 
 class CategoryController extends BaseController
 {
-    protected $enumStatuses = [
-        'Inactive', 'Active'
-    ];
+     
 
     public function index(){
         return view('admin.pages.category.index', [
@@ -18,7 +16,7 @@ class CategoryController extends BaseController
             'title' => 'Category List',
             'page_title' => 'Category List',
             'categories' => Category::latest()->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -27,7 +25,7 @@ class CategoryController extends BaseController
             'prefixname' => 'Admin',
             'title' => 'Category Create',
             'page_title' => 'Category Create',
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -59,7 +57,7 @@ class CategoryController extends BaseController
             'title' => 'Category Show',
             'page_title' => 'Category Edit',
             'category' => Category::findOrFail($id),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 

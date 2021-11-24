@@ -25,7 +25,7 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'phone' => 'required|max:15|min:10',
+            'phone' => 'required|max:15|min:10|unique:users,phone,'.$this->id.',id',
             'username' => 'required|max:50|min:4|unique:users,username,'.$this->id.',id',
             'email' => 'required|max:50|min:4|email|unique:users,email,'.$this->id.',id',
         ];

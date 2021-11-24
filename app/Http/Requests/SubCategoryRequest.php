@@ -25,8 +25,8 @@ class SubCategoryRequest extends FormRequest
     {
         return [
             'category_id' => 'required',
-            'nameBn' => 'required|unique:categories,nameBn,'.$this->id,
-            'nameEn' => 'required|unique:categories,nameEn,'.$this->id,
+            'nameBn' => 'required|unique:categories,nameBn,'.$this->id.',id',
+            'nameEn' => 'required|unique:categories,nameEn,'.$this->id.',id',
             'img'    => 'required'
         ];
     }

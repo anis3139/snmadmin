@@ -48,7 +48,8 @@
                         class="d-flex align-items-center" href="{{ route('admin.create') }}"><i
                             data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
                 </li>
-                <li class="{{ Route::currentRouteName() === 'admin.index' ? 'active' : Route::currentRouteName() === 'admin.edit' ? 'active' :'' }}"><a
+                <li class="{{
+                Route::currentRouteName() === 'admin.index' ? 'active' : Route::currentRouteName() === 'admin.edit' ? 'active' : Route::currentRouteName() === 'admin.show' ? 'active' : '' }}"><a
                         class="d-flex align-items-center" href="{{ route('admin.index') }}"><i
                             data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
                 </li>

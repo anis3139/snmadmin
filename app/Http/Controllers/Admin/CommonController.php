@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Config\Curl;
+use App\Models\Admin;
 use App\View\Components\FlashMessages;
 use Rap2hpoutre\FastExcel\FastExcel;
-
-use App\Models\User;
 use Validator;
 
 class CommonController extends Controller
@@ -36,10 +35,10 @@ class CommonController extends Controller
 
 	public function prints(Request $request)
     {
-        $user=User::all();
+        $admin=Admin::all();
         $action=$request->action;
-		if($user){
-			return view('admin.common.print',compact('user', 'action'));
+		if($admin){
+			return view('admin.common.print',compact('admin', 'action'));
 		}
 		else{
 			return view('admin.pages.notfound');
@@ -88,7 +87,7 @@ class CommonController extends Controller
 					$users = (new FastExcel)->import($path, function ($line) {
 
 						if($line['Email']!=""){
-							$checkExist = User::where('email',$line['Email'])->first();
+							$checkExist = Admin::where('email',$line['Email'])->first();
 							if($checkExist==''){
 								if($line['Username']!=""){
 									$username = implode('-',explode(' ',$line['Username']));
@@ -101,7 +100,7 @@ class CommonController extends Controller
 									$username = '';
 								}
 
-                                $user=User::create([
+                                $admin=Admin::create([
 									'name' => $line['Name'],
 									'email' => $line['Email'],
 									'phone' => $line['Phone'],
@@ -109,8 +108,8 @@ class CommonController extends Controller
 									'password' => bcrypt($line['Password']),
 									'status' => $line['Status']
 								]);
-                                if ($user) {
-                                    $user->assignRole( $line['Role']);
+                                if ($admin) {
+                                    $admin->assignRole( $line['Role']);
                                 }
 							}
 						}
@@ -138,14 +137,14 @@ class CommonController extends Controller
 
 			if($type=='admin'){
 				function usersGenerator() {
-					foreach (User::cursor() as $user) {
+					foreach (Admin::cursor() as $admin) {
 						$arrayval = array(
-							'Name' => $user->name,
-							'Phone' => $user->phone,
-							'Email' => $user->email,
-							'Username' => $user->username,
-							'Status' => $user->status,
-							'Role' => $user->getRoleNames()[0],
+							'Name' => $admin->name,
+							'Phone' => $admin->phone,
+							'Email' => $admin->email,
+							'Username' => $admin->username,
+							'Status' => $admin->status,
+							'Role' => $admin->getRoleNames()[0],
 						);
 						yield $arrayval;
 					}

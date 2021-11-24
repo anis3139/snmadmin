@@ -49,7 +49,7 @@
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="login-name">Name</label>
-                                <input id="name" placeholder="Name" type="name"
+                                <input required id="name" placeholder="Name" type="name"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ old('name') }}" autocomplete="name" autofocus>
 
@@ -61,7 +61,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="login-username">User Name</label>
-                                <input id="username" placeholder="Admin Name" type="username"
+                                <input required id="username" placeholder="Admin Name" type="username"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
                                     value="{{ old('username') }}" autocomplete="username" autofocus>
 
@@ -73,7 +73,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="login-phone">Mobile</label>
-                                <input id="phone" placeholder="Mobile" type="phone"
+                                <input required id="phone" placeholder="Mobile" type="phone"
                                     class="form-control @error('phone') is-invalid @enderror" name="phone"
                                     value="{{ old('phone') }}" autocomplete="phone" autofocus>
 
@@ -85,7 +85,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="login-email">Email</label>
-                                <input id="email" placeholder="Email" type="email"
+                                <input required id="email" placeholder="Email" type="email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
                                     value="{{ old('email') }}" autocomplete="email" autofocus>
 
@@ -97,7 +97,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="role">Role</label>
-                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
+                                <select required name="role" id="role" class="form-control @error('role') is-invalid @enderror"
                                     value="{{ old('role') }}" autocomplete="role" autofocus>
                                     <option value="">Select Role</option>
                                     @foreach ($roles as  $role)
@@ -114,7 +114,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="status">Status</label>
-                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror"
+                                <select required name="status" id="status" class="form-control @error('status') is-invalid @enderror"
                                     value="{{ old('status') }}" autocomplete="status" autofocus>
                                     <option value="">Select Status</option>
                                     @foreach ($enumStatuses as $key => $status)
@@ -133,7 +133,7 @@
                                     <label for="login-password">Password</label>
                                 </div>
                                 <div class="input-group input-group-merge form-password-toggle">
-                                    <input id="password" placeholder="Password" type="password"
+                                    <input required id="password" placeholder="Password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         >
                                     @error('password')
@@ -150,7 +150,7 @@
                                     <label for="login-password">Confirm Password</label>
                                 </div>
                                 <div class="input-group input-group-merge form-password_confirmation-toggle">
-                                    <input id="password_confirmation" placeholder="Password" type="password_confirmation"
+                                    <input required id="password_confirmation" placeholder="Password" type="password_confirmation"
                                         class="form-control @error('password_confirmation') is-invalid @enderror"
                                         name="password_confirmation" autocomplete="current-password_confirmation">
                                     @error('password_confirmation')

@@ -41,6 +41,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                @include('ErrorMessage')
                                 <form action=" {{ route('admin.update', $admin->id) }}" method="post"
                                     enctype="multipart/form-data" files="true">
                                     @csrf
@@ -48,7 +49,7 @@
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
                                                 <label class="form-label" for="login-name">Name</label>
-                                                <input id="name" placeholder="Name" type="name"
+                                                <input required  id="name" placeholder="Name" type="name"
                                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                                     value="{{ $admin->name ?? '' }}" autocomplete="name" autofocus>
 
@@ -63,7 +64,7 @@
                                             <div class="form-group">
 
                                                     <label class="form-label" for="login-username">User Name</label>
-                                                    <input id="username" placeholder="Admin Name" type="username"
+                                                    <input required id="username" placeholder="Admin Name" type="username"
                                                         class="form-control @error('username') is-invalid @enderror" name="username"
                                                         value="{{ $admin->username ?? ''  }}" autocomplete="username" autofocus>
 
@@ -78,7 +79,7 @@
                                             <div class="form-group">
 
                                                     <label class="form-label" for="login-email">Email</label>
-                                                <input id="email" placeholder="Email" type="email"
+                                                <input required id="email" placeholder="Email" type="email"
                                                     class="form-control @error('email') is-invalid @enderror" name="email"
                                                     value="{{ $admin->email ?? '' }}" autocomplete="email" autofocus>
 
@@ -92,7 +93,7 @@
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
                                                 <label class="form-label" for="login-phone">Mobile</label>
-                                                <input id="phone" placeholder="Mobile" type="phone"
+                                                <input required id="phone" placeholder="Mobile" type="phone"
                                                     class="form-control @error('phone') is-invalid @enderror" name="phone"
                                                     value="{{ $admin->phone ??'' }}" autocomplete="phone" autofocus>
 
@@ -109,7 +110,7 @@
 
                                             <div class="form-group">
                                                 <label class="form-label" for="status">Status</label>
-                                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror"
+                                                <select required name="status" id="status" class="form-control @error('status') is-invalid @enderror"
                                                     value="{{ old('status') }}" autocomplete="status" autofocus>
                                                     <option value="">Select Status</option>
                                                    @if ($enumStatuses)
@@ -129,20 +130,20 @@
 
 
                                         @if ($admin->id!=1)
-                                            
+
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <div class="form-group">
-                                                
+
                                                 <label class="form-label" for="role">Role</label>
-                                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
+                                                <select required name="role" id="role" class="form-control @error('role') is-invalid @enderror"
                                                         value="{{ old('role') }}" autocomplete="role" autofocus>
                                                         <option value="">Select Role</option>
                                                         @foreach ($roles as  $role)
                                                         <option value="{{$role->name}}" {{$admin->getRoleNames()[0]==$role->name ? "selected": ''}}   >{{ucFirst($role->name)}}</option>
                                                         @endforeach
-                                                        
+
                                                     </select>
-                                                    
+
                                                     @error('role')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -150,7 +151,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            
+
                                         @endif
 
                                     </div>

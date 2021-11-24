@@ -16,11 +16,11 @@ class LoginController extends Controller
     function login()
     {
         //Server ip
-        $UserIP = $_SERVER['REMOTE_ADDR']; 
+        $UserIP = $_SERVER['REMOTE_ADDR'];
         date_default_timezone_set("Asia/Dhaka");
         $timeDate = date("Y-m-d h:i:sa");
         Visitor::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);
-    //Server ip
+        //Server ip
         return view('admin.auth.login');
     }
 
@@ -32,11 +32,9 @@ class LoginController extends Controller
             'password' => 'required',
 
         ]);
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
         $credentials = $request->only('password');
 
         if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) !== FALSE) {

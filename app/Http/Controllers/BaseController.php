@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class BaseController extends Controller
 {
     public $user;
+    protected $enumStatuses = [
+         'inactive', 'active', 'pending', 'freez', 'block',
+    ];
 
+    protected $blogEnumStaus = [
+        'Inactive', 'Active'
+    ];
 
     public function __construct()
     {

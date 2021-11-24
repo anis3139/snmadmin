@@ -35,7 +35,7 @@ class RolePermissionSeeder extends Seeder
         $user->username = 'admin';
         $user->email = 'admin@gmail.com';
         $user->phone = '01816366535';
-        $user->password = bcrypt('password');
+        $user->password ='password';
         $user->status = 1;
         $user->save();
 

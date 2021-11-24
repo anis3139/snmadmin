@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class SubCategoryController extends BaseController
 {
-    protected $enumStatuses = [
-        'Inactive', 'Active'
-    ];
+    
 
     public function index(){
         return view('admin.pages.sub_category.index', [
@@ -20,7 +18,7 @@ class SubCategoryController extends BaseController
             'title' => 'Sub Category List',
             'page_title' => 'Sub Category List',
             'subcategories' => Subcategory::latest()->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -30,7 +28,7 @@ class SubCategoryController extends BaseController
             'title' => 'Sub Category Create',
             'page_title' => 'Sub Category Create',
             'categories' => Category::where('status', 1)->latest()->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -66,7 +64,7 @@ class SubCategoryController extends BaseController
             'page_title' => 'SubCategory Edit',
             'category' => Subcategory::findOrFail($id),
             'maincategories' => Category::where('status', 1)->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 

@@ -12,9 +12,7 @@ use Spatie\Permission\Models\Role;
 
 class AdminController extends BaseController
 {
-    protected $enumStatuses = [
-        'Active', 'Inactive', 'Pending', 'Freez', 'Block',
-    ];
+
     public function index()
     {
         if (is_null($this->user) || !$this->user->can('admin.view')) {
@@ -44,27 +42,37 @@ class AdminController extends BaseController
             ]);
 
     }
+    public function show(Admin $admin)
+    {
+        if (is_null($this->user) || !$this->user->can('admin.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any Admin !');
+        }
 
-    public function store(AdminStoreRequest $request)
+            return view('admin.pages.admins.details', [
+                'prefixname' => 'Admin',
+                'title' => 'Admin Create',
+                'page_title' => 'Admin Create',
+                'roles' => Role::all(),
+                'admin' => $admin,
+                'enumStatuses' => $this->enumStatuses,
+            ]);
+
+    }
+
+    public function store(AdminStoreRequest $request, Admin $admin)
     {
         if (is_null($this->user) || !$this->user->can('admin.create')) {
             abort(403, 'Sorry !! You are Unauthorized to store any Admin !');
         }
-        $admin = new Admin();
-        $admin->name = $request->get('name');
-        $admin->username = $request->get('username');
-        $admin->email = $request->get('email');
-        $admin->phone = $request->get('phone');
-        $admin->password = bcrypt($request->get('password'));
-
-        if ($admin->save()) {
+        $admin = $admin->create($request->only('name','username','email','phone','password'));
+        if ($admin) {
             $admin->assignRole($request->get('role'));
             return redirect()->route('admin.index')->with('success', 'Data Added successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on create');
     }
 
-    public function edit($id)
+    public function edit($admin)
     {
         if (is_null($this->user) || !$this->user->can('admin.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to edit any Admin !');
@@ -73,57 +81,42 @@ class AdminController extends BaseController
                 'prefixname' => 'Admin',
                 'title' => 'Admin Create',
                 'page_title' => 'Admin Create',
-                'admin' => Admin::with('roles')->findOrFail($id),
+                'admin' => Admin::with('roles')->findOrFail($admin),
                 'roles' => Role::all(),
                 'enumStatuses' => $this->enumStatuses,
             ]);
 
     }
-    public function update(AdminUpdateRequest $request, $id)
+
+    public function update(AdminUpdateRequest $request, Admin $admin)
     {
         if (is_null($this->user) || !$this->user->can('admin.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to update any Admin !');
         }
-            $id = $id;
-            $name = $request->Input('name');
-            $username = $request->Input('username');
-            $phone = $request->Input('phone');
-            $email = strtolower($request->Input('email'));
-            $password = $request->Input('password');
-            $statusUpdate = $request->Input('status');
-            $role = $request->Input('role');
-
-            $admin = Admin::find($id);
-            $admin->name = $name;
-            if ($password) {
-                $admin->password = bcrypt($password);
-            }
-            $admin->username = $username;
-            $admin->email = $email;
-            $admin->phone = $phone;
-            $admin->status = $statusUpdate;
-            $admin->save();
-
-            if ($admin) {
-                $admin->roles()->detach();
-                $admin->assignRole($role);
+            $admin->update($request->only('name','username','email','phone', 'status'));
+            if($admin) {
+                if($admin->id!=1){
+                    $admin->roles()->detach();
+                    $admin->assignRole($request->role);
+                }
                 return redirect()->route('admin.index')->with('success', 'Data Added successfully Done');
             } else {
                 return redirect()->back()->withInput()->with('error', 'Data Added Failed');
             }
 
     }
-    public function destroy($id)
+    public function destroy(Admin $admin)
     {
         if (is_null($this->user) || !$this->user->can('admin.delete')) {
             abort(403, 'Sorry !! You are Unauthorized to delete any Admin !');
         }
-        $result = Admin::where('id', '=', $id)->delete();
+        $result = $admin->delete();
 
         if ($result) {
             return redirect()->route('admin.index');
         } else {
             return redirect()->back();
         }
+
     }
 }

@@ -24,8 +24,8 @@ class TagRequest extends FormRequest
     public function rules()
     {
         return [
-            'nameBn' =>'required|unique:tags,nameBn,'.$this->id,
-            'nameEn' =>'required|unique:tags,nameEn,'.$this->id,
+            'nameBn' =>'required|unique:tags,nameBn,'.$this->id.',id',
+            'nameEn' =>'required|unique:tags,nameEn,'.$this->id.',id',
         ];
     }
 }

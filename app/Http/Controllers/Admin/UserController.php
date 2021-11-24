@@ -19,4 +19,9 @@ class UserController extends Controller
         return view('admin.pages.partner.create');
 
     }
+
+    public function show($id)
+    {
+        //
+    }
 }

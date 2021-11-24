@@ -55,7 +55,7 @@
                 <div class="auth-inner row m-0">
                     <!-- Brand logo-->
                     <a class="brand-logo" href="javascript:void(0);">
-                        <img src="{{asset('images/logo.png')}}" height="auto" width="130px" alt="{{  $setting->site_name }}">
+                        <img src="{{asset('').  $setting->logo }}" height="auto" width="130px" alt="{{  $setting->site_name }}">
                         <h2 class="brand-text text-primary ml-1 mt-1">{{  $setting->site_name }}</h2>
                     </a>
                     <!-- /Brand logo-->
@@ -67,45 +67,25 @@
                     <!-- Login-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                            <h2 class="card-title font-weight-bold mb-1">{{  $setting->site_name }}</h2>
+                            <h2 class="card-title font-weight-bold mb-1">User Sign Up</h2>
                             <p class="card-text mb-2">Please sign-in to your account</p>
-
-                            <form class="mt-2" action="#" method="POST">
+                                @include('Message')
+                            <form class="mt-2" action="{{route('client.login')}}" method="POST">
                                 @csrf
-                                @include('ErrorMessage')
                                 <div class="form-group">
                                     <label class="form-label" for="login-email">Email</label>
-                                    <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="phone" placeholder="Email" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
-                                    @error('email')
+                                    @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <div class="d-flex justify-content-between">
-                                        <label for="login-password">Password</label><a href="#"><small>Forgot Password?</small></a>
-                                    </div>
-                                    <div class="input-group input-group-merge form-password-toggle">
-                                        <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />
-                                        <label class="custom-control-label" for="remember-me"> Remember Me</label>
-                                    </div>
-                                </div>
+                                 
                                 <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
                             </form>
-                            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{ route('register') }}"><span>&nbsp;Create an account</span></a></p>
+                            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{ route('client.register') }}"><span>&nbsp;Create an account</span></a></p>
                             <div class="divider my-2">
                                 <div class="divider-text">or</div>
                             </div>

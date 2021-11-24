@@ -50,7 +50,11 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password']=bcrypt($password);
+    }
 
     public static function getpermissionGroups()
     {
@@ -81,4 +85,5 @@ class Admin extends Authenticatable
         }
         return $hasPermission;
     }
+
 }

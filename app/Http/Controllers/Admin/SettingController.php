@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController; 
 use App\Http\Requests\SettingsRequest;
 use App\Models\Category;
 use App\Models\Setting;
 use App\Utlity;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
-class SettingController extends Controller
+class SettingController extends BaseController
 
 {
 
-    protected $enumStatuses = [
-        'active', 'inactive', 'pending', 'freez', 'block',
-    ];
+
     public function index(){
         return view('admin.pages.setting.index', [
             'prefixname' => 'Admin',

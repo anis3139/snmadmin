@@ -25,7 +25,6 @@ class LoginController extends BaseController
         ->first();
         $result->otp=$randomNumber;
         $result->save();
-        
         $user =User::where('phone', $request->phone)
         ->orWhere('email', $request->phone)
         ->first();

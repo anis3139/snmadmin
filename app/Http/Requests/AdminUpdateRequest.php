@@ -25,11 +25,10 @@ class AdminUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'username' => 'required|string|max:255|min:4',
-            'email' => 'required|string|email|max:255|min:4',
-            'phone' => 'required|min:10',
+            'username' => 'required|string|max:255|min:4|unique:admins,username,'. optional($this->admin)->id,
+            'email' => 'required|string|email|max:255|min:4|unique:admins,email,'. optional($this->admin)->id,
+            'phone' => 'required|min:10|max:20|unique:admins,phone,'. optional($this->admin)->id,
             'status' => 'required',
-            'role' => 'required'
         ];
     }
 }

@@ -12,9 +12,7 @@ use Illuminate\Http\Request;
 
 class BlogController extends BaseController
 {
-    protected $enumStatuses = [
-        'Inactive', 'Active'
-    ];
+
     public function index()
     {
         if (is_null($this->user) || !$this->user->can('role.delete')) {
@@ -25,7 +23,7 @@ class BlogController extends BaseController
             'title' => 'Blog List',
             'page_title' => 'Blog List',
             'blogs' => Blog::latest()->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -38,7 +36,7 @@ class BlogController extends BaseController
             'categories' => Category::where('status', 1)->get(),
             'subcategories' => Subcategory::where('status', 1)->get(),
             'tags' => Tag::where('status', 1)->latest()->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -73,7 +71,7 @@ class BlogController extends BaseController
             'title' => 'Blog View',
             'page_title' => 'Blog View',
             'blog' => Blog::findOrFail($id),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -87,7 +85,7 @@ class BlogController extends BaseController
             'categories' => Category::where('status', 1)->get(),
             'subcategories' => Subcategory::where('status', 1)->get(),
             'tags'=>Tag::where('status', 1)->latest()->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 

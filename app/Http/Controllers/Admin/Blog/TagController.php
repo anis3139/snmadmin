@@ -7,16 +7,14 @@ use App\Models\Tag;
 
 class TagController extends BaseController
 {
-    protected $enumStatuses = [
-        'Inactive', 'Active'
-    ];
-    public function index(){ 
+     
+    public function index(){
         return view('admin.pages.tag.index', [
             'prefixname' => 'Admin',
             'title' => 'Tag List',
             'page_title' => 'Tag List',
             'tags' => Tag::latest()->get(),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -25,7 +23,7 @@ class TagController extends BaseController
             'prefixname' => 'Admin',
             'title' => 'Tag Create',
             'page_title' => 'Tag Create',
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
@@ -50,7 +48,7 @@ class TagController extends BaseController
             'title' => 'Tag Edit',
             'page_title' => 'Tag Edit',
             'tag' => Tag::findOrFail($id),
-            'enumStatuses' => $this->enumStatuses,
+            'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 

@@ -23,12 +23,12 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-       
+
         $rules = [
-            'nameBn' => 'required|unique:categories,nameBn,'.$this->id,
-            'nameEn' => 'required|unique:categories,nameEn,'.$this->id,
+            'nameBn' => 'required|unique:categories,nameBn,'.$this->id.',id',
+            'nameEn' => 'required|unique:categories,nameEn,'.$this->id.',id',
         ];
-       
+
         if (!$this->has('img'))
          {
            $rules += ['img'    => 'required'];

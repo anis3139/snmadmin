@@ -51,7 +51,7 @@
                                         <label class="card-title" for="name">Role Name</label>
 
                                             <label class="card-title" for="name">Role Name</label>
-                                            <input id="name" placeholder="Name" type="name"
+                                            <input required id="name" placeholder="Name" type="name"
                                                 class="form-control @error('name') is-invalid @enderror" name="name"
                                                 value="{{ old('name') }}" autocomplete="name" autofocus>
 

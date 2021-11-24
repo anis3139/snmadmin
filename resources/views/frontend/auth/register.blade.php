@@ -9,7 +9,7 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>{{ $setting->site_title }} | Login</title>
+    <title>Register Page - Vuexy - Bootstrap HTML admin template</title>
     <link rel="apple-touch-icon" href="{{ asset('') }}app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
@@ -42,7 +42,7 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
+<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
 <!-- BEGIN: Content-->
 <div class="app-content content ">
     <div class="content-overlay"></div>
@@ -61,58 +61,74 @@
                     <!-- /Brand logo-->
                     <!-- Left Text-->
                     <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{ asset('') }}app-assets/images/pages/login-v2.svg" alt="Login V2" /></div>
+                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{ asset('') }}app-assets/images/pages/register-v2.svg" alt="Register V2" /></div>
                     </div>
                     <!-- /Left Text-->
-                    <!-- Login-->
+                    <!-- Register-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                            <h2 class="card-title font-weight-bold mb-1">{{  $setting->site_name }}</h2>
-                            <p class="card-text mb-2">Please sign-in to your account</p>
-
-                            <form class="mt-2" action="#" method="POST">
+                        @include('Message')
+                            <h2 class="card-title font-weight-bold mb-1">User Registration</h2>
+                            <form class="auth-register-form mt-2"  action="{{ route('client.regitration') }}"  method="POST">
                                 @csrf
-                                @include('ErrorMessage')
-                                <div class="form-group">
-                                    <label class="form-label" for="login-email">Email</label>
-                                    <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                 <div class="form-group">
+                                <label class="form-label" for="login-name">Name</label>
+                                <input required id="name" placeholder="Name" type="name"
+                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                    value="{{ old('name') }}" autocomplete="name" autofocus>
 
-                                    @error('email')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <div class="d-flex justify-content-between">
-                                        <label for="login-password">Password</label><a href="#"><small>Forgot Password?</small></a>
-                                    </div>
-                                    <div class="input-group input-group-merge form-password-toggle">
-                                        <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="login-username">User Name</label>
+                                <input required id="username" placeholder="Admin Name" type="username"
+                                    class="form-control @error('username') is-invalid @enderror" name="username"
+                                    value="{{ old('username') }}" autocomplete="username" autofocus>
+
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror
-                                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />
-                                        <label class="custom-control-label" for="remember-me"> Remember Me</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="login-phone">Mobile</label>
+                                <input required id="phone" placeholder="Mobile" type="phone"
+                                    class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                    value="{{ old('phone') }}" autocomplete="phone" autofocus>
+
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="login-email">Email</label>
+                                <input required id="email" placeholder="Email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                             <button class="btn btn-primary btn-block" tabindex="5">Sign up</button>
                             </form>
-                            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{ route('register') }}"><span>&nbsp;Create an account</span></a></p>
+                            <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('client.login')}}"><span>&nbsp;Sign in instead</span></a></p>
                             <div class="divider my-2">
                                 <div class="divider-text">or</div>
                             </div>
                             <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a></div>
                         </div>
                     </div>
-                    <!-- /Login-->
+                    <!-- /Register-->
                 </div>
             </div>
         </div>
@@ -135,7 +151,7 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="{{ asset('') }}app-assets/js/scripts/pages/page-auth-login.js"></script>
+<script src="{{ asset('') }}app-assets/js/scripts/pages/page-auth-register.js"></script>
 <!-- END: Page JS-->
 
 <script>

@@ -130,7 +130,8 @@
                                         <td><button class="btn btn-sm btn-primary">{{ ucfirst($admin->getRoleNames()[0]) }}</button></td>
                                         <td>
                                             @php
-                                                $btnClass=[ 'success', 'danger', 'warning', 'info', 'danger']
+
+                                                $btnClass=['danger', 'success', 'warning', 'info', 'danger']
                                             @endphp
                                             @foreach ($enumStatuses as $key => $status)
                                                 @if ($admin->status == $key)

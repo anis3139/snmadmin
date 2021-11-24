@@ -21,7 +21,6 @@ class UserTableSeeder extends Seeder
         $admin->username = 'Admin';
         $admin->email = 'admin@gmail.com';
         $admin->phone = '01740144461';
-        $admin->password = bcrypt('password');
 
 
 
@@ -31,7 +30,6 @@ class UserTableSeeder extends Seeder
         $author->username = 'Author';
         $author->email = 'author@gmail.com';
         $author->phone = '01740144462';
-        $author->password = bcrypt('password');
 
 
 
@@ -41,7 +39,6 @@ class UserTableSeeder extends Seeder
         $editor->username = 'Editor';
         $editor->email = 'editor@gmail.com';
         $editor->phone = '01740144463';
-        $editor->password = bcrypt('password');
 
 
 
@@ -50,10 +47,9 @@ class UserTableSeeder extends Seeder
         $_viewer->name = 'Viewer';
         $_viewer->username = 'Viewer';
         $_viewer->email = 'viewer@gmail.com';
-        $_viewer->phone = '01740144464';
-        $_viewer->password = bcrypt('password');
+        $_viewer->phone = '01740144464'; 
 
-       
+
 
     }
 }
