@@ -23,7 +23,7 @@ Route::namespace('\App\Http\Controllers\Api\V1')->group(function () {
 
 
         Route::post('login', 'Auth\LoginController@login')->name('user.login');
-        Route::post('verify', 'Auth\LoginController@verify')->name('user.verify');
+        Route::post('sendOtp', 'Auth\LoginController@sendOtp')->name('user.verify');
 
         Route::prefix('user')->middleware('auth:api')->group(function () {
                     Route::get('profile/{id}', function ($id) {

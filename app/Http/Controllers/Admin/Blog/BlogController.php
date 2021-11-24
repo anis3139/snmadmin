@@ -17,6 +17,9 @@ class BlogController extends BaseController
     ];
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('role.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to delete any role !');
+        }
         return view('admin.pages.blog.list', [
             'prefixname' => 'Admin',
             'title' => 'Blog List',

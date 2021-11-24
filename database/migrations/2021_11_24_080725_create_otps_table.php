@@ -15,11 +15,9 @@ class CreateOtpsTable extends Migration
     {
         Schema::create('otps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('email', 50)->nullable();
             $table->string('phone', 20)->nullable();
-            $table->string('otp')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('otp')->nullable(); 
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@ class StoreOtpRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required|max:15|min:10|exists:otps,otp',
+            'phone' => 'required|max:15|min:10|exists:otps,phone',
         ];
     }
 }
