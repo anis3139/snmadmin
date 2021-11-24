@@ -194,11 +194,11 @@
         <li class="nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span
                     class="menu-title text-truncate" data-i18n="Board">User</span></a>
             <ul class="menu-content">
-                <li class="{{ Route::currentRouteName() === 'user.create' ? 'active' : '' }}"><a
-                        class="d-flex align-items-center" href="{{ route('user.create') }}"><i
+                <li class="{{ Route::currentRouteName() === 'admin.user.create' ? 'active' : '' }}"><a
+                        class="d-flex align-items-center" href="{{ route('admin.user.create') }}"><i
                             data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
                 </li>
-                <li class="{{ Route::currentRouteName() === 'user.index' ? 'active' : Route::currentRouteName() === 'user.edit' ? 'active' : '' }}"><a
+                <li class="{{ Route::currentRouteName() === 'admin.user.index' ? 'active' : Route::currentRouteName() === 'admin.user.edit' ? 'active' : '' }}"><a
                         class="d-flex align-items-center" href="{{ route('user.index') }}"><i
                             data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
                 </li>

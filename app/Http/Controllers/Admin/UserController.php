@@ -22,6 +22,6 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //
+        return "User id ".$id;
     }
 }

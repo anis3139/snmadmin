@@ -36,7 +36,7 @@
                                             <li style="margin: 2px;"><button class="btn btn-danger btn-sm"><i data-feather='file'></i> PDF</button></li>
                                             <li style="margin: 2px;"><button class="btn btn-warning btn-sm"><i data-feather='printer'></i> Print</button></li>
                                             <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('user.index') }}"><i data-feather='eye'></i> View</a></li>
-                                            <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('user.create') }}"><i data-feather='plus'></i> Create</a></li>
+                                            <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('admin.user.create') }}"><i data-feather='plus'></i> Create</a></li>
                                             <li style="margin: 2px;"><div class="btn-group">
                                                     <button type="button" class="btn btn-sm btn-outline-secondary">Column</button>
                                                     <button
@@ -128,9 +128,9 @@
                                     <td>1</td>
                                     <td><input type="checkbox"  name="summe_code[]" id="summe_code" value="{{ $user->id }}"/></td>
                                     <td class="text-nowrap">
-                                        	<a href="{{ route('user.show',$user->id) }}"><i data-feather='eye'></i></a>
-                                            <a href="{{ route('user.edit',$user->id) }}"><i data-feather='edit'></i></a>
-                                            <a href="{{ route('user.destroy',$user->id) }}"><i data-feather='trash-2'></i></a>
+                                        	<a href="{{ route('admin.user.show',$user->id) }}"><i data-feather='eye'></i></a>
+                                            <a href="{{ route('admin.user.edit',$user->id) }}"><i data-feather='edit'></i></a>
+                                            <a href="{{ route('admin.user.destroy',$user->id) }}"><i data-feather='trash-2'></i></a>
                                     </td>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>

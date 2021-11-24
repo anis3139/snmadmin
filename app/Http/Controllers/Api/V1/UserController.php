@@ -42,7 +42,7 @@ class UserController extends BaseController
      */
     public function show(User $user)
     {
-        return $this->successResponse($user, 'All User List', Response::HTTP_OK);
+        return $this->successResponse($user, 'User data', Response::HTTP_OK);
     }
 
     /**

@@ -30,7 +30,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::post('/admin-role/update/{id}', 'Auth\AdminController@roleUpdate')->name('admin.role.update');
         //Visitor Table
         Route::get('/visitor', 'VisitorController@VisitorIndex')->name('admin.VisitorIndex');
-        Route::resource('user', 'UserController');
+        Route::resource('user', 'UserController', ['names' => 'admin.user']);
 
     });
 
@@ -107,7 +107,7 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
 
     //banner
     Route::resource('banners', 'BannerController');
- 
+
 
     Route::post('admin/logout', 'Auth\LoginController@onLogout')->name('admin.logout');
 });
