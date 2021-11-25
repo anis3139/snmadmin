@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Blog;
 use App\Models\Subcategory;
 use App\Models\Tag;
+use App\services\ImageServices;
 use App\Utlity;
 use Illuminate\Http\Request;
 
@@ -46,19 +47,13 @@ class BlogController extends BaseController
         ]);
     }
 
-    public function store(BlogStoreRequest $request, Blog $blog)
+    public function store(BlogStoreRequest $request, Blog $blog, ImageServices $imageServices)
     {
 
         if (is_null($this->user) || !$this->user->can('blog.create')) {
             abort(403, 'Sorry !! You are Unauthorized to create any blog !');
         }
-        $dataImg['admin_id'] = auth()->user()->id;
-        //upload photo
-        if ($request->hasFile('img')) {
-            $dataImg['image'] = Utlity::file_upload($request, 'img', 'Blog_Photo');
-        } else {
-            $dataImg['image']  = null;
-        }
+        $dataImg=$imageServices->imageStore('blog');
 
         $postData=$request->only('category_id','subcategory_id','title','titleEn','description','descriptionEn','status');
 
@@ -103,21 +98,13 @@ class BlogController extends BaseController
         ]);
     }
 
-    public function update(BlogUpdateRequest $request, Blog $blog)
+    public function update(BlogUpdateRequest $request, Blog $blog, ImageServices $imageServices)
     {
 
-        if (is_null($this->user) || !$this->user->can('blog.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to edit any blog !');
+        if (is_null($this->user) || !$this->user->can('blog.update')) {
+            abort(403, 'Sorry !! You are Unauthorized to update any blog !');
         }
-
-        if ($request->hasFile('img')) {
-            if (file_exists($blog->image)) {
-                unlink($blog->image);
-            }
-            $dataImg['image']= Utlity::file_upload($request, 'img', 'Blog_Photo');
-        }else {
-            $dataImg['image']  = null;
-        }
+        $dataImg=$imageServices->imageUpdate($blog, 'blog');
 
         $data = array_merge($dataImg,$request->only('category_id','subcategory_id','title','titleEn','description','descriptionEn','status'));
         $result = $blog->update($data);
@@ -135,7 +122,7 @@ class BlogController extends BaseController
         if (is_null($this->user) || !$this->user->can('blog.delete')) {
             abort(403, 'Sorry !! You are Unauthorized to delete any blog !');
         }
- 
+
         if (file_exists($blog->image)) {
             unlink($blog->image);
         }

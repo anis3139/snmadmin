@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Blog;
-use App\Http\Controllers\BaseController; 
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\TagStoreRequest;
 use App\Http\Requests\TagUpdateRequest;
 use App\Models\Tag;
@@ -10,6 +10,9 @@ class TagController extends BaseController
 {
 
     public function index(){
+        if (is_null($this->user) || !$this->user->can('tag.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any tag !');
+        }
         return view('admin.pages.tag.index', [
             'prefixname' => 'Admin',
             'title' => 'Tag List',
@@ -20,6 +23,9 @@ class TagController extends BaseController
     }
 
     public function create(){
+        if (is_null($this->user) || !$this->user->can('tag.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any tag !');
+        }
         return view('admin.pages.tag.create', [
             'prefixname' => 'Admin',
             'title' => 'Tag Create',
@@ -29,6 +35,9 @@ class TagController extends BaseController
     }
 
     public function store(TagStoreRequest $request, Tag $tag){
+        if (is_null($this->user) || !$this->user->can('tag.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any tag !');
+        }
         $data= $request->only('nameBn','nameEn', 'status');
         if ($tag->create($data)) {
             return redirect()->route('tag.index')->with('success', 'Data Added successfully Done');
@@ -37,6 +46,9 @@ class TagController extends BaseController
     }
 
     public function edit(Tag $tag){
+        if (is_null($this->user) || !$this->user->can('tag.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any tag !');
+        }
         return view('admin.pages.tag.edit', [
             'prefixname' => 'Admin',
             'title' => 'Tag Edit',
@@ -47,7 +59,9 @@ class TagController extends BaseController
     }
 
     public function update(TagUpdateRequest $request, Tag $tag){
-
+        if (is_null($this->user) || !$this->user->can('tag.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any tag !');
+        }
         $data= $request->only('nameBn','nameEn', 'status');
         if ($tag->update($data)) {
 
@@ -57,6 +71,9 @@ class TagController extends BaseController
     }
 
     public function destroy(Tag $tag){
+        if (is_null($this->user) || !$this->user->can('tag.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to delete any tag !');
+        }
         if($tag->delete()){
             return redirect()->route('tag.index')->with('success', 'Data Delete successfully');
         }

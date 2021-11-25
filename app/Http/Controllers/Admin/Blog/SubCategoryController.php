@@ -7,6 +7,7 @@ use App\Http\Requests\SubCategoryStoreRequest;
 use App\Http\Requests\SubCategoryUpdateRequest;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\services\ImageServices;
 use App\Utlity;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,9 @@ class SubCategoryController extends BaseController
 
 
     public function index(){
+        if (is_null($this->user) || !$this->user->can('category.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any category !');
+        }
         return view('admin.pages.sub_category.index', [
             'prefixname' => 'Admin',
             'title' => 'Sub Category List',
@@ -25,6 +29,9 @@ class SubCategoryController extends BaseController
     }
 
     public function create(){
+        if (is_null($this->user) || !$this->user->can('category.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any category !');
+        }
         return view('admin.pages.sub_category.create', [
             'prefixname' => 'Admin',
             'title' => 'Sub Category Create',
@@ -34,14 +41,11 @@ class SubCategoryController extends BaseController
         ]);
     }
 
-    public function store(SubCategoryStoreRequest $request, Subcategory $subcategory){
-        //upload photo
-        if ($request->hasFile('img')){
-            $path['image'] = Utlity::file_upload($request,'img','subCategory_Photo');
+    public function store(SubCategoryStoreRequest $request, Subcategory $subcategory, ImageServices $imageServices){
+        if (is_null($this->user) || !$this->user->can('category.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any category !');
         }
-        else {
-            $path['image'] = null;
-        }
+        $path=$imageServices->imageStore($subcategory, 'subcategory');
         $data =array_merge($path, $request->only('category_id','nameBn','nameEn', 'description', 'status'));
         if ($subcategory->create($data)) {
             return redirect()->route('subcategory.index')->with('success', 'Data Added successfully Done');
@@ -50,6 +54,9 @@ class SubCategoryController extends BaseController
     }
 
     public function edit(Subcategory $subcategory){
+        if (is_null($this->user) || !$this->user->can('category.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any category !');
+        }
         return view('admin.pages.sub_category.edit', [
             'prefixname' => 'Admin',
             'title' => 'SubCategory Edit',
@@ -60,17 +67,11 @@ class SubCategoryController extends BaseController
         ]);
     }
 
-    public function update(SubCategoryUpdateRequest $request, Subcategory $subcategory){
-
-        if($request->hasFile('img')){
-            if(file_exists($subcategory->image)){
-                unlink($subcategory->image);
-            }
-            $path['image'] = Utlity::file_upload($request,'img','subCategory_Photo');
-
-        }else{
-            $path['image']=  null;
+    public function update(SubCategoryUpdateRequest $request, Subcategory $subcategory, ImageServices $imageServices){
+        if (is_null($this->user) || !$this->user->can('category.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any category !');
         }
+        $path=$imageServices->imageUpdate($subcategory, 'subcategory');
         $data =array_merge($path, $request->only('category_id','nameBn','nameEn', 'description', 'status'));
         if ($subcategory->update($data)) {
             return redirect()->route('subcategory.index', $subcategory->id)->with('success', 'Data Updated successfully Done');
@@ -79,6 +80,9 @@ class SubCategoryController extends BaseController
     }
 
     public function destroy(Subcategory $subcategory){
+        if (is_null($this->user) || !$this->user->can('category.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to delete any category !');
+        }
         if(file_exists($subcategory->image)){
             unlink($subcategory->image);
         }
@@ -90,6 +94,9 @@ class SubCategoryController extends BaseController
     }
 
     public function ajaxGetData(Request $request){
+        if (is_null($this->user) || !$this->user->can('category.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any category !');
+        }
         if($request->ajax()){
             $subcat = Subcategory::where('id',$request->id)->pluck('image')->first();
             return response()->json($subcat);

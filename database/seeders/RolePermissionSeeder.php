@@ -103,6 +103,18 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
 
+            [
+                'group_name' => 'tag',
+                'permissions' => [
+
+                    'tag.create',
+                    'tag.view',
+                    'tag.edit',
+                    'tag.delete',
+                    'tag.approve',
+                ]
+            ],
+
 
             [
                 'group_name' => 'about',

@@ -21,7 +21,6 @@
             header("Location: /dashboard");
             exit();
         ?>
-        
     </div>
     <!-- built files will be auto injected -->
 
