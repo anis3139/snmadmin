@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\BlogRequest;
+use App\Http\Requests\BlogStoreRequest;
+use App\Http\Requests\BlogUpdateRequest;
 use App\Models\Category;
 use App\Models\Blog;
 use App\Models\Subcategory;
@@ -15,8 +17,8 @@ class BlogController extends BaseController
 
     public function index()
     {
-        if (is_null($this->user) || !$this->user->can('role.delete')) {
-            abort(403, 'Sorry !! You are Unauthorized to delete any role !');
+        if (is_null($this->user) || !$this->user->can('blog.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any blog !');
         }
         return view('admin.pages.blog.list', [
             'prefixname' => 'Admin',
@@ -29,7 +31,11 @@ class BlogController extends BaseController
 
     public function create()
     {
-        return view('admin.pages.blog.add', [
+
+        if (is_null($this->user) || !$this->user->can('blog.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any blog !');
+        }
+        return view('admin.pages.blog.create', [
             'prefixname' => 'Admin',
             'title' => 'Blog Create',
             'page_title' => 'Blog Create',
@@ -40,25 +46,27 @@ class BlogController extends BaseController
         ]);
     }
 
-    public function store(Request $request)
+    public function store(BlogStoreRequest $request, Blog $blog)
     {
+
+        if (is_null($this->user) || !$this->user->can('blog.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any blog !');
+        }
+        $dataImg['admin_id'] = auth()->user()->id;
         //upload photo
         if ($request->hasFile('img')) {
-            $path = Utlity::file_upload($request, 'img', 'Blog_Photo');
+            $dataImg['image'] = Utlity::file_upload($request, 'img', 'Blog_Photo');
         } else {
-            $path = null;
+            $dataImg['image']  = null;
         }
-        $blog = new Blog();
-        $blog->admin_id = auth()->user()->id;
-        $blog->category_id = $request->get('category');
-        $blog->subcategory_id = $request->get('subcategory');
-        $blog->title = $request->get('title');
-        $blog->titleEn = $request->get('titleEn');
-        $blog->description = $request->get('description');
-        $blog->descriptionEn = $request->get('descriptionEn');
-        $blog->image = $path;
-        if ($blog->save()) {
-            $blog->tags()->attach($request->tags);
+
+        $postData=$request->only('category_id','subcategory_id','title','titleEn','description','descriptionEn','status');
+
+        $data= array_merge($dataImg,$postData);
+        $result= $blog->create($data);
+
+        if ($result) {
+            $result->tags()->attach($request->tags);
             return redirect()->route('blog.index')->with(['success' => 'Data Added successfully Done']);
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on create');
@@ -66,6 +74,9 @@ class BlogController extends BaseController
 
     public function view($id)
     {
+        if (is_null($this->user) || !$this->user->can('blog.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any blog !');
+        }
         return view('admin.pages.blog.view', [
             'prefixname' => 'Admin',
             'title' => 'Blog View',
@@ -77,6 +88,9 @@ class BlogController extends BaseController
 
     public function edit($id)
     {
+        if (is_null($this->user) || !$this->user->can('blog.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any blog !');
+        }
         return view('admin.pages.blog.edit', [
             'prefixname' => 'Admin',
             'title' => 'Blog Edit',
@@ -89,36 +103,39 @@ class BlogController extends BaseController
         ]);
     }
 
-    public function update(BlogRequest $request, $id)
+    public function update(BlogUpdateRequest $request, Blog $blog)
     {
-        $blog = Blog::findOrFail($id);
-        $blog->admin_id = auth()->user()->id;
-        $blog->category_id = $request->get('category');
-        $blog->subcategory_id = $request->get('subcategory');
-        $blog->title = $request->get('title');
-        $blog->titleEn = $request->get('titleEn');
-        $blog->description = $request->get('description');
-        $blog->descriptionEn = $request->get('descriptionEn');
-        $path = null;
+
+        if (is_null($this->user) || !$this->user->can('blog.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any blog !');
+        }
+
         if ($request->hasFile('img')) {
             if (file_exists($blog->image)) {
                 unlink($blog->image);
             }
-            $path = Utlity::file_upload($request, 'img', 'Blog_Photo');
-            $blog->image = $path;
+            $dataImg['image']= Utlity::file_upload($request, 'img', 'Blog_Photo');
+        }else {
+            $dataImg['image']  = null;
         }
-        $blog->status = $request->status;
-        if ($blog->save()) {
+
+        $data = array_merge($dataImg,$request->only('category_id','subcategory_id','title','titleEn','description','descriptionEn','status'));
+        $result = $blog->update($data);
+
+        if ($result) {
             $blog->tags()->sync($request->tags);
             return redirect()->route('blog.index', $blog->id)->with('success', 'Data Updated successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on create');
     }
 
-    public function destroy($id)
+    public function destroy(Blog $blog)
     {
-        $blog = Blog::findOrFail($id);
 
+        if (is_null($this->user) || !$this->user->can('blog.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to delete any blog !');
+        }
+ 
         if (file_exists($blog->image)) {
             unlink($blog->image);
         }

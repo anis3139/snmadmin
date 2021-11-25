@@ -86,11 +86,12 @@
                                     @can('role.view')
                                     <a href="{{ route('admin.roles.show', $role->id) }}" title="view"><i data-feather='eye'></i></a>
                                     @endcan
+                                 @if ( $role->id!=1)
                                     @can('role.edit')
                                     <a href="{{ route('admin.roles.edit', $role->id) }}" title="edit"><i data-feather='edit'></i></a>
                                     @endcan
                                     @can('role.delete')
-                                    @if ( $role->id!=1)
+
                                     <a href="{{ route('admin.roles.destroy', $role->id) }}"
                                         onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();" title="delete"><i data-feather='trash-2'></i></a>
 
@@ -98,8 +99,8 @@
                                             @method('DELETE')
                                             @csrf
                                         </form>
-                                        @endif
-                                    @endcan
+                                        @endcan
+                                     @endif
                                     <a href="#" title="info"><i data-feather='more-vertical'></i></a>
                                 </td>
                                     <td>{{ $role->name }}</td>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController; 
 
 use App\Models\Contact;
 
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Validator;
 
 
-class ContactController extends Controller
+class ContactController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -20,6 +20,9 @@ class ContactController extends Controller
      */
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('contact.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any Contact !');
+        }
         return view('admin.pages.contact.index', [
             'prefixname' => 'Admin',
             'title' => 'Contact List',
@@ -35,7 +38,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**

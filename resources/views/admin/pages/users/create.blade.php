@@ -42,20 +42,20 @@
                                             class="fas fa-arrow-circle-left"></i> Back</a>
                                 </div>
                                 <div class="right">
-                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.index') }}"><i
+                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.user.index') }}"><i
                                             data-feather='eye'></i> View Admin</a>
-                                    <a class="btn btn-dark btn-learge" href="{{ route('admin.create') }}"><i
+                                    <a class="btn btn-dark btn-learge" href="{{ route('admin.user.create') }}"><i
                                             data-feather='plus'></i> Create New</a>
                                 </div>
                             </div>
                         </div>
                         <!-- Modern Horizontal Wizard -->
                         @include('ErrorMessage')
-                        <form class="mt-2" action="{{ route('admin.store') }}" method="POST">
+                        <form class="mt-2" action="{{ route('admin.user.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="login-name">Name</label>
-                                <input id="name" placeholder="Name" type="name"
+                                <input required id="name" placeholder="Name" type="name"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ old('name') }}" autocomplete="name" autofocus>
 
@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="login-username">Admin Name</label>
-                                <input id="username" placeholder="Admin Name" type="username"
+                                <input required id="username" placeholder="Admin Name" type="username"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
                                     value="{{ old('username') }}" autocomplete="username" autofocus>
 
@@ -79,7 +79,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="login-phone">Mobile</label>
-                                <input id="phone" placeholder="Mobile" type="phone"
+                                <input required id="phone" placeholder="Mobile" type="phone"
                                     class="form-control @error('phone') is-invalid @enderror" name="phone"
                                     value="{{ old('phone') }}" autocomplete="phone" autofocus>
 
@@ -91,7 +91,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="login-email">Email</label>
-                                <input id="email" placeholder="Email" type="email"
+                                <input required id="email" placeholder="Email" type="email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
                                     value="{{ old('email') }}" autocomplete="email" autofocus>
 
@@ -101,34 +101,15 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="form-label" for="role">Role</label>
-                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror"
-                                    value="{{ old('role') }}" autocomplete="role" autofocus>
-                                    <option value="">Select Role</option>
 
-                                    @foreach ($roles as  $role)
-                                    <option value="{{$role->name}}">{{ucFirst($role->name)}}</option>
-                                    @endforeach
-
-                                </select>
-
-                                @error('status')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                             <div class="form-group">
                                 <label class="form-label" for="status">Status</label>
-                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror"
+                                <select required name="status" id="status" class="form-control @error('status') is-invalid @enderror"
                                     value="{{ old('status') }}" autocomplete="status" autofocus>
                                     <option value="">Select Status</option>
-                                    <option value="0">Inactive</option>
-                                    <option value="1">Active</option>
-                                    <option value="2">Pending</option>
-                                    <option value="3">Freez</option>
-                                    <option value="4">Block</option>
+                                    @foreach ($enumStatuses as $key => $status)
+                                    <option   value="{{$key}}">{{$status}}</option>
+                                     @endforeach
                                 </select>
 
                                 @error('status')
@@ -137,42 +118,10 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <div class="d-flex justify-content-between">
-                                    <label for="login-password">Password</label>
-                                </div>
-                                <div class="input-group input-group-merge form-password-toggle">
-                                    <input id="password" placeholder="Password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        >
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
-                                                data-feather="eye"></i></span></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="d-flex justify-content-between">
-                                    <label for="login-password">Confirm Password</label>
-                                </div>
-                                <div class="input-group input-group-merge form-password_confirmation-toggle">
-                                    <input id="password_confirmation" placeholder="Password" type="password_confirmation"
-                                        class="form-control @error('password_confirmation') is-invalid @enderror"
-                                        name="password_confirmation" autocomplete="current-password_confirmation">
-                                    @error('password_confirmation')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
-                                                data-feather="eye"></i></span></div>
-                                </div>
-                            </div>
 
-                            <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
+
+
+                            <button class="btn btn-primary btn-block" tabindex="4">Create</button>
                         </form>
                         <!-- /Modern Horizontal Wizard -->
                     </div>

@@ -44,8 +44,8 @@
                                         <li style="margin: 2px;"><button class="btn btn-success btn-sm"><i data-feather='download'></i> Excel</button></li>
                                         <li style="margin: 2px;"><button class="btn btn-danger btn-sm"><i data-feather='file'></i> PDF</button></li>
                                         <li style="margin: 2px;"><button class="btn btn-warning btn-sm"><i data-feather='printer'></i> Print</button></li>
-                                        <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('user.create') }}"><i data-feather='eye'></i> View</a></li>
-                                        <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('user.create') }}"><i data-feather='plus'></i> Create</a></li>
+                                        <li style="margin: 2px;"><a class="btn btn-primary btn-sm" href="{{ route('admin.user.create') }}"><i data-feather='eye'></i> View</a></li>
+                                        <li style="margin: 2px;"><a class="btn btn-dark btn-sm" href="{{ route('admin.user.create') }}"><i data-feather='plus'></i> Create</a></li>
                                         <li style="margin: 2px;"><div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">Column</button>
                                                 <button

@@ -1,4 +1,9 @@
 @extends('admin.layouts.master')
+@section('page-style')
+
+    <link rel="stylesheet" href="{{ asset('/app-assets/css/plugins/forms/form-validation.css') }}">
+
+@endsection
 @section('content')
 <div class="content-wrapper">
     <div class="content-header row">
@@ -43,10 +48,10 @@
                                             data-feather='plus'></i> Create New</a>
                                             @endcan
                                 </div>
-                            </div> 
+                            </div>
                             <hr>
                         <div class="card-body">
-                            <form class="" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data" files="true">
+                            <form id="categoryAddForm" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
@@ -65,7 +70,7 @@
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="description">Image</label>
-                                            <input type="file" name="img" id="input-file-now" class="form-control" data-default-file="" />
+                                            <input type="file" name="img" id="input-file-now" class="form-control img" data-default-file="" />
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
@@ -85,6 +90,13 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-xl-4 col-md-6 col-12 mb-1">
+                                        <div class="form-group">
+                                            <img src="" alt="" id="imagePreview" width="200px" height="auto"
+                                            class="text-center">
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                         <div class="input-field col s12">
@@ -100,4 +112,47 @@
         <!-- Tooltip validations end -->
     </div>
 </div>
+@endsection
+
+@section('vendor-script')
+    <!-- vendor files -->
+    <script src="{{ asset('/app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/js/scripts/forms/form-validation.js') }}"></script>
+@endsection
+@section('page-script')
+
+    <script>
+         $('.img').change(function() {
+            var reader = new FileReader();
+            reader.readAsDataURL(this.files[0]);
+            reader.onload = function(event) {
+                var ImgSource = event.target.result;
+                $('#imagePreview').attr('src', ImgSource)
+            }
+        })
+
+
+        $('#categoryAddForm').validate({
+            rules: {
+                nameEn: "required",
+                img: "required",
+                nameBn: "required",
+                description: "required",
+                status: "required",
+            },
+            messages: {
+                nameEn: "Please specify Title (Bangla)",
+                img: "Please Selcect Image",
+                nameBn: "Please Selcect Name",
+                status: "Please Selcect Status",
+                description: "Please specify Description (Bangla)",
+            }
+        });
+
+
+
+
+
+    </script>
+
 @endsection

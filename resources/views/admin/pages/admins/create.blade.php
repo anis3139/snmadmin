@@ -119,7 +119,7 @@
                                     <option value="">Select Status</option>
                                     @foreach ($enumStatuses as $key => $status)
                                     <option   value="{{$key}}">{{$status}}</option>
-                                @endforeach
+                                     @endforeach
                                 </select>
 
                                 @error('status')

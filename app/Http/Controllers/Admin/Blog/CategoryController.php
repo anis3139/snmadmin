@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Utlity;
 
 class CategoryController extends BaseController
 {
-     
+
 
     public function index(){
         return view('admin.pages.category.index', [
@@ -29,76 +30,66 @@ class CategoryController extends BaseController
         ]);
     }
 
-    public function store(CategoryRequest $request){
+    public function store(CategoryStoreRequest $request, Category $category){
 
         //upload photo
         if ($request->hasFile('img')){
-            $path = Utlity::file_upload($request,'img','Category_Photo');
+            $path['image'] = Utlity::file_upload($request,'img','Category_Photo');
         }
         else {
-            $path = null;
+            $path['image'] = null;
         }
-        $category = new Category();
-        $category->nameBn = $request->get('nameBn');
-        $category->nameEn = $request->get('nameEn');
-        $category->description = $request->get('description');
-        $category->image = $path;
-        $category->status = $request->status;
-        if ($category->save()) {
 
+        $data =array_merge($path, $request->only('nameBn','nameEn', 'description', 'status'));
+        if ($category->create($data)) {
             return redirect()->route('category.index')->with('success', 'Data Added successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on create');
     }
 
-    public function show($id){
+    public function show(Category $category){
         return view('admin.pages.category.edit', [
             'prefixname' => 'Admin',
             'title' => 'Category Show',
             'page_title' => 'Category Edit',
-            'category' => Category::findOrFail($id),
+            'category' => $category,
             'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
-    public function edit($id){
+    public function edit(Category $category){
         return view('admin.pages.category.edit', [
             'prefixname' => 'Admin',
             'title' => 'Category Edit',
             'page_title' => 'Category Edit',
-            'category' => Category::findOrFail($id)
+            'category' => $category,
         ]);
     }
 
-    public function update(CategoryRequest $request, $id){
+    public function update(CategoryUpdateRequest $request,Category $category){
 
-        $category = Category::findOrFail($id);
-        $category->nameBn = $request->get('nameBn');
-        $category->nameEn = $request->get('nameEn');
-        $category->description = $request->get('description');
-        $path = null;
+
         if($request->hasFile('img')){
             if(file_exists($category->image)){
                 unlink($category->image);
             }
-            $path = Utlity::file_upload($request,'img','Category_Photo');
-            $category->image = $path;
+            $path['image'] = Utlity::file_upload($request,'img','Category_Photo');
+        }else{
+            $path['image']=null;
         }
-        $category->status = $request->status;
-        if ($category->save()) {
 
+        $data =array_merge($path, $request->only('nameBn','nameEn', 'description', 'status'));
+        if ($category->update($data)) {
             return redirect()->route('category.index', $category->id)->with('success', 'Data Updated successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on update');
     }
 
-    public function destroy($id){
-        $category = Category::findOrFail($id);
+    public function destroy(Category $category){
         if(file_exists($category->image)){
             unlink($category->image);
         }
         if($category->delete()){
-
             return redirect()->route('category.index')->with('success', 'Data Delete successfully');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on deleting');

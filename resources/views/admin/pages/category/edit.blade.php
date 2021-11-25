@@ -1,16 +1,21 @@
 @extends('admin.layouts.master')
+@section('page-style')
+
+    <link rel="stylesheet" href="{{ asset('/app-assets/css/plugins/forms/form-validation.css') }}">
+
+@endsection
 @section('content')
 <div class="content-wrapper">
     <div class="content-header row">
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="content-header-title float-left mb-0">Sub Category</h2>
+                    <h2 class="content-header-title float-left mb-0">Category</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Sub Category Edit
+                            <li class="breadcrumb-item active"> {{$title}}
                             </li>
                         </ol>
                     </div>
@@ -28,7 +33,7 @@
                     <div class="card">
                         <div class="card-header d-flex">
                             <div class="left">
-                                <h4 class="card-title">{{$category->nameEn??$category->nameBn }} Edit</h4>
+                                <h4 class="card-title"> {{$title}}</h4>
                             </div>
                             <div class="right">
                                 <a class="btn btn-primary btn-learge" href="{{ route('category.index') }}">Category List</a>
@@ -36,8 +41,9 @@
                         </div>
                         <hr>
                         <div class="card-body">
-                            <form class="" action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data" files="true">
+                            <form id="categoryEditForm" action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
+                                @method('put')
                                 <div class="row">
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
@@ -55,11 +61,7 @@
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="description">Image</label>
-                                            @if($category->image)
-                                            <input type="file" name="img" id="input-file-now" class="form-control" data-default-file="{{ asset($category->image) }}" />
-                                            @else
-                                            <input type="file" name="img" id="input-file-now" class="form-control" data-default-file="" />
-                                            @endif
+                                            <input type="file" name="img" id="input-file-now" class="form-control img" data-default-file="{{ asset($category->image) ?? '' }}" />
 
                                         </div>
                                     </div>
@@ -80,6 +82,12 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-xl-4 col-md-6 col-12 mb-1">
+                                        <div class="form-group">
+                                            <img src="{{ asset($category->image) }}" alt="" id="imagePreview" width="200px" height="auto"
+                                                class="text-center">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
@@ -95,4 +103,45 @@
         <!-- Tooltip validations end -->
     </div>
 </div>
+@endsection
+
+@section('vendor-script')
+    <!-- vendor files -->
+    <script src="{{ asset('/app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/js/scripts/forms/form-validation.js') }}"></script>
+@endsection
+@section('page-script')
+
+    <script>
+         $('.img').change(function() {
+            var reader = new FileReader();
+            reader.readAsDataURL(this.files[0]);
+            reader.onload = function(event) {
+                var ImgSource = event.target.result;
+                $('#imagePreview').attr('src', ImgSource)
+            }
+        })
+
+
+        $('#categoryEditForm').validate({
+            rules: {
+                nameEn: "required",
+                nameBn: "required",
+                description: "required",
+                status: "required",
+            },
+            messages: {
+                nameEn: "Please specify Title (Bangla)",
+                nameBn: "Please Selcect Name",
+                status: "Please Selcect Status",
+                description: "Please specify Description (Bangla)",
+            }
+        });
+
+
+
+
+
+    </script>
+
 @endsection

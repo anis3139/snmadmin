@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Blog;
-use App\Http\Controllers\BaseController;
-use App\Http\Requests\TagRequest;
+use App\Http\Controllers\BaseController; 
+use App\Http\Requests\TagStoreRequest;
+use App\Http\Requests\TagUpdateRequest;
 use App\Models\Tag;
 
 class TagController extends BaseController
 {
-     
+
     public function index(){
         return view('admin.pages.tag.index', [
             'prefixname' => 'Admin',
@@ -27,51 +28,38 @@ class TagController extends BaseController
         ]);
     }
 
-    public function store(TagRequest $request){
-
-
-
-        $tag = new Tag();
-        $tag->nameBn = $request->get('nameBn');
-        $tag->nameEn = $request->get('nameEn');
-        $tag->status = $request->status;
-        if ($tag->save()) {
-
+    public function store(TagStoreRequest $request, Tag $tag){
+        $data= $request->only('nameBn','nameEn', 'status');
+        if ($tag->create($data)) {
             return redirect()->route('tag.index')->with('success', 'Data Added successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on create');
     }
 
-    public function edit($id){
+    public function edit(Tag $tag){
         return view('admin.pages.tag.edit', [
             'prefixname' => 'Admin',
             'title' => 'Tag Edit',
             'page_title' => 'Tag Edit',
-            'tag' => Tag::findOrFail($id),
+            'tag' => $tag,
             'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
-    public function update(TagRequest $request, $id){
+    public function update(TagUpdateRequest $request, Tag $tag){
 
-        $tag = Tag::findOrFail($id);
-        $tag->nameBn = $request->get('nameBn');
-        $tag->nameEn = $request->get('nameEn');
-        $tag->status = $request->status;
-        if ($tag->save()) {
+        $data= $request->only('nameBn','nameEn', 'status');
+        if ($tag->update($data)) {
 
             return redirect()->route('tag.index', $tag->id)->with('success', 'Data Updated successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on update');
     }
 
-    public function destroy($id){
-        $tag = Tag::findOrFail($id);
+    public function destroy(Tag $tag){
         if($tag->delete()){
-
             return redirect()->route('tag.index')->with('success', 'Data Delete successfully');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on deleting');
-
     }
 }

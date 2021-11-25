@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\SubCategoryRequest;
+use App\Http\Requests\SubCategoryStoreRequest;
+use App\Http\Requests\SubCategoryUpdateRequest;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Utlity;
@@ -10,7 +12,7 @@ use Illuminate\Http\Request;
 
 class SubCategoryController extends BaseController
 {
-    
+
 
     public function index(){
         return view('admin.pages.sub_category.index', [
@@ -32,73 +34,55 @@ class SubCategoryController extends BaseController
         ]);
     }
 
-    public function store(SubCategoryRequest $request){
-
-
-
+    public function store(SubCategoryStoreRequest $request, Subcategory $subcategory){
         //upload photo
         if ($request->hasFile('img')){
-            $path = Utlity::file_upload($request,'img','subCategory_Photo');
+            $path['image'] = Utlity::file_upload($request,'img','subCategory_Photo');
         }
         else {
-            $path = null;
+            $path['image'] = null;
         }
-        $category = new Subcategory();
-        $category->category_id = $request->get('category_id');
-        $category->nameBn = $request->get('nameBn');
-        $category->nameEn = $request->get('nameEn');
-        $category->description = $request->get('description');
-        $category->image = $path;
-        $category->status = $request->status;
-        if ($category->save()) {
-
+        $data =array_merge($path, $request->only('category_id','nameBn','nameEn', 'description', 'status'));
+        if ($subcategory->create($data)) {
             return redirect()->route('subcategory.index')->with('success', 'Data Added successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on create');
     }
 
-    public function edit($id){
+    public function edit(Subcategory $subcategory){
         return view('admin.pages.sub_category.edit', [
             'prefixname' => 'Admin',
             'title' => 'SubCategory Edit',
             'page_title' => 'SubCategory Edit',
-            'category' => Subcategory::findOrFail($id),
+            'category' => $subcategory,
             'maincategories' => Category::where('status', 1)->get(),
             'enumStatuses' => $this->blogEnumStaus,
         ]);
     }
 
-    public function update(SubCategoryRequest $request, $id){
+    public function update(SubCategoryUpdateRequest $request, Subcategory $subcategory){
 
-
-        $category = Subcategory::findOrFail($id);
-        $category->category_id = $request->get('category_id');
-        $category->nameBn = $request->get('nameBn');
-        $category->nameEn = $request->get('nameEn');
-        $category->description = $request->get('description');
-        $path = null;
         if($request->hasFile('img')){
-            if(file_exists($category->image)){
-                unlink($category->image);
+            if(file_exists($subcategory->image)){
+                unlink($subcategory->image);
             }
-            $path = Utlity::file_upload($request,'img','subCategory_Photo');
-            $category->image = $path;
-        }
-        $category->status = $request->status;
-        if ($category->save()) {
+            $path['image'] = Utlity::file_upload($request,'img','subCategory_Photo');
 
-            return redirect()->route('subcategory.index', $category->id)->with('success', 'Data Updated successfully Done');
+        }else{
+            $path['image']=  null;
+        }
+        $data =array_merge($path, $request->only('category_id','nameBn','nameEn', 'description', 'status'));
+        if ($subcategory->update($data)) {
+            return redirect()->route('subcategory.index', $subcategory->id)->with('success', 'Data Updated successfully Done');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on update');
     }
 
-    public function destroy($id){
-        $category = Subcategory::findOrFail($id);
-        if(file_exists($category->image)){
-            unlink($category->image);
+    public function destroy(Subcategory $subcategory){
+        if(file_exists($subcategory->image)){
+            unlink($subcategory->image);
         }
-        if($category->delete()){
-
+        if($subcategory->delete()){
             return redirect()->route('subcategory.index')->with('success', 'Data Delete successfully');
         }
         return redirect()->back()->withInput()->with('failed', 'Data failed on deleting');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class SubCategoryStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +23,11 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-
-        $rules = [
-            'nameBn' => 'required|unique:categories,nameBn,'.$this->id.',id',
-            'nameEn' => 'required|unique:categories,nameEn,'.$this->id.',id',
+        return [
+            'category_id' => 'required',
+            'nameBn' => 'required',
+            'nameEn' => 'required',
+            'img'    => 'required'
         ];
-
-        if (!$this->has('img'))
-         {
-           $rules += ['img'    => 'required'];
-        }
-
-        return $rules;
     }
 }

@@ -114,9 +114,9 @@
                                                     value="{{ old('status') }}" autocomplete="status" autofocus>
                                                     <option value="">Select Status</option>
                                                    @if ($enumStatuses)
-                                                   @foreach ($enumStatuses as $key => $status)
-                                                   <option {{$key==$admin->status?'selected':''}} value="{{$key}}">{{$status}}</option>
-                                               @endforeach
+                                                        @foreach ($enumStatuses as $key => $status)
+                                                        <option {{$key==$admin->status?'selected':''}} value="{{$key}}">{{$status}}</option>
+                                                        @endforeach
                                                    @endif
                                                 </select>
 

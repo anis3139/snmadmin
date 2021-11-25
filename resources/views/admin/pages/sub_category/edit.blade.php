@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('page-style')
+    <link rel="stylesheet" href="{{ asset('/app-assets/css/plugins/forms/form-validation.css') }}">
+@endsection
 @section('content')
 <div class="content-wrapper">
     <div class="content-header row">
@@ -36,8 +39,9 @@
                         </div>
                         <hr>
                         <div class="card-body">
-                            <form class="" action="{{ route('subcategory.update', $category->id) }}" method="POST" enctype="multipart/form-data" files="true">
+                            <form id="subCatEditForm" action="{{ route('subcategory.update', $category->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
+                                @method('put')
                                 <div class="row">
                                 <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
@@ -64,25 +68,15 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-4 col-md-6 col-12 mb-1">
-                                        <div class="form-group">
-                                            <label for="description">Image</label>
-                                            @if($category->image)
-                                            <input type="file" name="img" id="input-file-now" class="form-control" data-default-file="{{ asset($category->image) }}" />
-                                            @else
-                                            <input type="file" name="img" id="input-file-now" class="form-control" data-default-file="" />
-                                            @endif
 
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6 col-12 mb-1">
+                                    <div class="col-xl-3 col-md-4 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="description">Textarea</label>
                                             <textarea placeholder="Enter Description" name="description" id="description" class="form-control">{{ $category->description }}</textarea>
 
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-md-6 col-12 mb-1">
+                                    <div class="col-xl-3 col-md-4 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="description">Satus</label>
                                             <select name="status" class="form-control">
@@ -91,6 +85,20 @@
                                             </select>
 
                                         </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-4 col-12 mb-1">
+                                        <div class="form-group">
+                                            <label for="description">Image</label>
+                                            <input type="file" name="img" id="input-file-now" class="form-control img"   />
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-4 col-12 mb-1">
+                                            <div class="form-group">
+                                                <img src="{{ asset($category->image) }}" alt="" id="imagePreview" width="200px" height="auto"
+                                                    class="text-center">
+                                            </div>
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -107,4 +115,46 @@
         <!-- Tooltip validations end -->
     </div>
 </div>
+@endsection
+@section('vendor-script')
+    <!-- vendor files -->
+    <script src="{{ asset('/app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/js/scripts/forms/form-validation.js') }}"></script>
+@endsection
+@section('page-script')
+
+    <script>
+         $('.img').change(function() {
+            var reader = new FileReader();
+            reader.readAsDataURL(this.files[0]);
+            reader.onload = function(event) {
+                var ImgSource = event.target.result;
+                $('#imagePreview').attr('src', ImgSource)
+            }
+        })
+
+
+        $('#subCatEditForm').validate({
+            rules: {
+                nameEn: "required",
+                nameBn: "required",
+                category_id: "required",
+                description: "required",
+                status: "required",
+            },
+            messages: {
+                nameEn: "Please specify Title (English)",
+                nameBn: "Please Selcect Name (Bangla)",
+                status: "Please Selcect Status",
+                description: "Please specify Description (English)",
+                category_id: "Please specify Parent Category ",
+            }
+        });
+
+
+
+
+
+    </script>
+
 @endsection

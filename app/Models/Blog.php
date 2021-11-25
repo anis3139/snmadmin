@@ -9,9 +9,7 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'status',
-    ];
+    protected $guarded = ['id'];
 
     public function admin(){
         return $this->belongsTo('App\Models\Admin');

@@ -48,6 +48,7 @@
                         <div class="card-body">
                             <form id="userEditForm" action="{{ route('blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
+                                @method('put')
                                 <div class="row">
                                     <div class="col-xl-6 col-md-6 col-12 mb-1">
                                         <div class="form-group">
@@ -76,8 +77,8 @@
                                     </div>
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
-                                            <label for="category">Category</label>
-                                            <select id="category" name="category" class="form-control">
+                                            <label for="category_id">Category</label>
+                                            <select id="category_id" name="category_id" class="form-control">
                                                 <option value="" selected>---- Select Category---</option>
                                                 @foreach($categories as $key => $category)
                                                 <option value="{{ $category->id }}" {{ $category->id == $blog->category_id ? "selected" : '' }}>{{ $category->nameBn }} ({{ $category->nameEn }})</option>
@@ -87,8 +88,8 @@
                                     </div>
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
-                                            <label for="subcategory">Sub Category</label>
-                                            <select id="subcategory" name="subcategory" class="form-control">
+                                            <label for="subcategory_id">Sub Category</label>
+                                            <select id="subcategory_id" name="subcategory_id" class="form-control">
                                                 <option value="" selected>---- Select Sub Category---</option>
                                                 @foreach($subcategories as $key => $subcategory)
                                                 <option value="{{ $subcategory->id }}" {{ $subcategory->id == $blog->subcategory_id ? "selected" : '' }}>{{ $subcategory->nameBn }} ({{ $subcategory->nameEn }})</option>
@@ -119,7 +120,7 @@
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
                                             <label for="description">Image</label>
-                                            <input type="file" id="img" name="img" id="input-file-now" class="form-control" data-default-file="" />
+                                            <input type="file" id="img" name="img" id="input-file-now" class="form-control img" data-default-file="" />
                                         </div>
 
                                     </div>
@@ -159,8 +160,8 @@
                 title: "required",
                 tag: "required",
                 status: "required",
-                category: "required",
-                subcategory: "required",
+                category_id: "required",
+                subcategory_id: "required",
                 descriptionEn: "required",
                 description: "required",
                 titleEn: {
@@ -172,8 +173,8 @@
                 title: "Please specify Title (Bangla)",
                 tag: "Please Selcect Tag",
                 status: "Please Selcect Status",
-                category: "Please Selcect Category",
-                subcategory: "Please Selcect Sub Category",
+                category_id: "Please Selcect Category",
+                subcategory_id: "Please Selcect Sub Category",
                 descriptionEn: "Please specify Description (English)",
                 description: "Please specify Description (Bangla)",
                 titleEn: {
@@ -199,7 +200,7 @@
                 });
         });
 
-        $('#img').change(function() {
+        $('.img').change(function() {
             var reader = new FileReader();
             reader.readAsDataURL(this.files[0]);
             reader.onload = function(event) {

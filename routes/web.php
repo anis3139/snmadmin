@@ -30,66 +30,48 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::post('/admin-role/update/{id}', 'Auth\AdminController@roleUpdate')->name('admin.role.update');
         //Visitor Table
         Route::get('/visitor', 'VisitorController@VisitorIndex')->name('admin.VisitorIndex');
-        Route::resource('user', 'UserController', ['names' => 'admin.user']);
+        Route::resource('user', 'UserController', ['names' => 'admin.user'])->except('update');
+        Route::post('user/update/{user}', 'UserController@update')->name('admin.user.update');
 
     });
 
-    Route::prefix('category')->group(function () {
-        Route::get('/list', 'Blog\CategoryController@index')->name('category.index');
-        Route::get('/create', 'Blog\CategoryController@create')->name('category.create');
-        Route::post('/create', 'Blog\CategoryController@store')->name('category.store');
-        Route::get('/show/{id}', 'Blog\CategoryController@show')->name('category.show');
-        Route::get('/edit/{id}', 'Blog\CategoryController@edit')->name('category.edit');
-        Route::post('/edit/{id}', 'Blog\CategoryController@update')->name('category.update');
-        Route::delete('/delete/{id}', 'Blog\CategoryController@destroy')->name('category.delete');
-    });
-    Route::prefix('sub-category')->group(function () {
-        Route::get('/list', 'Blog\SubCategoryController@index')->name('subcategory.index');
-        Route::get('/create', 'Blog\SubCategoryController@create')->name('subcategory.create');
-        Route::post('/create', 'Blog\SubCategoryController@store')->name('subcategory.store');
-        Route::get('/edit/{id}', 'Blog\SubCategoryController@edit')->name('subcategory.edit');
-        Route::post('/edit/{id}', 'Blog\SubCategoryController@update')->name('subcategory.update');
-        Route::delete('/delete/{id}', 'Blog\SubCategoryController@destroy')->name('subcategory.delete');
+        /**
+         * Blog Route Start
+         */
+        Route::resource('blog', 'Blog\BlogController', ['names' => 'blog']);
+        Route::get('/view/{blog}', 'Blog\BlogController@view')->name('blog.view');
 
-        //for catch subcategory image
+        Route::resource('/category', 'Blog\CategoryController');
+        Route::get('/category/{category}', 'Blog\CategoryController@show')->name('category.show');
+
+        Route::resource('subcategory' , 'Blog\SubCategoryController');
         Route::get('/subcategory/list', 'Blog\SubCategoryController@ajaxGetData')->name('subcategory.ajaxdata');
-    });
 
-    Route::prefix('tag')->group(function () {
-        Route::get('/list', 'Blog\TagController@index')->name('tag.index');
-        Route::get('/create', 'Blog\TagController@create')->name('tag.create');
-        Route::post('/create', 'Blog\TagController@store')->name('tag.store');
-        Route::get('/edit/{id}', 'Blog\TagController@edit')->name('tag.edit');
-        Route::post('/edit/{id}', 'Blog\TagController@update')->name('tag.update');
-        Route::delete('/delete/{id}', 'Blog\TagController@destroy')->name('tag.delete');
-    });
+        Route::resource('/tag', 'Blog\TagController');
 
-    //manage comment
-    Route::prefix('comment')->group(function () {
-        Route::get('comment', 'Blog\CommentController@index')->name('comment.list');
-        Route::get('approve/approve-list', 'Blog\CommentController@approveList')->name('comment.approve.list');
-        Route::get('pending/pending-list', 'Blog\CommentController@pendingList')->name('comment.pending.list');
-        Route::get('pending/list/approve/{id}', 'Blog\CommentController@pendingListApprove')->name('comment.pending.list.approve');
-        Route::delete('delete/{id}', 'Blog\CommentController@destroy')->name('comment.destroy');
-    });
 
-    //filter data
-    Route::prefix('filter')->group(function () {
-        Route::get('/list', 'Blog\FilterController@index')->name('filter.view');
-        Route::get('/list/data', 'Blog\FilterController@filter')->name('filter.list');
-        Route::get('/subcategory/list', 'Blog\FilterController@ajaxGetSubcategoryData')->name('filter.getsubcategory');
 
-    });
+        //manage comment
+        Route::prefix('comment')->group(function () {
+            Route::get('comment', 'Blog\CommentController@index')->name('comment.list');
+            Route::get('approve/approve-list', 'Blog\CommentController@approveList')->name('comment.approve.list');
+            Route::get('pending/pending-list', 'Blog\CommentController@pendingList')->name('comment.pending.list');
+            Route::get('pending/list/approve/{id}', 'Blog\CommentController@pendingListApprove')->name('comment.pending.list.approve');
+            Route::delete('delete/{id}', 'Blog\CommentController@destroy')->name('comment.destroy');
+        });
 
-    Route::prefix('blog')->group(function () {
-        Route::get('/list', 'Blog\BlogController@index')->name('blog.index');
-        Route::get('/create', 'Blog\BlogController@create')->name('blog.create');
-        Route::post('/create', 'Blog\BlogController@store')->name('blog.store');
-        Route::get('/view/{id}', 'Blog\BlogController@view')->name('blog.view');
-        Route::get('/edit/{id}', 'Blog\BlogController@edit')->name('blog.edit');
-        Route::post('/edit/{id}', 'Blog\BlogController@update')->name('blog.update');
-        Route::delete('/delete/{id}', 'Blog\BlogController@destroy')->name('blog.delete');
-    });
+        //filter data
+        Route::prefix('filter')->group(function () {
+            Route::get('/list', 'Blog\FilterController@index')->name('filter.view');
+            Route::get('/list/data', 'Blog\FilterController@filter')->name('filter.list');
+            Route::get('/subcategory/list', 'Blog\FilterController@ajaxGetSubcategoryData')->name('filter.getsubcategory');
+
+        });
+
+
+          /**
+         * Blog Route Start
+         */
 
     //manage Contact
     Route::prefix('contact')->group(function () {
@@ -104,10 +86,8 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::post('/store', 'SettingController@store')->name('setting.store');
         Route::post('/update/{id}', 'SettingController@update')->name('setting.update');
     });
-
     //banner
     Route::resource('banners', 'BannerController');
-
 
     Route::post('admin/logout', 'Auth\LoginController@onLogout')->name('admin.logout');
 });

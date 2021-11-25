@@ -199,7 +199,7 @@
                             data-feather="plus"></i><span class="menu-item text-truncate" data-i18n="List">New</span></a>
                 </li>
                 <li class="{{ Route::currentRouteName() === 'admin.user.index' ? 'active' : Route::currentRouteName() === 'admin.user.edit' ? 'active' : '' }}"><a
-                        class="d-flex align-items-center" href="{{ route('user.index') }}"><i
+                        class="d-flex align-items-center" href="{{ route('admin.user.index') }}"><i
                             data-feather="list"></i><span class="menu-item text-truncate" data-i18n="List">View</span></a>
                 </li>
             </ul>

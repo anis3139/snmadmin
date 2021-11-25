@@ -31,7 +31,7 @@
                                     <h4 class="card-title"></h4>
                                 </div>
                                 <div class="right">
-                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.index') }}">Admin List</a>
+                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.user.index') }}">Admin List</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -40,38 +40,39 @@
                                     	<tr>
                                         	<td width="39%">Name</td>
                                           <td width="1%">:</td>
-                                          <td width="60%">{{ $admin->name }}</td>
+                                          <td width="60%">{{ $user->name }}</td>
                                       </tr>
                                         <tr>
                                         	<td>Username</td>
                                             <td>:</td>
-                                            <td>{{ $admin->username }}</td>
+                                            <td>{{ $user->username }}</td>
                                         </tr>
                                         <tr>
                                         	<td>Email</td>
                                             <td>:</td>
-                                            <td>{{ $admin->email }}</td>
+                                            <td>{{ $user->email }}</td>
                                         </tr>
                                         <tr>
                                         	<td>Phone</td>
                                             <td>:</td>
-                                            <td>{{ $admin->phone }}</td>
+                                            <td>{{ $user->phone }}</td>
                                         </tr>
                                         <tr>
                                         	<td>Status</td>
                                             <td>:</td>
-                                            <td>{{ $admin->status }}</td>
+                                            <td>
+                                                @php
+                                                $btnClass=['danger', 'success', 'warning', 'info', 'danger']
+                                            @endphp
+                                            @foreach ($enumStatuses as $key => $status)
+                                                @if ($user->status == $key)
+                                                    <button class="btn btn-sm btn-{{ $btnClass[$key]}}">
+                                                            {{$enumStatuses[$key]}}
+                                                        </button>
+                                                @endif
+                                            @endforeach</td>
                                         </tr>
-                                        <tr>
-                                        	<td>Present Address</td>
-                                            <td>:</td>
-                                            <td>{{ $admin->present_address }}</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Permanent Address</td>
-                                            <td>:</td>
-                                            <td>{{ $admin->permanent_address }}</td>
-                                        </tr>
+
                                     </table>
                                 </div>
                             </div>

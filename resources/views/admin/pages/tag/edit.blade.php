@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('page-style')
+    <link rel="stylesheet" href="{{ asset('/app-assets/css/plugins/forms/form-validation.css') }}">
+@endsection
 @section('content')
 <div class="content-wrapper">
     <div class="content-header row">
@@ -10,7 +13,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Tag Create
+                            <li class="breadcrumb-item active">{{$title}}
                             </li>
                         </ol>
                     </div>
@@ -20,6 +23,8 @@
 
     </div>
     <div class="content-body">
+        @include('ErrorMessage')
+
         <!-- Tooltip validations start -->
         <section class="tooltip-validations" id="tooltip-validation">
             <div class="row">
@@ -35,8 +40,9 @@
                         </div>
                         <hr>
                         <div class="card-body">
-                        <form class="" action="{{ route('tag.update', $tag->id) }}" method="POST" enctype="multipart/form-data" files="true">
+                        <form id="tagEditForm" action="{{ route('tag.update', $tag->id) }}" method="POST" enctype="multipart/form-data" files="true">
                                     @csrf
+                                    @method('put')
                                 <div class="row">
                                     <div class="col-xl-4 col-md-6 col-12 mb-1">
                                         <div class="form-group">
@@ -74,4 +80,30 @@
         <!-- Tooltip validations end -->
     </div>
 </div>
+@endsection
+
+@section('vendor-script')
+    <!-- vendor files -->
+    <script src="{{ asset('/app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('/app-assets/js/scripts/forms/form-validation.js') }}"></script>
+@endsection
+@section('page-script')
+
+    <script>
+
+        $('#tagEditForm').validate({
+            rules: {
+                nameEn: "required",
+                nameBn: "required",
+                status: "required",
+            },
+            messages: {
+                nameEn: "Please specify Title (English)",
+                nameBn: "Please Selcect Name (Bangla)",
+                status: "Please Selcect Status",
+            }
+        });
+
+    </script>
+
 @endsection

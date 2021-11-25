@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\BaseController; 
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\SettingsRequest;
 use App\Models\Category;
 use App\Models\Setting;
@@ -15,6 +15,9 @@ class SettingController extends BaseController
 
 
     public function index(){
+        if (is_null($this->user) || !$this->user->can('setting.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any Setting !');
+        }
         return view('admin.pages.setting.index', [
             'prefixname' => 'Admin',
             'title' => 'Site Setting',
@@ -25,7 +28,9 @@ class SettingController extends BaseController
 
     public function create()
     {
-
+        if (is_null($this->user) || !$this->user->can('setting.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any Setting !');
+        }
             return view('admin.pages.setting.create', [
                 'prefixname' => 'Admin',
                 'title' => 'General Setting',
@@ -39,7 +44,9 @@ class SettingController extends BaseController
 
     public function store(SettingsRequest $request){
 
-
+        if (is_null($this->user) || !$this->user->can('setting.store')) {
+            abort(403, 'Sorry !! You are Unauthorized to store any Setting !');
+        }
         //upload photo
         if ($request->hasFile('logo')){
             $logo = Utlity::file_upload($request,'logo','site_logo');
@@ -72,7 +79,9 @@ class SettingController extends BaseController
 
     public function update(SettingsRequest $request, $id){
 
-
+        if (is_null($this->user) || !$this->user->can('setting.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any Setting !');
+        }
 
         $setting = Setting::find($id);
         $setting->site_name = $request->get('site_name');
