@@ -8,6 +8,7 @@ use App\Http\Requests\AdminStoreRequest;
 use App\Http\Requests\AdminUpdateRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class AdminController extends BaseController
@@ -119,4 +120,5 @@ class AdminController extends BaseController
         }
 
     }
+ 
 }

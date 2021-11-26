@@ -31,7 +31,7 @@
                                     <h4 class="card-title"></h4>
                                 </div>
                                 <div class="right">
-                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.user.index') }}">Admin List</a>
+                                    <a class="btn btn-primary btn-learge" href="{{ route('admin.user.index') }}">User List</a>
                                 </div>
                             </div>
                             <div class="card-body">

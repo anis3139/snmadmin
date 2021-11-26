@@ -77,6 +77,7 @@
                     </div>
                     <!-- Orders Chart Card ends -->
                 </div>
+                @include('dashboard.partial.notification')
 
                 <!--                <div class="row match-height">
                                     &lt;!&ndash; Avg Sessions Chart Card starts &ndash;&gt;

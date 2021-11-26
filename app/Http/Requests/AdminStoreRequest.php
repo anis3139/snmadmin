@@ -25,7 +25,7 @@ class AdminStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'username' => 'required|string|max:255|min:4|unique:admins,username,',
+            'username' => 'required|string|max:255|min:4|alpha_dash|unique:admins,username,',
             'email' => 'required|string|email|max:255|min:4|unique:admins,email,',
             'phone' => 'required|min:10|max:20|unique:admins,phone,',
             'status' => 'required',

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\CardBundle;
 use Illuminate\Database\Seeder;
 
-class UserTableSeeder extends Seeder
+class CardBundleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-
-        User::factory()->times(10)->create();
- 
+        CardBundle::factory()->times(20)->create();
     }
 }

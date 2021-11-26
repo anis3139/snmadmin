@@ -63,6 +63,7 @@
                     </div>
                 </div>
             </div>
+            @include('dashboard.partial.notification')
             <div class="row match-height">
                 <div class="col-lg-4 col-sm-6 col-12">
                     <div class="card">

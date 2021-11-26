@@ -26,7 +26,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'required',
             'phone' => 'required|max:15|min:10|unique:users,phone,'. optional($this->user)->id,
-            'username' => 'required|max:50|min:4|unique:users,username,'. optional($this->user)->id,
+            'username' => 'required|alpha_dash|max:50|min:4|unique:users,username,'. optional($this->user)->id,
             'email' => 'required|max:50|min:4|email|unique:users,email,'. optional($this->user)->id,
         ];
     }

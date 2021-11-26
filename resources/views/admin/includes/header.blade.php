@@ -16,21 +16,28 @@
 
     <ul class="nav navbar-nav align-items-center ml-auto">
 
-        @php
-        $notifications=Auth::user()->unreadNotifications;
-        @endphp
 
-      <li class="nav-item dropdown dropdown-notification mr-25"><a class="nav-link" href="javascript:void(0);" data-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span class="badge badge-pill badge-danger badge-up">{{count($notifications)}}</span></a>
+      <li class="nav-item dropdown dropdown-notification mr-25">
+          <a class="nav-link" href="javascript:void(0);" data-toggle="dropdown"><i class="ficon" data-feather="bell"></i>
+            @if (Auth::user()->unReadNotifications->count())
+            <span class="badge badge-pill badge-danger badge-up">
+                {{Auth::user()->unReadNotifications->count()}}
+            </span>
+            @endif
+     </a>
         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
 
           <li class="dropdown-menu-header">
             <div class="dropdown-header d-flex">
               <h4 class="notification-title mb-0 mr-auto">Notifications</h4>
-              <div class="badge badge-pill badge-light-primary">{{count($notifications)}} New</div>
+
+
+              <div class="badge badge-pill badge-light-primary"> {{Auth::user()->unReadNotifications->count()}} New</div>
             </div>
           </li>
+           @if (Auth::user()->unReadNotifications->count())
           <li class="scrollable-container media-list">
-              @foreach ($notifications as $notification)
+              @foreach (Auth::user()->unReadNotifications as $notification)
                 <a class="d-flex" href="{{route('admin.user.show', $notification->data['user_id'] )}}">
                 <div class="media d-flex align-items-start">
                     <div class="media-left">
@@ -40,12 +47,27 @@
                      <small class="notification-text"> {{ $notification->data['message'] }} </small>
                     </div>
                 </div>
-                {{$notification->markAsRead()}}
                 </a>
-            @endforeach
-
+             @endforeach
           </li>
-          <li class="dropdown-menu-footer"><a class="btn btn-primary btn-block" href="javascript:void(0)">Read all notifications</a></li>
+          <li class="dropdown-menu-footer"><a class="btn btn-primary btn-block" href="{{route('admin.notification.read')}}">Mark All as Read</a></li>
+          @else
+          <li class="scrollable-container media-list">
+            @foreach (Auth::user()->notifications as $notification)
+              <a class="d-flex" href="{{route('admin.user.show', $notification->data['user_id'] )}}">
+              <div class="media d-flex align-items-start">
+                  <div class="media-left">
+                  <div class="avatar"><img src="{{asset('')}}app-assets/images/portrait/small/avatar-s-15.jpg" alt="avatar" width="32" height="32"></div>
+                  </div>
+                  <div class="media-body">
+                   <small class="notification-text"> {{ $notification->data['message'] }} </small>
+                  </div>
+              </div>
+            
+              </a>
+           @endforeach
+        </li>
+          @endif
         </ul>
       </li>
       <li class="nav-item dropdown dropdown-user">

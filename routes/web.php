@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('admin/login', '\App\Http\Controllers\Admin\Auth\LoginController@login')->name('admin.login')->middleware('admin.guest');
@@ -32,6 +33,12 @@ Route::namespace ('\App\Http\Controllers\Admin')->middleware(['admin.auth'])->gr
         Route::get('/visitor', 'VisitorController@VisitorIndex')->name('admin.VisitorIndex');
         Route::resource('user', 'UserController', ['names' => 'admin.user'])->except('update');
         Route::post('user/update/{user}', 'UserController@update')->name('admin.user.update');
+
+        Route::get('readNotification',  function()
+        {
+            Auth::user()->unReadNotifications->markAsRead();
+            return redirect()->back();
+        })->name('admin.notification.read');
 
     });
 

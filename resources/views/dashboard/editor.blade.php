@@ -91,6 +91,7 @@
                         <div class="mb-5"></div>
                     </div>
                 </div>
+                @include('dashboard.partial.notification')
 
 {{--                <div class="col-lg-4 col-12">--}}
 {{--                    <div class="card">--}}

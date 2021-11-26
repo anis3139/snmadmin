@@ -71,7 +71,7 @@
                 <!-- New Driver Request Chart Card ends -->
             </div>
         </section>
-
+        @include('dashboard.partial.notification')
          <div class="row">
                 <div class="col-12">
                     <div class="card invoice-list-wrapper">

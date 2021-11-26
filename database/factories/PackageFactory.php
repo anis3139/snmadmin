@@ -2,19 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\Package;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class PackageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
-
+    protected $model = Package::class;
     /**
      * Define the model's default state.
      *
@@ -23,12 +22,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'created_by' => function(){
+                return User::all()->random();
+            },
             'name' => $this->faker->name,
-            'username' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'phone' => $this->faker->numerify('###-###-####'),
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
+            'number_of_cards' => $this->faker->numberBetween(10,20),
+            'price' => $this->faker->numberBetween(10,20)
         ];
     }
 }
