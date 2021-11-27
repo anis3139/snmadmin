@@ -9,7 +9,7 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>{{ $setting->site_title }} | Login</title>
+    <title>{{ $setting->site_title ?? '' }} | Login</title>
     <link rel="apple-touch-icon" href="{{ asset('') }}app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
@@ -55,8 +55,8 @@
                 <div class="auth-inner row m-0">
                     <!-- Brand logo-->
                     <a class="brand-logo" href="javascript:void(0);">
-                        <img src="{{asset('').  $setting->logo }}" height="auto" width="130px" alt="{{  $setting->site_name }}">
-                        <h2 class="brand-text text-primary ml-1 mt-1">{{  $setting->site_name }}</h2>
+                        <img src="{{isset( $setting->logo )? asset('').$setting->logo : '' }}" height="auto" width="130px" alt="{{  $setting->site_name ?? ''}}">
+                        <h2 class="brand-text text-primary ml-1 mt-1">{{  $setting->site_name ??'' }}</h2>
                     </a>
                     <!-- /Brand logo-->
                     <!-- Left Text-->
@@ -69,7 +69,7 @@
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                             <h2 class="card-title font-weight-bold mb-1">User Sign Up</h2>
                             <p class="card-text mb-2">Please sign-in to your account</p>
-                                @include('Message') 
+                                @include('Message')
                                 <form class="mt-2" action="{{ route('admin.onLogin') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
