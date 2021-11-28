@@ -2,18 +2,16 @@
 
 namespace App\Jobs;
 
-use App\Models\Admin;
 use App\Models\User;
-use App\Notifications\UserRegistrationNotification;
+use App\Notifications\RegistrationOtpVerificationNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class UserRegistrationJobs implements ShouldQueue
+class RegistrationVerificationJobs implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -23,11 +21,12 @@ class UserRegistrationJobs implements ShouldQueue
      * @return void
      */
     private $user;
-    public function __construct(User $user)
+    private $otp;
+    public function __construct(User $user, $otp)
     {
         $this->user=$user;
+        $this->otp=$otp;
     }
-
     /**
      * Execute the job.
      *
@@ -35,16 +34,6 @@ class UserRegistrationJobs implements ShouldQueue
      */
     public function handle()
     {
-        $admins=Admin::with("roles")->where('status', 1)->whereHas("roles", function($q) {
-            $q->where("name", "!=", "user");
-        })->get();
-
-
-        foreach ($admins as $admin) {
-            $admin->notify(new UserRegistrationNotification($this->user));
-        }
-
-
-
+        $this->user->notify(new RegistrationOtpVerificationNotification($this->user, $this->otp));
     }
 }

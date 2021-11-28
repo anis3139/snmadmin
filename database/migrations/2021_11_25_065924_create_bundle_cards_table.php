@@ -14,12 +14,12 @@ class CreateBundleCardsTable extends Migration
     public function up()
     {
         Schema::create('bundle_cards', function (Blueprint $table) {
-            //$table->id();
+            $table->id();
             $table->unsignedBigInteger('card_id')->nullable();
             $table->unsignedBigInteger('bundle_id')->nullable();
             $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');
             $table->foreign('bundle_id')->references('id')->on('card_bundles')->onDelete('cascade');
-            //$table->timestamps();
+            $table->timestamps();
         });
     }
 

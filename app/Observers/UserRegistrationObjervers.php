@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\RegistrationVerificationJobs;
 use App\Jobs\UserRegistrationJobs;
 use App\Models\Otp;
 use App\Models\User;
@@ -22,15 +23,17 @@ class UserRegistrationObjervers
             [
                 'phone' => $user->phone,
             ],
-            [ 
-                'mobile' =>$user->phone,
+            [
+                'phone' =>$user->phone,
                 'email' =>$user->email,
                 'otp' => $randomNumber,
             ]
         );
         if($result){
-            dispatch(new UserRegistrationJobs($user, $result->otp));
+            dispatch(new UserRegistrationJobs($user));
         }
+
+        dispatch(new RegistrationVerificationJobs($user, $result->otp));
     }
 
     /**

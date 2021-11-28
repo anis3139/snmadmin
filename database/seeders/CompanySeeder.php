@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use  App\Models\Company;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class CompanySeeder extends Seeder
 {
@@ -14,6 +15,10 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        Company::truncate();
+        Schema::enableForeignKeyConstraints();
         Company::factory()->times(100)->create();
     }
 }
