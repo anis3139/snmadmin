@@ -220,7 +220,7 @@
     @stack('custom-js')
     @yield('vendor-script')
     @yield('page-script')
-
+    @yield('role')
 </body>
 <!-- END: Body-->
 
