@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class AdminSeeder extends Seeder
 {
@@ -15,6 +16,9 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        Admin::truncate();
+        Schema::enableForeignKeyConstraints();
 
             $admin           = new Admin();
             $admin->name     = "Super Admin";

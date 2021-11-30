@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="{{$setting->logo}}">
+    <link rel="icon" href="{{$setting->logo??''}}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>{{$setting->site_name}} || {{$setting->site_title}} </title>
+    <title>{{$setting->site_name??''}} || {{$setting->site_title??''}} </title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   </head>
   <body>

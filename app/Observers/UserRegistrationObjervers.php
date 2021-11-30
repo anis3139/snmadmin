@@ -22,8 +22,8 @@ class UserRegistrationObjervers
             [
                 'phone' => $user->phone,
             ],
-            [ 
-                'mobile' =>$user->phone,
+            [
+                'phone' =>$user->phone,
                 'email' =>$user->email,
                 'otp' => $randomNumber,
             ]

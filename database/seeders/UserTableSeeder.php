@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class UserTableSeeder extends Seeder
 {
@@ -14,8 +15,11 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        User::truncate();
+        Schema::enableForeignKeyConstraints();
 
-        User::factory()->times(10)->create();
- 
+        User::factory()->times(2)->create();
+
     }
 }

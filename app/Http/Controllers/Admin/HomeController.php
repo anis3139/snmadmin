@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 class HomeController extends BaseController
 {
@@ -56,6 +57,7 @@ class HomeController extends BaseController
             'user' => User::count(),
             'notifications' => Auth::user()->notifications,
             'visitor' => Visitor::count(),
+            'activities' =>  Activity::all() 
         ]);
     }
 }

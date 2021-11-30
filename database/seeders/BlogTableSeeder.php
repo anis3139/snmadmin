@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Blog;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 class BlogTableSeeder extends Seeder
 {
@@ -15,6 +16,11 @@ class BlogTableSeeder extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        Blog::truncate();
+        Schema::enableForeignKeyConstraints();
+
         $blog = new Blog();
         $blog->admin_id = 1;
         $blog->category_id = 1;

@@ -18,11 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
-        // $this->call(CompanySeeder::class);
-        // $this->call(CardSeeder::class);
-        // $this->call(PackageSeeder::class);
-        // $this->call(CardBundleSeeder::class);
-        //$this->call(BundleCardSeeder::class);
-        //$this->call(PackageCardsSeeder::class);
+ 
     }
 }

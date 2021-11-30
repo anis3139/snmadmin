@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
-
+use Spatie\Activitylog\LogOptions;
 class Admin extends Authenticatable
 {
-    use HasFactory, SoftDeletes, HasRoles, Notifiable;
+    use HasFactory, SoftDeletes, HasRoles, Notifiable, LogsActivity ;
     public $table='admins';
     /**
      * The attributes that are mass assignable.
@@ -23,14 +24,7 @@ class Admin extends Authenticatable
     protected $guard_name = 'admin';
 
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'username',
-        'phone',
-        'status',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -50,7 +44,15 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
+    protected static $logName="Admin";
+    protected static $ignoreChangedAttributes=["password"];
+    protected static $logAttributes=["name", 'email', 'phone', 'username'];
+    public function getDescriptionForEvent($eventName)
+    {
+        return   auth()->user()->name." {$eventName} this event ";
+    }
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password']=bcrypt($password);
