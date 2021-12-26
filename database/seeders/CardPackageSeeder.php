@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\CardPackage;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class UserTableSeeder extends Seeder
+class CardPackageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,9 +16,8 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        User::truncate();
+        CardPackage::truncate();
         Schema::enableForeignKeyConstraints();
-        User::factory()->times(2)->create();
-
+        CardPackage::factory()->times(20)->create();
     }
 }

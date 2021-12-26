@@ -14,11 +14,11 @@ class CategoriesTableSeeder extends Seeder
      * @return void
      */
     public function run()
+
     {
         Schema::disableForeignKeyConstraints();
         Category::truncate();
         Schema::enableForeignKeyConstraints();
-
         $category = new Category();
         $category->nameEn = "Others";
         $category->nameBn = "অন্যান্য";

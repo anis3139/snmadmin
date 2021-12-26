@@ -4,11 +4,11 @@ namespace App\Notifications;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
 
-class UserRegistrationNotification extends Notification
+class RegistrationOtpVerificationNotification extends Notification
 {
     use Queueable;
 
@@ -18,9 +18,11 @@ class UserRegistrationNotification extends Notification
      * @return void
      */
     private $user;
-    public function __construct(User $user)
+    private $otp;
+    public function __construct(User $user, $otp)
     {
         $this->user=$user;
+        $this->otp=$otp;
     }
 
     /**
@@ -31,7 +33,7 @@ class UserRegistrationNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail'];
     }
 
     /**
@@ -43,9 +45,10 @@ class UserRegistrationNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->line('New User Registered')
-        ->line('User Name: '. $this->user->name)
-        ->line('User id: '. $this->user->id)
+        ->line('Mr. '. $this->user->name)
+        ->line('Welcome To '.env('APP_NAME'))
+        ->line('Your Varification Code is '. $this->otp)
+        ->line('This code expiry for 2 minutes')
         ->line('Thanks For Choose us');
     }
 
@@ -58,8 +61,7 @@ class UserRegistrationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'user_id' => $this->user->id,
-            'message' =>  "Registered new user ( ".$this->user->name ." ).",
+            //
         ];
     }
 }

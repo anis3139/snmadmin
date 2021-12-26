@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use  App\Models\Company;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class UserTableSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +15,10 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-        User::truncate();
-        Schema::enableForeignKeyConstraints();
-        User::factory()->times(2)->create();
 
+        Schema::disableForeignKeyConstraints();
+        Company::truncate();
+        Schema::enableForeignKeyConstraints();
+        Company::factory()->times(100)->create();
     }
 }
