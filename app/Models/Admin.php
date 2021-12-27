@@ -48,7 +48,6 @@ class Admin extends Authenticatable
     protected static $logName="Admin";
     protected static $ignoreChangedAttributes=["password"];
     protected static $logAttributes=["name", 'email', 'phone', 'username'];
-    
     public function getDescriptionForEvent($eventName)
     {
         return   auth()->user()->name." {$eventName} this event ";
